@@ -1,20 +1,22 @@
-import { Button } from "@mui/material";
-import "./App.css";
+import { Button, Card, Typography } from "@mui/material";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to My React App</h1>
-      </header>
-      <main>
-        <p>This is a simple React application.</p>
-      </main>
-      <Button variant="contained" color="secondary">
-        Click Me
+    <div style={{ padding: "2rem" }}>
+      <Typography variant="h4" gutterBottom>
+        Vision UI Test
+      </Typography>
+
+      <Button variant="contained" color="primary">
+        Vision Button
       </Button>
+
+      <Card style={{ marginTop: "2rem" }}>
+        <Typography variant="h6">Vision UI Card</Typography>
+        <Typography variant="body2">
+          Toto je štýl Vision UI v MUI theme.
+        </Typography>
+      </Card>
     </div>
   );
 }
-
-export default App;
