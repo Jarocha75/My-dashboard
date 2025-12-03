@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import "./App.css";
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
       <main>
         <p>This is a simple React application.</p>
       </main>
+      <Button variant="contained" color="secondary">
+        Click Me
+      </Button>
     </div>
   );
 }
