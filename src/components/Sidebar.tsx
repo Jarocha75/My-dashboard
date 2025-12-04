@@ -11,7 +11,16 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <Box width={230} bgcolor="primary.main" color="white" height="100vh" p={2}>
+    <Box
+      width={260}
+      bgcolor="primary.main"
+      color="white"
+      height="100vh"
+      position="fixed"
+      left={0}
+      top={0}
+      p={2}
+    >
       <List>
         <ListItemButton component={Link} to="/dashboard">
           <ListItemIcon sx={{ color: "white" }}>

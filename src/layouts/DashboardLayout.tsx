@@ -7,9 +7,15 @@ const DashboardLayout = () => {
   return (
     <Box display="flex">
       <Sidebar />
-      <Box flexGrow={1} minHeight="100vh" bgcolor="background.default">
+      <Box
+        flexGrow={1}
+        minHeight="100vh"
+        bgcolor="background.default"
+        ml="260px"
+        p={3}
+      >
         <Navbar />
-        <Box p={3}>
+        <Box mt={3}>
           <Outlet />
         </Box>
       </Box>
