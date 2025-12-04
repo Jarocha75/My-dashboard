@@ -1,5 +1,20 @@
 import { createTheme } from "@mui/material/styles";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    navbar: {
+      main: string;
+      gradient: string;
+    };
+  }
+  interface PaletteOptions {
+    navbar?: {
+      main: string;
+      gradient: string;
+    };
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -22,46 +37,28 @@ const theme = createTheme({
     error: {
       main: "#f5365c",
     },
+
     background: {
       default: "#f8f9fa",
-      paper: "#ffffff",
+      paper: "rgba(255, 255, 255, 0.9)",
+    },
+
+    navbar: {
+      main: "#1A1F3C",
+      gradient: "linear-gradient(135deg, #1A1F3C 0%, #3A416F 100%)",
     },
   },
 
   typography: {
     fontFamily: `"Poppins", sans-serif`,
-    h1: {
-      fontSize: "2.5rem",
-      fontWeight: 700,
-    },
-    h2: {
-      fontSize: "2rem",
-      fontWeight: 600,
-    },
-    h3: {
-      fontSize: "1.75rem",
-      fontWeight: 600,
-    },
-    h4: {
-      fontSize: "1.5rem",
-      fontWeight: 600,
-    },
-    h5: {
-      fontSize: "1.25rem",
-      fontWeight: 500,
-    },
-    h6: {
-      fontSize: "1.1rem",
-      fontWeight: 500,
-    },
-    body1: {
-      fontWeight: 400,
-      fontSize: "0.95rem",
-    },
-    body2: {
-      fontWeight: 300,
-      fontSize: "0.85rem",
-    },
+    h1: { fontSize: "2.5rem", fontWeight: 700 },
+    h2: { fontSize: "2rem", fontWeight: 600 },
+    h3: { fontSize: "1.75rem", fontWeight: 600 },
+    h4: { fontSize: "1.5rem", fontWeight: 600 },
+    h5: { fontSize: "1.25rem", fontWeight: 500 },
+    h6: { fontSize: "1.1rem", fontWeight: 500 },
+    body1: { fontWeight: 400, fontSize: "0.95rem" },
+    body2: { fontWeight: 300, fontSize: "0.85rem" },
   },
 
   shape: {
@@ -98,6 +95,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
+          backdropFilter: "blur(20px)",
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.06)",
         },
       },
     },
