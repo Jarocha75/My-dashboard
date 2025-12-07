@@ -20,6 +20,26 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+      {
+        path: "tables",
+        element: <div>Tables Page</div>,
+      },
+      {
+        path: "billing",
+        element: <div>Billing Page</div>,
+      },
+      {
+        path: "rtl",
+        element: <div>RTL Page</div>,
+      },
+      {
+        path: "sign-in",
+        element: <div>Sign In Page</div>,
+      },
+      {
+        path: "sign-up",
+        element: <div>Sign Up Page</div>,
+      },
     ],
   },
 ]);
