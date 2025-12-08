@@ -16,7 +16,11 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+interface Props {
+  onLinkClick: () => void;
+}
+
+const Sidebar = ({ onLinkClick }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const mainItems = [
@@ -37,26 +41,26 @@ const Sidebar = () => {
       sx={{
         width: 250,
         height: "100vh",
-        position: "fixed",
-        top: 16,
-        left: 16,
-        borderRadius: 4,
         background: "linear-gradient(135deg, #0f1535 0%, #191c54 100%)",
         color: "white",
-        boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
         p: 2,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Typography variant="h5" fontWeight={600} mb={4} textAlign="center">
         Vision UI
       </Typography>
 
-      <List>
+      <List sx={{ flexGrow: 1 }}>
         {mainItems.map((item, index) => (
           <ListItemButton
             key={item.text}
             selected={activeIndex === index}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => {
+              setActiveIndex(index);
+              onLinkClick?.();
+            }}
             component={Link}
             to={item.path}
             sx={{
@@ -83,13 +87,9 @@ const Sidebar = () => {
 
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
             opacity: 0.6,
             mt: 4,
             mb: 2,
-            px: 1,
-            gap: 1,
           }}
         >
           <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
@@ -101,7 +101,10 @@ const Sidebar = () => {
           <ListItemButton
             key={item.text}
             selected={activeIndex === index + mainItems.length}
-            onClick={() => setActiveIndex(index + mainItems.length)}
+            onClick={() => {
+              setActiveIndex(index + mainItems.length);
+              onLinkClick?.();
+            }}
             component={Link}
             to={item.path}
             sx={{
