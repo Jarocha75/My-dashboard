@@ -1,6 +1,6 @@
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import FormatTextdirectionRToLIcon from "@mui/icons-material/FormatTextdirectionRToL";
+import BuildIcon from "@mui/icons-material/Build";
 import HouseIcon from "@mui/icons-material/House";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonIcon from "@mui/icons-material/Person";
@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import theme from "../theme";
 
 interface Props {
   onLinkClick: () => void;
@@ -27,7 +28,7 @@ const Sidebar = ({ onLinkClick }: Props) => {
     { text: "Dashboard", icon: <HouseIcon />, path: "/dashboard" },
     { text: "Tables", icon: <TableChartIcon />, path: "/tables" },
     { text: "Billing", icon: <CreditCardIcon />, path: "/billing" },
-    { text: "RTL", icon: <FormatTextdirectionRToLIcon />, path: "/rtl" },
+    { text: "RTL", icon: <BuildIcon />, path: "/rtl" },
   ];
 
   const accountItems = [
@@ -41,15 +42,42 @@ const Sidebar = ({ onLinkClick }: Props) => {
       sx={{
         width: 250,
         height: "100vh",
-        background: "linear-gradient(135deg, #0f1535 0%, #191c54 100%)",
+        position: "fixed",
+        background: theme.palette.card.gradient,
+        backdropFilter: "blur(12px)",
+        borderRight: "1px solid rgba(255,255,255,0.08)",
         color: "white",
-        p: 2,
-        display: "flex",
-        flexDirection: "column",
+        p: "20px 14px",
       }}
     >
-      <Typography variant="h5" fontWeight={600} mb={4} textAlign="center">
-        Vision UI
+      <Typography
+        fontWeight={700}
+        textAlign="center"
+        fontSize="12px"
+        sx={{
+          letterSpacing: 2,
+          textTransform: "uppercase",
+          mb: 4,
+          mt: 5,
+          pb: 2,
+          position: "relative",
+          background:
+            "linear-gradient(to right, white 70%, rgba(255,255,255,0))",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            left: "10%",
+            bottom: 0,
+            width: "80%",
+            height: "1px",
+            background:
+              "linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0))",
+          },
+        }}
+      >
+        Vision UI Free
       </Typography>
 
       <List sx={{ flexGrow: 1 }}>
@@ -65,7 +93,7 @@ const Sidebar = ({ onLinkClick }: Props) => {
             to={item.path}
             sx={{
               mb: 1,
-              borderRadius: 2,
+              borderRadius: "12px",
               "&.Mui-selected": {
                 background: "rgba(255, 255, 255, 0.15)",
                 "&:hover": { background: "rgba(255, 255, 255, 0.25)" },
@@ -75,27 +103,32 @@ const Sidebar = ({ onLinkClick }: Props) => {
               },
             }}
           >
-            <ListItemIcon sx={{ color: "#4bb4ff", minWidth: "40px" }}>
+            <ListItemIcon
+              sx={{ color: theme.palette.icon.blue, minWidth: "38px" }}
+            >
               {item.icon}
             </ListItemIcon>
             <ListItemText
               primary={item.text}
-              slotProps={{ primary: { fontWeight: 500 } }}
+              slotProps={{ primary: { fontWeight: 500, color: "white" } }}
             />
           </ListItemButton>
         ))}
 
-        <Box
+        <Typography
           sx={{
+            fontSize: "11px",
+            fontWeight: 700,
             opacity: 0.6,
-            mt: 4,
-            mb: 2,
+            mt: 3,
+            mb: 1,
+            ml: 1,
+            textTransform: "uppercase",
+            letterSpacing: "1px",
           }}
         >
-          <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-            ACCOUNT PAGES
-          </Typography>
-        </Box>
+          Account Pages
+        </Typography>
 
         {accountItems.map((item, index) => (
           <ListItemButton
@@ -109,24 +142,26 @@ const Sidebar = ({ onLinkClick }: Props) => {
             to={item.path}
             sx={{
               mb: 1,
-              borderRadius: 2,
+              borderRadius: "12px",
               "&.Mui-selected": {
                 background: "rgba(255, 255, 255, 0.15)",
-                "&:hover": { background: "rgba(255, 255, 255, 0.25)" },
+                "&:hover": { background: "rgba(255, 255, 255, 0.20)" },
               },
               "&:hover": {
-                background: "rgba(255, 255, 255, 0.1)",
+                background: "rgba(255, 255, 255, 0.88)",
               },
             }}
           >
-            <ListItemIcon sx={{ color: "#4bb4ff", minWidth: "40px" }}>
+            <ListItemIcon
+              sx={{ color: theme.palette.icon.blue, minWidth: "38px" }}
+            >
               {item.icon}
             </ListItemIcon>
 
             <ListItemText
               primary={item.text}
               slotProps={{
-                primary: { sx: { fontWeight: 500 } },
+                primary: { sx: { fontWeight: 500, color: "white" } },
               }}
             />
           </ListItemButton>

@@ -3,6 +3,8 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
 
+const SIDEBAR_WIDTH = 250;
+
 const DashboardLayout = () => {
   return (
     <Box
@@ -14,6 +16,7 @@ const DashboardLayout = () => {
     >
       <Box
         sx={{
+          width: { SIDEBAR_WIDTH },
           display: { xs: "none", md: "block" },
           flexShrink: 0,
         }}
@@ -22,12 +25,15 @@ const DashboardLayout = () => {
       </Box>
 
       <Box
-        flexGrow={1}
-        minHeight="100vh"
-        p={3}
+        component="main"
         sx={{
-          transition: "0.3s ease",
-          color: "white",
+          flexGrow: 1,
+          minHeight: "100vh",
+          px: { xs: 2, sm: 3 },
+          pt: 2,
+          ml: { xs: 0, md: `${SIDEBAR_WIDTH}px` },
+          transition: "margin 0.3s ease",
+          overflowX: "hidden",
         }}
       >
         <Navbar />
