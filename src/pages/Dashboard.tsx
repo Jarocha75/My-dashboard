@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import AnalyticsCard from "../components/AnalyticsCard";
+import WelcomeCard from "../components/WelcomeCard";
 
 const Dashboard = () => {
   return (
@@ -46,6 +47,10 @@ const Dashboard = () => {
           change="+5%"
           icon="sales"
         />
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 5 }}>
+        <WelcomeCard />
       </Grid>
     </Grid>
   );

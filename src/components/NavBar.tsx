@@ -28,18 +28,20 @@ const Navbar = () => {
         elevation={0}
         sx={{
           background: theme.palette.navbar.gradient,
-          backdropFilter: "blur(8px)",
+          backdropFilter: "blur(10px)",
           borderRadius: "16px",
           boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
           mt: 2,
         }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{ display: "flex", justifyContent: "space-between", px: 2 }}
+        >
           <Box display="flex" alignItems="center" gap={2}>
             <IconButton
               sx={{
                 display: { xs: "flex", md: "none" },
-                color: theme.palette.common.white,
+                color: "#fff",
               }}
               onClick={() => setMenuMobileOpen(!menuMobileOpen)}
             >
@@ -56,21 +58,21 @@ const Navbar = () => {
             </Typography>
           </Box>
 
-          <Box display="flex" alignItems="center" gap={2}>
+          <Box display="flex" alignItems="center" gap={3}>
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
                 alignItems: "center",
-                backgroundColor: alpha("#fff", 0.15),
-                padding: "6px 14px",
-                borderRadius: "12px",
-                width: { xs: "100%", md: "220px" },
+                backgroundColor: alpha("#ffffff", 0.12),
+                padding: "6px 12px",
+                borderRadius: "10px",
+                width: "200",
               }}
             >
-              <SearchIcon sx={{ color: "white", fontSize: 20, mr: 1 }} />
+              <SearchIcon sx={{ color: "white", fontSize: 18, mr: 1 }} />
               <InputBase
                 placeholder="Search..."
-                sx={{ color: "white", width: "100%" }}
+                sx={{ color: "white", fontSize: "14px", width: "100%" }}
               />
             </Box>
 
@@ -79,20 +81,18 @@ const Navbar = () => {
               alignItems="center"
               sx={{
                 cursor: "pointer",
-                "&:hover": { opacity: 0.8 },
               }}
             >
-              <PersonIcon
-                sx={{ color: theme.palette.common.white, fontSize: 24 }}
-              />
+              <PersonIcon sx={{ color: "#fff", opacity: 0.85 }} />
               <Typography
                 variant="body1"
                 color={theme.palette.common.white}
                 sx={{
-                  cursor: "pointer",
-                  fontWeight: 500,
+                  color: "#fff",
                   ml: 1,
+                  fontWeight: 500,
                   display: { xs: "none", md: "block" },
+                  opacity: 0.9,
                 }}
               >
                 Sign In
@@ -101,7 +101,8 @@ const Navbar = () => {
 
             <IconButton
               sx={{
-                color: theme.palette.common.white,
+                color: "white",
+                opacity: 0.8,
                 display: { xs: "none", md: "flex" },
               }}
             >
@@ -110,7 +111,8 @@ const Navbar = () => {
 
             <IconButton
               sx={{
-                color: theme.palette.common.white,
+                color: "white",
+                opacity: 0.8,
                 display: { xs: "none", md: "flex" },
               }}
             >
@@ -128,7 +130,7 @@ const Navbar = () => {
           paper: {
             sx: {
               width: 250,
-              background: "linear-gradient(135deg, #0f1535 0%, #191c54 100%)",
+              background: "theme.palette.card.gradient",
               borderRight: `1px solid ${alpha("#fff", 0.1)}`,
               p: 0,
             },

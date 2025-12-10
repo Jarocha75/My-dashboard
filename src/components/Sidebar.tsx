@@ -148,7 +148,7 @@ const Sidebar = ({ onLinkClick }: Props) => {
                 "&:hover": { background: "rgba(255, 255, 255, 0.20)" },
               },
               "&:hover": {
-                background: "rgba(255, 255, 255, 0.88)",
+                background: "rgba(255, 255, 255, 0.1)",
               },
             }}
           >

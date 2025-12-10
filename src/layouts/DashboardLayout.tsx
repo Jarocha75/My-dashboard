@@ -11,12 +11,14 @@ const DashboardLayout = () => {
       display="flex"
       minHeight="100vh"
       sx={{
-        background: "linear-gradient(135deg, #0f1535 0%, #191c54 100%)",
+        backgroundImage: `
+          radial-gradient(circle at 20% 0%, rgba(49, 85, 215, 0.15) 0%, transparent 60%),
+          linear-gradient(180deg, #0F1535 0%, #111A4B 40%, #0F1535 100%)`,
       }}
     >
       <Box
         sx={{
-          width: { SIDEBAR_WIDTH },
+          width: SIDEBAR_WIDTH,
           display: { xs: "none", md: "block" },
           flexShrink: 0,
         }}
@@ -31,7 +33,6 @@ const DashboardLayout = () => {
           minHeight: "100vh",
           px: { xs: 2, sm: 3 },
           pt: 2,
-          ml: { xs: 0, md: `${SIDEBAR_WIDTH}px` },
           transition: "margin 0.3s ease",
           overflowX: "hidden",
         }}
