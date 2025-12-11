@@ -9,7 +9,7 @@ const WelcomeCard = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        borderRadius: 3,
+        borderRadius: "28px",
         height: 340,
         background: "transparent",
       }}

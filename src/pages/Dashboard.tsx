@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import AnalyticsCard from "../components/AnalyticsCard";
 import WelcomeCard from "../components/WelcomeCard";
 import SatisfactionRateCard from "../components/SatisfactionRateCard";
+import ReferralTrackingCard from "../components/ReferralTrackingCard";
 
 const Dashboard = () => {
   return (
@@ -56,6 +57,10 @@ const Dashboard = () => {
 
       <Grid size={{ xs: 12, md: 3 }}>
         <SatisfactionRateCard />
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 4 }}>
+        <ReferralTrackingCard />
       </Grid>
     </Grid>
   );

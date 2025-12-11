@@ -27,36 +27,49 @@ const SatisfactionRateCard = () => {
         }}
       />
 
-      <Box sx={{ position: "relative", zIndex: 2, flexGrow: 1 }}>
+      <Box sx={{ position: "relative", zIndex: 2 }}>
         <Typography sx={{ fontSize: 16, fontWeight: 700, color: "white" }}>
           Satisfaction Rate
         </Typography>
         <Typography sx={{ fontSize: 12, color: "#A0AEC0", mt: 0.5 }}>
           From all projects
         </Typography>
+      </Box>
 
-        <Box
-          sx={{
-            mt: 4,
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Box sx={{ position: "relative" }}>
-            <ArcProgress value={95} />
+      <Box
+        sx={{
+          mt: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <Box sx={{ position: "relative" }}>
+          <ArcProgress
+            value={95}
+            size={180}
+            thickness={10}
+            startAngle={270}
+            endAngle={450}
+            clip="top"
+            gradientId="satisfactionGradient"
+            gradientStart="#3A7BFF"
+            gradientEnd="#00E1FF"
+          />
 
-            <Box
-              sx={{
-                position: "absolute",
-                top: "60%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 10,
-              }}
-            >
-              <SmileIcon />
-            </Box>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "70%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 10,
+            }}
+          >
+            <SmileIcon />
           </Box>
         </Box>
 
@@ -69,8 +82,6 @@ const SatisfactionRateCard = () => {
             borderRadius: "20px",
             py: 1.2,
             px: 2,
-            mt: 5,
-            mx: "auto",
             width: "90%",
           }}
         >
@@ -83,7 +94,7 @@ const SatisfactionRateCard = () => {
               alignItems: "center",
             }}
           >
-            <Typography sx={{ fontSize: 26, fontWeight: 700, color: "white" }}>
+            <Typography color="white" fontSize={26} fontWeight={700}>
               95%
             </Typography>
             <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>
