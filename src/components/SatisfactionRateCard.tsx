@@ -1,6 +1,6 @@
 import { Box, Card, Typography, useTheme } from "@mui/material";
-import ArcProgress from "./ArcProgress";
-import SmileIcon from "./SmileIcon";
+import ArcProgress from "./common/ArcProgress";
+import SmileIcon from "./common/SmileIcon";
 
 const SatisfactionRateCard = () => {
   const theme = useTheme();

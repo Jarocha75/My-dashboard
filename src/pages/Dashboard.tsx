@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import AnalyticsCard from "../components/AnalyticsCard";
-import WelcomeCard from "../components/WelcomeCard";
-import SatisfactionRateCard from "../components/SatisfactionRateCard";
-import ReferralTrackingCard from "../components/ReferralTrackingCard";
+import AnalyticsCard from "@/components/AnalyticsCard";
+import WelcomeCard from "@/components/WelcomeCard";
+import SatisfactionRateCard from "@/components/SatisfactionRateCard";
+import ReferralTrackingCard from "@/components/ReferralTrackingCard";
 
 const Dashboard = () => {
   return (

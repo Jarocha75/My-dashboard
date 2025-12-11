@@ -1,5 +1,5 @@
 import { Box, Card, Typography, useTheme } from "@mui/material";
-import welcomeImg from "../assets/picture01.jpg";
+import welcomeImg from "@/assets/picture01.jpg";
 
 const WelcomeCard = () => {
   const theme = useTheme();
