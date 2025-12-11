@@ -3,6 +3,7 @@ import AnalyticsCard from "@/components/AnalyticsCard";
 import WelcomeCard from "@/components/WelcomeCard";
 import SatisfactionRateCard from "@/components/SatisfactionRateCard";
 import ReferralTrackingCard from "@/components/ReferralTrackingCard";
+import SalesOverviewCard from "@/components/SalesOverviewCard";
 
 const Dashboard = () => {
   return (
@@ -61,6 +62,10 @@ const Dashboard = () => {
 
       <Grid size={{ xs: 12, md: 4 }}>
         <ReferralTrackingCard />
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 7 }}>
+        <SalesOverviewCard />
       </Grid>
     </Grid>
   );
