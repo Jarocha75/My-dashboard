@@ -1,6 +1,6 @@
 import { Box, Card, Typography, useTheme } from "@mui/material";
 import ArcProgress from "./common/ArcProgress";
-import SmileIcon from "./common/SmileIcon";
+import { Smile } from "lucide-react";
 
 const SatisfactionRateCard = () => {
   const theme = useTheme();
@@ -69,7 +69,7 @@ const SatisfactionRateCard = () => {
               zIndex: 10,
             }}
           >
-            <SmileIcon />
+            <Smile size={40} />
           </Box>
         </Box>
 

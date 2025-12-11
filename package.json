@@ -15,6 +15,7 @@
     "@fontsource/poppins": "^5.2.7",
     "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
+    "lucide-react": "^0.560.0",
     "react": "^19.2.0",
     "react-circular-progressbar": "^2.2.0",
     "react-dom": "^19.2.0",
