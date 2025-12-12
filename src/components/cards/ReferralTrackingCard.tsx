@@ -1,6 +1,6 @@
 import { Card, Typography, useTheme, IconButton, Stack } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ArcProgress from "./common/ArcProgress";
+import ArcProgress from "../common/ArcProgress";
 
 const ReferralTrackingCard = () => {
   const theme = useTheme();

@@ -1,5 +1,5 @@
 import { Card, Typography, useTheme, Box } from "@mui/material";
-import SalesOverviewChart from "./common/SalesOverviewChart";
+import SalesOverviewChart from "../common/SalesOverviewChart";
 
 const SalesOverviewCard = () => {
   const theme = useTheme();

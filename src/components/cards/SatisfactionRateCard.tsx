@@ -1,6 +1,6 @@
 import { Card, Stack, Typography, useTheme } from "@mui/material";
 import { Smile } from "lucide-react";
-import ArcProgress from "./common/ArcProgress";
+import ArcProgress from "../common/ArcProgress";
 
 const SatisfactionRateCard = () => {
   const theme = useTheme();
