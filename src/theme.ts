@@ -69,6 +69,11 @@ const theme = createTheme({
       paper: "rgba(255,255,255,0.06)",
     },
 
+    text: {
+      primary: "#FFFFFF",
+      secondary: "#A0AEC0",
+    },
+
     navbar: {
       main: "#1A1F3C",
       gradient: "linear-gradient(135deg, #1A1F3C 0%, #3A416F 100%)",

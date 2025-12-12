@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 interface ArcProgressProps {
   value: number;
-  size?: number;
+  size?: number | { xs: number; md: number };
   thickness?: number;
   startAngle?: number;
   endAngle?: number;
@@ -23,7 +23,8 @@ const ArcProgress = ({
   gradientEnd = "#00E1FF",
   clip = "none",
 }: ArcProgressProps) => {
-  const radius = (size - thickness) / 2;
+  const numericSize = typeof size === "number" ? size : size.md;
+  const radius = (numericSize - thickness) / 2;
 
   const sweepAngle = endAngle - startAngle;
   const progressAngle = (value / 100) * sweepAngle;
@@ -31,8 +32,8 @@ const ArcProgress = ({
   const polarToCartesian = (angle: number) => {
     const rad = (angle - 90) * (Math.PI / 180);
     return {
-      x: size / 2 + radius * Math.cos(rad),
-      y: size / 2 + radius * Math.sin(rad),
+      x: numericSize / 2 + radius * Math.cos(rad),
+      y: numericSize / 2 + radius * Math.sin(rad),
     };
   };
 
@@ -45,27 +46,31 @@ const ArcProgress = ({
 
   // --- CLIPPING --- //
   const clipStyle: React.CSSProperties = {
-    width: size,
-    height: size,
+    width: numericSize,
+    height: numericSize,
     overflow: "hidden",
     position: "relative",
   };
 
   if (clip === "top") {
-    clipStyle.height = size / 2;
+    clipStyle.height = numericSize / 2;
   } else if (clip === "bottom") {
-    clipStyle.height = size / 2;
-    clipStyle.top = -(size / 2);
+    clipStyle.height = numericSize / 2;
+    clipStyle.top = -(numericSize / 2);
   } else if (clip === "left") {
-    clipStyle.width = size / 2;
+    clipStyle.width = numericSize / 2;
   } else if (clip === "right") {
-    clipStyle.width = size / 2;
-    clipStyle.left = -(size / 2);
+    clipStyle.width = numericSize / 2;
+    clipStyle.left = -(numericSize / 2);
   }
 
   return (
     <Box sx={clipStyle}>
-      <svg width={size} height={size} style={{ position: "absolute" }}>
+      <svg
+        width={numericSize}
+        height={numericSize}
+        style={{ position: "absolute" }}
+      >
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor={gradientStart} />

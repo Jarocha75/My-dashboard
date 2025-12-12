@@ -1,4 +1,4 @@
-import { Box, Card, Typography, useTheme, IconButton } from "@mui/material";
+import { Card, Typography, useTheme, IconButton, Stack } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ArcProgress from "./common/ArcProgress";
 
@@ -10,38 +10,34 @@ const ReferralTrackingCard = () => {
       sx={{
         position: "relative",
         borderRadius: "28px",
-        height: 344,
+        minHeight: 340,
         background: theme.palette.card.gradient,
-        backdropFilter: "blur(120px)", // Presne ako vo Figme
+        backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
-        flexDirection: "row",
+        flexDirection: { xs: "column", md: "row" },
         overflow: "hidden",
+        gap: { xs: 3, md: 0 },
       }}
     >
-      {/* MENU DOTS */}
       <IconButton
         sx={{
           position: "absolute",
           top: 10,
           right: 10,
-          color: "#A0AEC0",
+          color: theme.palette.text.secondary,
           zIndex: 10,
         }}
       >
         <MoreHorizIcon />
       </IconButton>
 
-      {/* LEFT SIDE */}
-      <Box
-        sx={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          gap: 3,
-          pr: 2,
-        }}
+      <Stack
+        flex={{ xs: 0, md: 1 }}
+        width={{ xs: "100%", md: "50%" }}
+        justifyContent={"flex-start"}
+        gap={3}
+        pr={{ md: 2 }}
       >
         <Typography
           sx={{ fontSize: 18, fontWeight: 700, color: "white", mb: 1 }}
@@ -49,8 +45,7 @@ const ReferralTrackingCard = () => {
           Referral Tracking
         </Typography>
 
-        {/* Card 1 */}
-        <Box
+        <Stack
           sx={{
             p: 2,
             borderRadius: "18px",
@@ -58,16 +53,17 @@ const ReferralTrackingCard = () => {
             backdropFilter: "blur(12px)",
           }}
         >
-          <Typography sx={{ color: "#A0AEC0", fontSize: 12 }}>
+          <Typography
+            sx={{ color: theme.palette.text.secondary, fontSize: 12 }}
+          >
             Invited
           </Typography>
           <Typography sx={{ fontSize: 22, fontWeight: 700, color: "white" }}>
             145 people
           </Typography>
-        </Box>
+        </Stack>
 
-        {/* Card 2 */}
-        <Box
+        <Stack
           sx={{
             p: 2,
             borderRadius: "18px",
@@ -75,45 +71,47 @@ const ReferralTrackingCard = () => {
             backdropFilter: "blur(12px)",
           }}
         >
-          <Typography sx={{ color: "#A0AEC0", fontSize: 12 }}>Bonus</Typography>
+          <Typography
+            sx={{ color: theme.palette.text.secondary, fontSize: 12 }}
+          >
+            Bonus
+          </Typography>
           <Typography sx={{ fontSize: 22, fontWeight: 700, color: "white" }}>
             1,465
           </Typography>
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
 
-      {/* RIGHT SIDE — QUARTER GAUGE */}
-      <Box
-        sx={{
-          flex: 1,
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          pl: 4,
-        }}
+      <Stack
+        flex={{ xs: 0, md: 1 }}
+        width={{ xs: "100%", md: "50%" }}
+        justifyContent={"center"}
+        alignItems={"center"}
+        pt={{ xs: 2, md: 0 }}
+        sx={{ position: "relative" }}
       >
         <ArcProgress
           value={93}
-          size={220}
+          size={{ xs: 160, md: 220 }}
           thickness={12}
           startAngle={200}
-          endAngle={420} // otvorený dole!
+          endAngle={420}
           gradientId="referralGradient"
           gradientStart="#00E1FF"
           gradientEnd="#00FF85"
         />
 
-        {/* Center text */}
-        <Box
+        <Stack
+          textAlign={"center"}
           sx={{
             position: "absolute",
-            textAlign: "center",
             top: "35%",
             transform: "translateY(-20%)",
           }}
         >
-          <Typography sx={{ color: "#A0AEC0", fontSize: 14 }}>
+          <Typography
+            sx={{ color: theme.palette.text.secondary, fontSize: 14 }}
+          >
             Safety
           </Typography>
 
@@ -128,13 +126,14 @@ const ReferralTrackingCard = () => {
             9.3
           </Typography>
 
-          <Typography sx={{ color: "#A0AEC0", fontSize: 14 }}>
+          <Typography
+            sx={{ color: theme.palette.text.secondary, fontSize: 14 }}
+          >
             Total Score
           </Typography>
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
 
-      {/* gradient */}
       <svg width="0" height="0">
         <defs>
           <linearGradient

@@ -1,4 +1,4 @@
-import { Card, Typography, useTheme, Stack } from "@mui/material";
+import { Card, Typography, useTheme, Box } from "@mui/material";
 import SalesOverviewChart from "./common/SalesOverviewChart";
 
 const SalesOverviewCard = () => {
@@ -8,7 +8,7 @@ const SalesOverviewCard = () => {
     <Card
       sx={{
         borderRadius: "28px",
-        height: 450,
+        minHeight: 450,
         background: theme.palette.card.gradient,
         position: "relative",
         p: 3,
@@ -16,7 +16,7 @@ const SalesOverviewCard = () => {
         flexDirection: "column",
       }}
     >
-      <Stack
+      <Box
         sx={{
           position: "absolute",
           inset: 0,
@@ -25,12 +25,12 @@ const SalesOverviewCard = () => {
         }}
       />
 
-      <Stack sx={{ position: "relative", zIndex: 2 }}>
+      <Box sx={{ position: "relative", zIndex: 2 }}>
         <Typography
           sx={{
             fontSize: 18,
             fontWeight: 700,
-            color: "#ffffff",
+            color: theme.palette.text.primary,
           }}
         >
           Sales overview
@@ -47,10 +47,10 @@ const SalesOverviewCard = () => {
           (+5) more in 2021
         </Typography>
 
-        <Stack mt={3} height={320}>
+        <Box mt={3} minHeight={320}>
           <SalesOverviewChart />
-        </Stack>
-      </Stack>
+        </Box>
+      </Box>
     </Card>
   );
 };

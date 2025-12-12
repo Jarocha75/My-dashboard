@@ -1,4 +1,4 @@
-import { Box, Card, Typography, useTheme } from "@mui/material";
+import { Card, Stack, Typography, useTheme } from "@mui/material";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -36,7 +36,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
         boxShadow: "0px 4px 14px rgba(0,0,0,0.3)",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Stack>
         <Typography
           sx={{
             fontSize: "12px",
@@ -47,7 +47,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
           {title}
         </Typography>
 
-        <Box sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
+        <Stack direction={"row"} alignItems={"baseline"} gap={1}>
           <Typography sx={{ fontSize: "24px", fontWeight: 700 }}>
             {value}
           </Typography>
@@ -61,23 +61,23 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
           >
             {change}
           </Typography>
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
 
-      <Box
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        flexShrink={0}
         sx={{
-          width: 46,
-          height: 46,
           borderRadius: "12px",
+          width: "46px",
+          height: "46px",
           background: theme.palette.icon.blueGradient,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexShrink: 0,
         }}
       >
         {iconMap[icon]}
-      </Box>
+      </Stack>
     </Card>
   );
 };

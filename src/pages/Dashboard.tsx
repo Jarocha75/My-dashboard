@@ -16,7 +16,7 @@ const Dashboard = () => {
         m: 0,
       }}
     >
-      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
         <AnalyticsCard
           title="Today's Money"
           value="$53,000"
@@ -25,7 +25,7 @@ const Dashboard = () => {
         />
       </Grid>
 
-      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
         <AnalyticsCard
           title="Today's Users"
           value="2,300"
@@ -34,7 +34,7 @@ const Dashboard = () => {
         />
       </Grid>
 
-      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
         <AnalyticsCard
           title="New Clients"
           value="+3,462"
@@ -43,7 +43,7 @@ const Dashboard = () => {
         />
       </Grid>
 
-      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
         <AnalyticsCard
           title="Sales"
           value="$103,430"
@@ -52,19 +52,19 @@ const Dashboard = () => {
         />
       </Grid>
 
-      <Grid size={{ xs: 12, md: 5 }}>
+      <Grid size={{ xs: 12, lg: 5 }}>
         <WelcomeCard />
       </Grid>
 
-      <Grid size={{ xs: 12, md: 3 }}>
+      <Grid size={{ xs: 12, lg: 3 }}>
         <SatisfactionRateCard />
       </Grid>
 
-      <Grid size={{ xs: 12, md: 4 }}>
+      <Grid size={{ xs: 12, lg: 4 }}>
         <ReferralTrackingCard />
       </Grid>
 
-      <Grid size={{ xs: 12, md: 7 }}>
+      <Grid size={{ xs: 12, lg: 7 }}>
         <SalesOverviewCard />
       </Grid>
     </Grid>
