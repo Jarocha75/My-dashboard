@@ -1,0 +1,62 @@
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+const data = [
+  { uv: 500 },
+  { uv: 400 },
+  { uv: 300 },
+  { uv: 200 },
+  { uv: 189 },
+  { uv: 239 },
+];
+
+const margin = {
+  top: 10,
+  right: 0,
+  left: 0,
+  bottom: 20,
+};
+
+const ActiveUsersChart = () => {
+  return (
+    <ResponsiveContainer width="100%" height={200}>
+      <BarChart data={data} margin={margin}>
+        <XAxis
+          dataKey="uv"
+          hide={true}
+          tick={{ fill: "#A0AEC0", fontSize: 12 }}
+          axisLine={false}
+          tickLine={false}
+        />
+        <YAxis
+          type="number"
+          dataKey="uv"
+          domain={[0, 500]}
+          tick={{ fill: "#ffffff", fontSize: 12, fontWeight: 500 }}
+          axisLine={false}
+          tickLine={false}
+        />
+        <Tooltip
+          contentStyle={{
+            background: "#1A2035",
+            borderRadius: 20,
+            padding: "10px 15px",
+          }}
+          wrapperStyle={{ outline: "none" }}
+          labelStyle={{ color: "#A0AEC0" }}
+          itemStyle={{ color: "white" }}
+        />
+
+        <Bar dataKey="uv" fill="#ffffff" barSize={15} />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default ActiveUsersChart;
