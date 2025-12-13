@@ -1,6 +1,13 @@
 import { Box, Card, Stack, Typography, useTheme } from "@mui/material";
 import ActiveUsersChart from "../common/ActiveUsersChart";
 import { Rocket, ShoppingCart, WalletMinimal, Wrench } from "lucide-react";
+import StatProgress from "../common/StatProgress";
+import { formatNumberShort } from "@/utils/formatNumber";
+
+const users = 1245;
+const clicks = 2_420_430;
+const sales = 2400;
+const items = 320;
 
 const ActiveUsersCard = () => {
   const theme = useTheme();
@@ -74,7 +81,10 @@ const ActiveUsersCard = () => {
             </Stack>
 
             <Stack spacing={1} alignItems="flex-start">
-              <Typography sx={valueStyle}>1,245</Typography>
+              <Typography sx={valueStyle}>
+                {formatNumberShort(users)}
+              </Typography>
+              <StatProgress value={users} max={2000} />
             </Stack>
           </Stack>
 
@@ -86,8 +96,9 @@ const ActiveUsersCard = () => {
 
             <Stack spacing={1} alignItems="flex-start">
               <Typography sx={{ ...valueStyle, fontSize: 18 }}>
-                2,42m
+                {formatNumberShort(clicks)}
               </Typography>
+              <StatProgress value={clicks} max={5000000} />
             </Stack>
           </Stack>
 
@@ -99,8 +110,9 @@ const ActiveUsersCard = () => {
 
             <Stack spacing={1} alignItems="flex-start">
               <Typography sx={{ ...valueStyle, fontSize: 18 }}>
-                2.400$
+                {formatNumberShort(sales)}
               </Typography>
+              <StatProgress value={sales} max={5000} />
             </Stack>
           </Stack>
 
@@ -111,7 +123,10 @@ const ActiveUsersCard = () => {
             </Stack>
 
             <Stack spacing={1} alignItems="flex-start">
-              <Typography sx={{ ...valueStyle, fontSize: 18 }}>320</Typography>
+              <Typography sx={{ ...valueStyle, fontSize: 18 }}>
+                {items.toLocaleString()}
+              </Typography>
+              <StatProgress value={items} max={1000} />
             </Stack>
           </Stack>
         </Stack>
