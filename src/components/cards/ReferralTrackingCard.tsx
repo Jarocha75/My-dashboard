@@ -1,9 +1,40 @@
 import { Card, Typography, useTheme, IconButton, Stack } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ArcProgress from "../common/ArcProgress";
+import { formatNumberShort } from "@/utils/formatNumber";
+
+const peopleInvited = 145;
+const bonusAmount = 1465;
+const score = 9.3;
+const scorePercent = score * 10;
 
 const ReferralTrackingCard = () => {
   const theme = useTheme();
+
+  const titleStyle = {
+    fontSize: 18,
+    fontWeight: 700,
+    color: theme.palette.text.primary,
+    mb: 1,
+  };
+
+  const subtitleStyle = {
+    fontSize: 14,
+    color: theme.palette.text.secondary,
+  };
+
+  const labelStyle = {
+    fontSize: 22,
+    color: theme.palette.text.primary,
+    fontWeight: 700,
+  };
+
+  const valueStyle = {
+    fontSize: 42,
+    fontWeight: 700,
+    color: theme.palette.text.primary,
+    lineHeight: 1.1,
+  };
 
   return (
     <Card
@@ -39,11 +70,7 @@ const ReferralTrackingCard = () => {
         gap={3}
         pr={{ md: 2 }}
       >
-        <Typography
-          sx={{ fontSize: 18, fontWeight: 700, color: "white", mb: 1 }}
-        >
-          Referral Tracking
-        </Typography>
+        <Typography sx={titleStyle}>Referral Tracking</Typography>
 
         <Stack
           sx={{
@@ -53,13 +80,9 @@ const ReferralTrackingCard = () => {
             backdropFilter: "blur(12px)",
           }}
         >
-          <Typography
-            sx={{ color: theme.palette.text.secondary, fontSize: 12 }}
-          >
-            Invited
-          </Typography>
-          <Typography sx={{ fontSize: 22, fontWeight: 700, color: "white" }}>
-            145 people
+          <Typography sx={subtitleStyle}>Invited</Typography>
+          <Typography sx={labelStyle}>
+            {formatNumberShort(peopleInvited)} people
           </Typography>
         </Stack>
 
@@ -71,13 +94,9 @@ const ReferralTrackingCard = () => {
             backdropFilter: "blur(12px)",
           }}
         >
-          <Typography
-            sx={{ color: theme.palette.text.secondary, fontSize: 12 }}
-          >
-            Bonus
-          </Typography>
-          <Typography sx={{ fontSize: 22, fontWeight: 700, color: "white" }}>
-            1,465
+          <Typography sx={subtitleStyle}>Bonus</Typography>
+          <Typography sx={labelStyle}>
+            ${formatNumberShort(bonusAmount)}
           </Typography>
         </Stack>
       </Stack>
@@ -91,7 +110,7 @@ const ReferralTrackingCard = () => {
         sx={{ position: "relative" }}
       >
         <ArcProgress
-          value={93}
+          value={scorePercent}
           size={{ xs: 160, md: 220 }}
           thickness={12}
           startAngle={200}
@@ -109,28 +128,11 @@ const ReferralTrackingCard = () => {
             transform: "translateY(-20%)",
           }}
         >
-          <Typography
-            sx={{ color: theme.palette.text.secondary, fontSize: 14 }}
-          >
-            Safety
-          </Typography>
+          <Typography sx={subtitleStyle}>Safety</Typography>
 
-          <Typography
-            sx={{
-              fontSize: 42,
-              fontWeight: 700,
-              color: "white",
-              lineHeight: 1.1,
-            }}
-          >
-            9.3
-          </Typography>
+          <Typography sx={valueStyle}>{score}</Typography>
 
-          <Typography
-            sx={{ color: theme.palette.text.secondary, fontSize: 14 }}
-          >
-            Total Score
-          </Typography>
+          <Typography sx={subtitleStyle}>Total Score</Typography>
         </Stack>
       </Stack>
 
