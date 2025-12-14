@@ -45,8 +45,8 @@ const ActiveUsersCard = () => {
         background: theme.palette.card.gradient,
         position: "relative",
         overflow: "hidden",
-        p: 3,
         display: "flex",
+        p: { xs: 2, md: 3 },
         flexDirection: "column",
       }}
     >
@@ -58,7 +58,14 @@ const ActiveUsersCard = () => {
         }}
       />
 
-      <Box sx={{ position: "relative", zIndex: 2, height: "100%" }}>
+      <Box
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          height: { xs: 180, md: "100%" },
+          mb: 3,
+        }}
+      >
         <ActiveUsersChart />
       </Box>
 
@@ -73,8 +80,18 @@ const ActiveUsersCard = () => {
           <Typography sx={subtitleStyle}>+23% than last week</Typography>
         </Stack>
 
-        <Stack direction={"row"} spacing={4} justifyContent="space-between">
-          <Stack justifyContent="flex-start" spacing={1}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent={"space-between"}
+          spacing={{ xs: 2, sm: 4 }}
+          flexWrap="wrap"
+        >
+          <Stack
+            justifyContent="flex-start"
+            sx={{
+              width: { xs: "100%", sm: "auto" },
+            }}
+          >
             <Stack direction={"row"} spacing={1} alignItems="center">
               <WalletMinimal size={25} color={theme.palette.text.primary} />
               <Typography sx={labelStyle}>Users</Typography>
@@ -88,7 +105,12 @@ const ActiveUsersCard = () => {
             </Stack>
           </Stack>
 
-          <Stack spacing={1}>
+          <Stack
+            spacing={1}
+            sx={{
+              width: { xs: "100%", sm: "auto" },
+            }}
+          >
             <Stack direction={"row"} spacing={1}>
               <Rocket size={25} color={theme.palette.text.primary} />
               <Typography sx={labelStyle}>Clicks</Typography>
@@ -102,7 +124,12 @@ const ActiveUsersCard = () => {
             </Stack>
           </Stack>
 
-          <Stack spacing={1}>
+          <Stack
+            spacing={1}
+            sx={{
+              width: { xs: "100%", sm: "auto" },
+            }}
+          >
             <Stack direction={"row"} spacing={1}>
               <ShoppingCart size={25} color={theme.palette.text.primary} />
               <Typography sx={labelStyle}>Sales</Typography>
@@ -116,7 +143,12 @@ const ActiveUsersCard = () => {
             </Stack>
           </Stack>
 
-          <Stack spacing={1}>
+          <Stack
+            spacing={1}
+            sx={{
+              width: { xs: "100%", sm: "auto" },
+            }}
+          >
             <Stack direction={"row"} spacing={1}>
               <Wrench size={25} color={theme.palette.text.primary} />
               <Typography sx={labelStyle}>Items</Typography>

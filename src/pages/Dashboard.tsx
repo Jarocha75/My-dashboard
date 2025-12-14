@@ -5,6 +5,7 @@ import SatisfactionRateCard from "@/components/cards/SatisfactionRateCard";
 import ReferralTrackingCard from "@/components/cards/ReferralTrackingCard";
 import SalesOverviewCard from "@/components/cards/SalesOverviewCard";
 import ActiveUsersCard from "@/components/cards/ActiveUsersCard";
+import ProjectsCard from "@/components/cards/ProjectsCard";
 
 const Dashboard = () => {
   return (
@@ -71,6 +72,10 @@ const Dashboard = () => {
 
       <Grid size={{ xs: 12, lg: 5 }}>
         <ActiveUsersCard />
+      </Grid>
+
+      <Grid size={{ xs: 12, lg: 8 }}>
+        <ProjectsCard />
       </Grid>
     </Grid>
   );

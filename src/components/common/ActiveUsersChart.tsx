@@ -20,7 +20,7 @@ const margin = {
   top: 10,
   right: 0,
   left: 0,
-  bottom: 20,
+  bottom: 10,
 };
 
 const ActiveUsersChart = () => {
@@ -45,8 +45,6 @@ const ActiveUsersChart = () => {
         <Tooltip
           contentStyle={{
             background: "#1A2035",
-            borderRadius: 20,
-            padding: "10px 15px",
           }}
           wrapperStyle={{ outline: "none" }}
           labelStyle={{ color: "#A0AEC0" }}
