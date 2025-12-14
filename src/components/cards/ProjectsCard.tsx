@@ -9,8 +9,10 @@ import jiraLogo from "@/assets/logos/jira.svg";
 import netlixLogo from "@/assets/logos/netflix.svg";
 import slackLogo from "@/assets/logos/slack.svg";
 import spotifyLogo from "@/assets/logos/spotify.svg";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   Card,
+  IconButton,
   Stack,
   Table,
   TableBody,
@@ -79,6 +81,18 @@ const ProjectsCard = () => {
         p: { xs: 2, md: 3 },
       }}
     >
+      <IconButton
+        sx={{
+          position: "absolute",
+          top: 10,
+          right: 10,
+          color: theme.palette.text.secondary,
+          zIndex: 10,
+        }}
+      >
+        <MoreVertIcon />
+      </IconButton>
+
       {/* Header */}
       <Stack mb={3}>
         <Typography fontSize={18} fontWeight={700}>
