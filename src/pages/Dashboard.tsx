@@ -6,6 +6,7 @@ import ReferralTrackingCard from "@/components/cards/ReferralTrackingCard";
 import SalesOverviewCard from "@/components/cards/SalesOverviewCard";
 import ActiveUsersCard from "@/components/cards/ActiveUsersCard";
 import ProjectsCard from "@/components/cards/ProjectsCard";
+import OrdersOverviewCard from "@/components/cards/OrdersOverviewCard";
 
 const Dashboard = () => {
   return (
@@ -76,6 +77,10 @@ const Dashboard = () => {
 
       <Grid size={{ xs: 12, lg: 8 }}>
         <ProjectsCard />
+      </Grid>
+
+      <Grid size={{ xs: 12, lg: 4 }}>
+        <OrdersOverviewCard />
       </Grid>
     </Grid>
   );
