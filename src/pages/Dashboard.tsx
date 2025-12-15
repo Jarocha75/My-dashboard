@@ -7,6 +7,7 @@ import SalesOverviewCard from "@/components/cards/SalesOverviewCard";
 import ActiveUsersCard from "@/components/cards/ActiveUsersCard";
 import ProjectsCard from "@/components/cards/ProjectsCard";
 import OrdersOverviewCard from "@/components/cards/OrdersOverviewCard";
+import Footer from "@/components/Footer";
 
 const Dashboard = () => {
   return (
@@ -81,6 +82,10 @@ const Dashboard = () => {
 
       <Grid size={{ xs: 12, lg: 4 }}>
         <OrdersOverviewCard />
+      </Grid>
+
+      <Grid size={{ xs: 12 }}>
+        <Footer />
       </Grid>
     </Grid>
   );
