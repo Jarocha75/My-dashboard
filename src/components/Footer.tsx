@@ -1,6 +1,8 @@
 import { Stack, Typography, useTheme } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
+const items = ["Marketplace", "Blog", "License"];
+
 const Footer = () => {
   const theme = useTheme();
 
@@ -11,7 +13,6 @@ const Footer = () => {
       alignItems={{ xs: "flex-start", md: "center" }}
       spacing={2}
       sx={{
-        px: 3,
         py: 2,
         backgroundColor: theme.palette.card.gradientOverlay,
       }}
@@ -27,7 +28,7 @@ const Footer = () => {
         alignItems="center"
         sx={{ width: { xs: "100%", md: "auto" } }}
       >
-        {["Marketplace", "Blog", "License"].map((item) => (
+        {items.map((item) => (
           <Typography
             key={item}
             component={RouterLink}
