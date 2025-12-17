@@ -1,5 +1,6 @@
-import { Box, Grid, Typography } from "@mui/material";
 import SigninImage from "@/assets/image/Signin.png";
+import SignInForm from "@/components/auth/SignInForm";
+import { Box, Grid } from "@mui/material";
 
 const SignIn = () => {
   return (
@@ -35,55 +36,7 @@ const SignIn = () => {
           p: 4,
         }}
       >
-        <Box sx={{ width: "100%", maxWidth: 400 }}>
-          <Typography variant="h4" fontWeight={700} mb={2}>
-            Sign In
-          </Typography>
-          {/* Sign In Form - Placeholder */}
-          <Box
-            component="form"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-            }}
-          >
-            <input
-              type="email"
-              placeholder="Email"
-              style={{
-                padding: "12px",
-                borderRadius: "8px",
-                border: "1px solid #ccc",
-                fontSize: "16px",
-              }}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              style={{
-                padding: "12px",
-                borderRadius: "8px",
-                border: "1px solid #ccc",
-                fontSize: "16px",
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                padding: "12px",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#3155D7",
-                color: "white",
-                fontSize: "16px",
-                cursor: "pointer",
-              }}
-            >
-              Sign In
-            </button>
-          </Box>
-        </Box>
+        <SignInForm />
       </Grid>
     </Grid>
   );
