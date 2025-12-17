@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import SignIn from "./pages/auth/SignIn";
+import AuthLayout from "./layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
@@ -32,14 +34,15 @@ const router = createBrowserRouter([
         path: "rtl",
         element: <div>RTL Page</div>,
       },
-      {
-        path: "sign-in",
-        element: <div>Sign In Page</div>,
-      },
-      {
-        path: "sign-up",
-        element: <div>Sign Up Page</div>,
-      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      { index: true, element: <SignIn /> },
+      { path: "signin", element: <SignIn /> },
+      { path: "signup", element: <div>Sign Up Page</div> },
     ],
   },
 ]);
