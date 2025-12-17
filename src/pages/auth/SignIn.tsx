@@ -21,7 +21,7 @@ const SignIn = () => {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.7))",
+              "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.25))",
           }}
         />
       </Grid>

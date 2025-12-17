@@ -31,7 +31,7 @@ const NavItem = ({ icon: Icon, label, to = "/" }: Props) => {
       }}
     >
       <Icon size={14} />
-      <Typography fontSize={10} fontWeight={700}>
+      <Typography fontSize={10} fontWeight={700} textTransform={"uppercase"}>
         {label}
       </Typography>
     </Stack>

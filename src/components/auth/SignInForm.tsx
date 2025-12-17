@@ -37,6 +37,16 @@ const SignInForm = () => {
         <Button variant="contained" size="large" sx={{ mt: 2, py: 1.5 }}>
           Sign In
         </Button>
+        <Typography fontSize={14} color="text.secondary" textAlign="center">
+          Don&apos;t have an account?{" "}
+          <Box
+            component="span"
+            color="primary.main"
+            sx={{ cursor: "pointer", fontWeight: 600 }}
+          >
+            Sign Up
+          </Box>
+        </Typography>
       </Stack>
     </Box>
   );

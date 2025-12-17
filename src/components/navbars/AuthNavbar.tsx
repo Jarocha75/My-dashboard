@@ -1,16 +1,22 @@
 import {
+  alpha,
   AppBar,
   Button,
+  Drawer,
+  IconButton,
   Stack,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { CircleUser, Codesandbox, KeyRound, UserPen } from "lucide-react";
+import { useState } from "react";
 import NavItem from "./NavItem";
 
 const Navbar = () => {
   const theme = useTheme();
+  const [menuMobileOpen, setMenuMobileOpen] = useState(false);
 
   return (
     <>
@@ -37,12 +43,22 @@ const Navbar = () => {
           }}
         >
           {/* LEFT */}
-          <Typography fontSize={14} fontWeight={400}>
+          <Typography
+            fontSize={14}
+            fontWeight={400}
+            letterSpacing={2}
+            textTransform={"uppercase"}
+          >
             Vision UI Free
           </Typography>
 
           {/* CENTER */}
-          <Stack direction="row" justifyContent="center" spacing={4}>
+          <Stack
+            direction="row"
+            justifyContent="center"
+            spacing={4}
+            sx={{ display: { xs: "none", md: "flex" } }}
+          >
             <NavItem icon={Codesandbox} label="Dashboard" />
             <NavItem icon={UserPen} label="Profile" />
             <NavItem icon={CircleUser} label="Sign Up" />
@@ -50,11 +66,56 @@ const Navbar = () => {
           </Stack>
 
           {/* RIGHT */}
-          <Button variant="contained" size="small">
-            Free Download
-          </Button>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            <Button
+              variant="contained"
+              size="small"
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
+            >
+              Free Download
+            </Button>
+
+            <IconButton
+              sx={{ display: { xs: "flex", md: "none" }, color: "#fff" }}
+              onClick={() => setMenuMobileOpen(!menuMobileOpen)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Stack>
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        anchor="right"
+        open={menuMobileOpen}
+        onClose={() => setMenuMobileOpen(false)}
+        slotProps={{
+          paper: {
+            sx: {
+              width: 250,
+              background: "theme.palette.card.gradient",
+              borderRight: `1px solid ${alpha("#fff", 0.1)}`,
+              px: 2,
+            },
+          },
+        }}
+      >
+        <Stack spacing={2} mt={4}>
+          <NavItem icon={Codesandbox} label="Dashboard" />
+          <NavItem icon={UserPen} label="Profile" />
+          <NavItem icon={CircleUser} label="Sign Up" />
+          <NavItem icon={KeyRound} label="Sign In" />
+
+          <Button variant="contained" fullWidth sx={{ mt: 2 }}>
+            Free Download
+          </Button>
+        </Stack>
+      </Drawer>
     </>
   );
 };
