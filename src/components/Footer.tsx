@@ -5,6 +5,7 @@ const items = ["Marketplace", "Blog", "License"];
 
 const Footer = () => {
   const theme = useTheme();
+  const currentYear = new Date().getFullYear();
 
   return (
     <Stack
@@ -18,8 +19,8 @@ const Footer = () => {
       }}
     >
       <Typography variant="body1">
-        &copy; {new Date().getFullYear()} My dashboard. Made with ❤️ by Jaroslav
-        Pecha for a better web.
+        &copy; {currentYear} My dashboard. Made with ❤️ by Jaroslav Pecha for a
+        better web.
       </Typography>
 
       <Stack
