@@ -33,8 +33,8 @@ const Sidebar = ({ onLinkClick }: Props) => {
 
   const accountItems = [
     { text: "Profile", icon: <PersonIcon />, path: "/profile" },
-    { text: "Sign In", icon: <LoginIcon />, path: "/sign-in" },
-    { text: "Sign Up", icon: <AssignmentIcon />, path: "/sign-up" },
+    { text: "Sign In", icon: <LoginIcon />, path: "/auth/signin" },
+    { text: "Sign Up", icon: <AssignmentIcon />, path: "/auth/signup" },
   ];
 
   return (
