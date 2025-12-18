@@ -1,3 +1,4 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
   Button,
@@ -8,15 +9,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-
-interface SignInFormValues {
-  email?: string;
-  password?: string;
-  rememberMe?: boolean;
-}
+import { Link as RouterLink } from "react-router-dom";
+import { signInSchema, type SignInFormValues } from "@/validation/auth";
 
 const SignInForm = () => {
-  const { register, handleSubmit } = useForm<SignInFormValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInFormValues>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -44,6 +46,8 @@ const SignInForm = () => {
           label="Email"
           type="email"
           placeholder="Your email address"
+          error={!!errors.email}
+          helperText={errors.email?.message}
         />
 
         <TextField
@@ -52,6 +56,8 @@ const SignInForm = () => {
           label="Password"
           type="password"
           placeholder="Your password"
+          error={!!errors.password}
+          helperText={errors.password?.message}
         />
         <FormControlLabel
           control={<Switch {...register("rememberMe")} />}
@@ -62,15 +68,20 @@ const SignInForm = () => {
           size="large"
           sx={{ mt: 2, py: 1.5 }}
           type="submit"
+          disabled={isSubmitting}
         >
-          Sign In
+          {isSubmitting ? "Signing In..." : "Sign In"}
         </Button>
         <Typography fontSize={14} color="text.secondary" textAlign="center">
           Don&apos;t have an account?{" "}
           <Box
-            component="span"
+            component={RouterLink}
+            to="/auth/signup"
             color="primary.main"
-            sx={{ cursor: "pointer", fontWeight: 600 }}
+            sx={{
+              textDecoration: "none",
+              fontWeight: 600,
+            }}
           >
             Sign Up
           </Box>
