@@ -1,4 +1,5 @@
 import SigninImage from "@/assets/image/Signin.png";
+import AuthFooter from "@/components/auth/AuthFooter";
 import SignInForm from "@/components/auth/SignInForm";
 import { Box, Grid } from "@mui/material";
 
@@ -31,12 +32,26 @@ const SignIn = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
           p: 4,
         }}
       >
-        <SignInForm />
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "100%",
+            maxWidth: 400,
+          }}
+        >
+          <SignInForm />
+        </Box>
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <AuthFooter />
+        </Box>
       </Grid>
     </Grid>
   );
