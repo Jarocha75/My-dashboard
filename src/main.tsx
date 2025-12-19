@@ -10,12 +10,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme.ts";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes.tsx";
+import AuthProvider from "./context/AuthProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AuthProvider>
   </StrictMode>
 );
