@@ -1,7 +1,7 @@
 import api from "@/services/apiClient";
 import { type User } from "@/context/authContext";
 
-interface LoginResponse {
+export interface LoginResponse {
   token: string;
   user: User;
 }

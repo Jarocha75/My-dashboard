@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/useAuth";
-import { loginRequest } from "@/services/auth";
+import { loginRequest, type LoginResponse } from "@/services/auth";
 import { signInSchema, type SignInFormValues } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -18,7 +18,11 @@ import { Link as RouterLink } from "react-router-dom";
 const SignInForm = () => {
   const { login } = useAuth();
 
-  const mutation = useMutation({
+  const mutation = useMutation<
+    LoginResponse,
+    Error,
+    { email: string; password: string }
+  >({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       loginRequest(email, password),
     onSuccess: ({ token, user }) => {
@@ -30,7 +34,7 @@ const SignInForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -45,63 +49,70 @@ const SignInForm = () => {
   };
 
   return (
-    <Box maxWidth={400} width="100%">
-      <Typography variant="h2" fontWeight={700} mb={2}>
-        Nice to see you!
-      </Typography>
-      <Typography fontSize={14} color="text.secondary" mb={4}>
-        Enter your email and password to sign in
-      </Typography>
-
-      <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          {...register("email")}
-          fullWidth
-          label="Email"
-          type="email"
-          placeholder="Your email address"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
-
-        <TextField
-          {...register("password")}
-          fullWidth
-          label="Password"
-          type="password"
-          placeholder="Your password"
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-        <FormControlLabel
-          control={<Switch {...register("rememberMe")} />}
-          label="Remember me"
-        />
-        <Button
-          variant="contained"
-          size="large"
-          sx={{ mt: 2, py: 1.5 }}
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Signing In..." : "Sign In"}
-        </Button>
-        <Typography fontSize={14} color="text.secondary" textAlign="center">
-          Don&apos;t have an account?{" "}
-          <Box
-            component={RouterLink}
-            to="/auth/signup"
-            color="primary.main"
-            sx={{
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
-          >
-            Sign Up
-          </Box>
+    <>
+      {mutation.isError && (
+        <Typography color="error" mb={2}>
+          {mutation.error.message}
         </Typography>
-      </Stack>
-    </Box>
+      )}
+      <Box maxWidth={400} width="100%">
+        <Typography variant="h2" fontWeight={700} mb={2}>
+          Nice to see you!
+        </Typography>
+        <Typography fontSize={14} color="text.secondary" mb={4}>
+          Enter your email and password to sign in
+        </Typography>
+
+        <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            {...register("email")}
+            fullWidth
+            label="Email"
+            type="email"
+            placeholder="Your email address"
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
+
+          <TextField
+            {...register("password")}
+            fullWidth
+            label="Password"
+            type="password"
+            placeholder="Your password"
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
+          <FormControlLabel
+            control={<Switch {...register("rememberMe")} />}
+            label="Remember me"
+          />
+          <Button
+            variant="contained"
+            size="large"
+            sx={{ mt: 2, py: 1.5 }}
+            type="submit"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? "Signing In..." : "Sign In"}
+          </Button>
+          <Typography fontSize={14} color="text.secondary" textAlign="center">
+            Don&apos;t have an account?{" "}
+            <Box
+              component={RouterLink}
+              to="/auth/signup"
+              color="primary.main"
+              sx={{
+                textDecoration: "none",
+                fontWeight: 600,
+              }}
+            >
+              Sign Up
+            </Box>
+          </Typography>
+        </Stack>
+      </Box>
+    </>
   );
 };
 
