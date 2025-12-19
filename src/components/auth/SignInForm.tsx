@@ -1,3 +1,6 @@
+import { useAuth } from "@/context/useAuth";
+import { loginRequest } from "@/services/auth";
+import { signInSchema, type SignInFormValues } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
@@ -8,11 +11,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink } from "react-router-dom";
-import { signInSchema, type SignInFormValues } from "@/validation/auth";
 
 const SignInForm = () => {
+  const { login } = useAuth();
+
+  const mutation = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+      loginRequest(email, password),
+    onSuccess: ({ token, user }) => {
+      console.log("Login successful:", user);
+      login(token, user);
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -27,7 +41,7 @@ const SignInForm = () => {
   });
 
   const onSubmit = (data: SignInFormValues) => {
-    console.log(data);
+    mutation.mutate({ email: data.email, password: data.password });
   };
 
   return (

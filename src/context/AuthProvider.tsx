@@ -1,43 +1,48 @@
+import { getMe } from "@/services/auth";
+import { setupInterceptors } from "@/services/setupInterceptors";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import AuthContext, { type User } from "./authContext";
+import AuthContext from "./authContext";
 
-const TOKEN_KEY = "access_token";
+const TOKEN_KEY = "auth_token";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = React.useState<User | null>(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // Simulate fetching user data with the token
-      const fetchedUser: User = { id: "1", email: "user@example.com" };
-      setUser(fetchedUser);
-    }
-  }, []);
-
-  const login = (token: string, user: User) => {
-    localStorage.setItem(TOKEN_KEY, token);
-    setUser(user);
-  };
-
-  const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    setUser(null);
-  };
+  const queryClient = useQueryClient();
 
   const getToken = () => {
     return localStorage.getItem(TOKEN_KEY);
   };
 
+  const { data: user, isLoading } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMe,
+    enabled: !!getToken(),
+  });
+
+  useEffect(() => {
+    setupInterceptors(getToken);
+  }, [getToken]);
+
+  const login = (token: string) => {
+    localStorage.setItem("TOKEN_KEY", token);
+    queryClient.invalidateQueries({ queryKey: ["me"] });
+  };
+
+  const logout = () => {
+    localStorage.removeItem("TOKEN_KEY");
+    queryClient.clear();
+  };
+
   return (
     <AuthContext.Provider
       value={{
-        user,
+        user: user || null,
         isAuthenticated: !!user,
+        isLoading,
         login,
         logout,
         getToken,
