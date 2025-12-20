@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/auth/SignIn";
 import AuthLayout from "./layouts/AuthLayout";
+import SignUp from "./pages/auth/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <SignIn /> },
       { path: "signin", element: <SignIn /> },
-      { path: "signup", element: <div>Sign Up Page</div> },
+      { path: "signup", element: <SignUp /> },
     ],
   },
 ]);

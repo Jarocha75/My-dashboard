@@ -1,6 +1,5 @@
-import { useAuth } from "@/context/useAuth";
-import { loginRequest, type LoginResponse } from "@/services/auth";
-import { signInSchema, type SignInFormValues } from "@/validation/auth";
+import { signUpRequest } from "@/services/auth";
+import { signUpSchema, type SignUpFormValues } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
@@ -15,20 +14,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-const SignInForm = () => {
-  const { login } = useAuth();
+const SignUpForm = () => {
   const navigate = useNavigate();
 
-  const mutation = useMutation<
-    LoginResponse,
-    Error,
-    { email: string; password: string }
-  >({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-      loginRequest(email, password),
-    onSuccess: ({ token, user }) => {
-      login(token, user);
-      navigate("/dashboard", { replace: true });
+  const mutation = useMutation({
+    mutationFn: signUpRequest,
+    onSuccess: () => {
+      navigate("/auth/signin", { replace: true });
     },
   });
 
@@ -36,16 +28,11 @@ const SignInForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormValues>({
-    resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      rememberMe: true,
-    },
+  } = useForm<SignUpFormValues>({
+    resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = (data: SignInFormValues) => {
+  const onSubmit = (data: SignUpFormValues) => {
     mutation.mutate({ email: data.email, password: data.password });
   };
 
@@ -58,13 +45,25 @@ const SignInForm = () => {
       )}
       <Box maxWidth={400} width="100%">
         <Typography variant="h2" fontWeight={700} mb={2}>
-          Nice to see you!
+          Welcome!
         </Typography>
         <Typography fontSize={14} color="text.secondary" mb={4}>
-          Enter your email and password to sign in
+          Use these awesome forms to login or create new
+          <br />
+          account in your project for free.
         </Typography>
 
         <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            {...register("name")}
+            fullWidth
+            label="Name"
+            type="text"
+            placeholder="Your name"
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+
           <TextField
             {...register("email")}
             fullWidth
@@ -84,8 +83,18 @@ const SignInForm = () => {
             error={!!errors.password}
             helperText={errors.password?.message}
           />
+          <TextField
+            {...register("confirmPassword")}
+            fullWidth
+            label="Confirm Password"
+            type="password"
+            placeholder="Confirm your password"
+            error={!!errors.confirmPassword}
+            helperText={errors.confirmPassword?.message}
+          />
+
           <FormControlLabel
-            control={<Switch {...register("rememberMe")} />}
+            control={<Switch {...register} />}
             label="Remember me"
           />
           <Button
@@ -95,20 +104,20 @@ const SignInForm = () => {
             type="submit"
             disabled={mutation.isPending}
           >
-            {mutation.isPending ? "Signing In..." : "Sign In"}
+            {mutation.isPending ? "Signing Up..." : "Sign Up"}
           </Button>
           <Typography fontSize={14} color="text.secondary" textAlign="center">
-            Don&apos;t have an account?{" "}
+            Already have an account?{" "}
             <Box
               component={RouterLink}
-              to="/auth/signup"
+              to="/auth/signin"
               color="primary.main"
               sx={{
                 textDecoration: "none",
                 fontWeight: 600,
               }}
             >
-              Sign Up
+              Sign In
             </Box>
           </Typography>
         </Stack>
@@ -117,4 +126,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

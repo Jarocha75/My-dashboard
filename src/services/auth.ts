@@ -19,12 +19,23 @@ export const loginRequest = async (
   }
 
   return {
-    token: "mock-token",
+    token: "mock-token-" + data[0].id,
     user: data[0],
   };
 };
 
 export const getMe = async (): Promise<User> => {
-  const { data } = await api.get<User>("/user/1");
+  const { data } = await api.get<User>("/users/1");
+  return data;
+};
+
+export interface SignUpPayload {
+  email: string;
+  password: string;
+}
+
+export const signUpRequest = async (payload: SignUpPayload): Promise<User> => {
+  const { data } = await api.post<User>("/users", payload);
+
   return data;
 };
