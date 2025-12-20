@@ -13,10 +13,11 @@ import {
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const mutation = useMutation<
     LoginResponse,
@@ -25,9 +26,9 @@ const SignInForm = () => {
   >({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       loginRequest(email, password),
-    onSuccess: ({ token, user }) => {
-      console.log("Login successful:", user);
-      login(token, user);
+    onSuccess: ({ user }) => {
+      login("mock-token", user);
+      navigate("/dashboard", { replace: true });
     },
   });
 
