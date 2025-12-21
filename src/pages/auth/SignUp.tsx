@@ -1,10 +1,24 @@
 import SignUpImage from "@/assets/image/SignUp.svg";
 import AuthFooter from "@/components/auth/AuthFooter";
 import GlassCard from "@/components/auth/GlassCard";
+import { useAuth } from "@/context/useAuth";
+import { facebookLoginRequest } from "@/services/auth";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const theme = useTheme();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const facebookMutation = useMutation({
+    mutationFn: facebookLoginRequest,
+    onSuccess: ({ token, user }) => {
+      login(token, user);
+      navigate("/profile", { replace: true });
+    },
+  });
 
   return (
     <Grid container minHeight="100dvh">
@@ -103,7 +117,7 @@ const SignUp = () => {
               alignItems: "center",
             }}
           >
-            <GlassCard />
+            <GlassCard onFacebookLogin={() => facebookMutation.mutate()} />
           </Box>
         </Box>
         <Box sx={{ mt: "auto", display: { xs: "none", md: "flex" } }}>

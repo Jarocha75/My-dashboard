@@ -15,6 +15,12 @@
       "id": "d80f",
       "email": "patkope@gmail.com",
       "password": "123456"
-    }
+    },
+    {
+      "id": "fb-1",
+      "email": "facebook.user1@example.com",
+      "provider": "facebook"
+}
+
   ]
 }

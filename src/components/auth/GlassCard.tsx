@@ -28,7 +28,11 @@ const glassStyle = {
   m: 2,
 };
 
-const GlassCard = () => {
+interface Props {
+  onFacebookLogin: () => void;
+}
+
+const GlassCard = ({ onFacebookLogin }: Props) => {
   return (
     <Box sx={{ ...glassStyle, maxWidth: 420, width: "100%" }}>
       <Typography
@@ -42,7 +46,7 @@ const GlassCard = () => {
       </Typography>
 
       <Stack direction="row" justifyContent="center" spacing={2}>
-        <IconButton sx={iconStyle}>
+        <IconButton sx={iconStyle} onClick={onFacebookLogin}>
           <FacebookRoundedIcon />
         </IconButton>
         <IconButton sx={iconStyle}>
