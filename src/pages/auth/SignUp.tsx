@@ -84,7 +84,7 @@ const SignUp = () => {
             maxWidth: 400,
           }}
         >
-          <Box mt={3} textAlign="center">
+          <Box mt={3} mb={1} textAlign="center">
             <Typography variant="h2" fontWeight={700} mb={1}>
               Welcome!
             </Typography>

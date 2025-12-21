@@ -1,5 +1,5 @@
 import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import AppleIcon from "@mui/icons-material/Apple";
 import GoogleIcon from "@mui/icons-material/Google";
 import SignUpForm from "./SignUpForm";
@@ -43,7 +43,7 @@ const GlassCard = () => {
 
       <Stack direction="row" justifyContent="center" spacing={2}>
         <IconButton sx={iconStyle}>
-          <FacebookIcon />
+          <FacebookRoundedIcon />
         </IconButton>
         <IconButton sx={iconStyle}>
           <AppleIcon />
