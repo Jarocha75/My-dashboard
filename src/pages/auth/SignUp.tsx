@@ -1,6 +1,6 @@
 import SignUpImage from "@/assets/image/SignUp.svg";
 import AuthFooter from "@/components/auth/AuthFooter";
-import SignUpForm from "@/components/auth/SignUpForm";
+import GlassCard from "@/components/auth/GlassCard";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 
 const SignUp = () => {
@@ -68,9 +68,10 @@ const SignUp = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
           alignItems: "center",
+          justifyContent: { xs: "center", md: "flex-start" },
           p: 4,
+          pt: { xs: 10, md: 12 },
         }}
       >
         <Box
@@ -83,9 +84,19 @@ const SignUp = () => {
             maxWidth: 400,
           }}
         >
-          <SignUpForm />
+          <Box mt={3} textAlign="center">
+            <Typography variant="h2" fontWeight={700} mb={1}>
+              Welcome!
+            </Typography>
+            <Typography fontSize={14} color="text.secondary" mb={1}>
+              Use these awesome forms to login or create new
+              <br />
+              account in your project for free.
+            </Typography>
+          </Box>
+          <GlassCard />
         </Box>
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+        <Box sx={{ mt: "auto", display: { xs: "none", md: "flex" } }}>
           <AuthFooter />
         </Box>
       </Grid>

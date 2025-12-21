@@ -59,10 +59,10 @@ const Navbar = () => {
             spacing={4}
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            <NavItem icon={Codesandbox} label="Dashboard" />
-            <NavItem icon={UserPen} label="Profile" />
-            <NavItem icon={CircleUser} label="Sign Up" />
-            <NavItem icon={KeyRound} label="Sign In" />
+            <NavItem icon={Codesandbox} label="Dashboard" to="/" />
+            <NavItem icon={UserPen} label="Profile" to="/profile" />
+            <NavItem icon={CircleUser} label="Sign Up" to="/auth/signup" />
+            <NavItem icon={KeyRound} label="Sign In" to="/auth/signin" />
           </Stack>
 
           {/* RIGHT */}

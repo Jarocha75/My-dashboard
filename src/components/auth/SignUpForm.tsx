@@ -43,85 +43,75 @@ const SignUpForm = () => {
           {mutation.error.message}
         </Typography>
       )}
-      <Box maxWidth={400} width="100%">
-        <Typography variant="h2" fontWeight={700} mb={2}>
-          Welcome!
-        </Typography>
-        <Typography fontSize={14} color="text.secondary" mb={4}>
-          Use these awesome forms to login or create new
-          <br />
-          account in your project for free.
-        </Typography>
 
-        <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            {...register("name")}
-            fullWidth
-            label="Name"
-            type="text"
-            placeholder="Your name"
-            error={!!errors.name}
-            helperText={errors.name?.message}
-          />
+      <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          {...register("name")}
+          fullWidth
+          label="Name"
+          type="text"
+          placeholder="Your name"
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
 
-          <TextField
-            {...register("email")}
-            fullWidth
-            label="Email"
-            type="email"
-            placeholder="Your email address"
-            error={!!errors.email}
-            helperText={errors.email?.message}
-          />
+        <TextField
+          {...register("email")}
+          fullWidth
+          label="Email"
+          type="email"
+          placeholder="Your email address"
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
 
-          <TextField
-            {...register("password")}
-            fullWidth
-            label="Password"
-            type="password"
-            placeholder="Your password"
-            error={!!errors.password}
-            helperText={errors.password?.message}
-          />
-          <TextField
-            {...register("confirmPassword")}
-            fullWidth
-            label="Confirm Password"
-            type="password"
-            placeholder="Confirm your password"
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword?.message}
-          />
+        <TextField
+          {...register("password")}
+          fullWidth
+          label="Password"
+          type="password"
+          placeholder="Your password"
+          error={!!errors.password}
+          helperText={errors.password?.message}
+        />
+        <TextField
+          {...register("confirmPassword")}
+          fullWidth
+          label="Confirm Password"
+          type="password"
+          placeholder="Confirm your password"
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+        />
 
-          <FormControlLabel
-            control={<Switch {...register} />}
-            label="Remember me"
-          />
-          <Button
-            variant="contained"
-            size="large"
-            sx={{ mt: 2, py: 1.5 }}
-            type="submit"
-            disabled={mutation.isPending}
+        <FormControlLabel
+          control={<Switch {...register} />}
+          label="Remember me"
+        />
+        <Button
+          variant="contained"
+          size="large"
+          sx={{ mt: 2, py: 1.5 }}
+          type="submit"
+          disabled={mutation.isPending}
+        >
+          {mutation.isPending ? "Signing Up..." : "Sign Up"}
+        </Button>
+        <Typography fontSize={14} color="text.secondary" textAlign="center">
+          Already have an account?{" "}
+          <Box
+            component={RouterLink}
+            to="/auth/signin"
+            color="primary.main"
+            sx={{
+              textDecoration: "none",
+              fontWeight: 600,
+            }}
           >
-            {mutation.isPending ? "Signing Up..." : "Sign Up"}
-          </Button>
-          <Typography fontSize={14} color="text.secondary" textAlign="center">
-            Already have an account?{" "}
-            <Box
-              component={RouterLink}
-              to="/auth/signin"
-              color="primary.main"
-              sx={{
-                textDecoration: "none",
-                fontWeight: 600,
-              }}
-            >
-              Sign In
-            </Box>
-          </Typography>
-        </Stack>
-      </Box>
+            Sign In
+          </Box>
+        </Typography>
+      </Stack>
     </>
   );
 };
