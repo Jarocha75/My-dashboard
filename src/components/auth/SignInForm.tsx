@@ -57,12 +57,19 @@ const SignInForm = () => {
         </Typography>
       )}
       <Box maxWidth={400} width="100%">
-        <Typography variant="h2" fontWeight={700} mb={2}>
-          Nice to see you!
-        </Typography>
-        <Typography fontSize={14} color="text.secondary" mb={4}>
-          Enter your email and password to sign in
-        </Typography>
+        <Box
+          mb={3}
+          textAlign="center"
+          display={{ xs: "none", sm: "block" }}
+          mt={{ xs: 0, sm: 2 }}
+        >
+          <Typography variant="h2" fontWeight={700} mb={2}>
+            Nice to see you!
+          </Typography>
+          <Typography fontSize={14} color="text.secondary" mb={4}>
+            Enter your email and password to sign in
+          </Typography>
+        </Box>
 
         <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
           <TextField

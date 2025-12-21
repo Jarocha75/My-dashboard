@@ -94,7 +94,17 @@ const SignUp = () => {
               account in your project for free.
             </Typography>
           </Box>
-          <GlassCard />
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: 420,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <GlassCard />
+          </Box>
         </Box>
         <Box sx={{ mt: "auto", display: { xs: "none", md: "flex" } }}>
           <AuthFooter />
