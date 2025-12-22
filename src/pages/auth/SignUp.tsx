@@ -3,6 +3,7 @@ import AuthFooter from "@/components/auth/AuthFooter";
 import GlassCard from "@/components/auth/GlassCard";
 import { useAuth } from "@/context/useAuth";
 import { facebookLoginRequest } from "@/services/auth";
+import { useFacebookLogin } from "@/hooks/useFacebookLogin";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,7 @@ const SignUp = () => {
   const theme = useTheme();
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { login: fbLogin, isLoading: isFbLoading } = useFacebookLogin();
 
   const facebookMutation = useMutation({
     mutationFn: facebookLoginRequest,
@@ -19,6 +21,15 @@ const SignUp = () => {
       navigate("/profile", { replace: true });
     },
   });
+
+  const handleFacebookLogin = async () => {
+    try {
+      const fbToken = await fbLogin();
+      facebookMutation.mutate(fbToken);
+    } catch (error) {
+      console.error("Facebook login error:", error);
+    }
+  };
 
   return (
     <Grid container minHeight="100dvh">
@@ -117,7 +128,10 @@ const SignUp = () => {
               alignItems: "center",
             }}
           >
-            <GlassCard onFacebookLogin={() => facebookMutation.mutate()} />
+            <GlassCard
+              onFacebookLogin={handleFacebookLogin}
+              isFacebookLoading={isFbLoading || facebookMutation.isPending}
+            />
           </Box>
         </Box>
         <Box sx={{ mt: "auto", display: { xs: "none", md: "flex" } }}>

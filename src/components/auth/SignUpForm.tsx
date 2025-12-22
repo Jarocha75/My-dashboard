@@ -13,14 +13,17 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/useAuth";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const mutation = useMutation({
     mutationFn: signUpRequest,
-    onSuccess: () => {
-      navigate("/auth/signin", { replace: true });
+    onSuccess: ({ token, user }) => {
+      login(token, user);
+      navigate("/profile", { replace: true });
     },
   });
 
@@ -33,7 +36,11 @@ const SignUpForm = () => {
   });
 
   const onSubmit = (data: SignUpFormValues) => {
-    mutation.mutate({ email: data.email, password: data.password });
+    mutation.mutate({
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (

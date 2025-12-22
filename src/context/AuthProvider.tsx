@@ -23,18 +23,18 @@ const AuthProvider = ({ children }: Props) => {
     enabled: !!getToken(),
   });
 
-  useEffect(() => {
-    setupInterceptors(getToken);
-  }, [getToken]);
-
-  const login = (token: string) => {
-    localStorage.setItem("TOKEN_KEY", token);
-    queryClient.invalidateQueries({ queryKey: ["me"] });
+  const logout = () => {
+    localStorage.removeItem(TOKEN_KEY);
+    queryClient.clear();
   };
 
-  const logout = () => {
-    localStorage.removeItem("TOKEN_KEY");
-    queryClient.clear();
+  useEffect(() => {
+    setupInterceptors(getToken, logout);
+  }, []);
+
+  const login = (token: string, user: import("./authContext").User) => {
+    localStorage.setItem(TOKEN_KEY, token);
+    queryClient.setQueryData(["me"], user);
   };
 
   return (
