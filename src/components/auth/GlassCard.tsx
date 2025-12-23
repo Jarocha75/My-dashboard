@@ -31,9 +31,11 @@ const glassStyle = {
 interface Props {
   onFacebookLogin: () => void;
   isFacebookLoading?: boolean;
+  onGoogleLogin: () => void;
+  isGoogleLoading?: boolean;
 }
 
-const GlassCard = ({ onFacebookLogin, isFacebookLoading }: Props) => {
+const GlassCard = ({ onFacebookLogin, isFacebookLoading, onGoogleLogin, isGoogleLoading }: Props) => {
   return (
     <Box sx={{ ...glassStyle, maxWidth: 420, width: "100%" }}>
       <Typography
@@ -53,7 +55,7 @@ const GlassCard = ({ onFacebookLogin, isFacebookLoading }: Props) => {
         <IconButton sx={iconStyle} disabled>
           <AppleIcon />
         </IconButton>
-        <IconButton sx={iconStyle} disabled>
+        <IconButton sx={iconStyle} onClick={onGoogleLogin} disabled={isGoogleLoading}>
           <GoogleIcon />
         </IconButton>
       </Stack>

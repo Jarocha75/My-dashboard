@@ -46,3 +46,13 @@ export const facebookLoginRequest = async (
 
   return data;
 };
+
+export const googleLoginRequest = async (
+  googleToken?: string
+): Promise<LoginResponse> => {
+  const { data } = await api.post<LoginResponse>("/auth/google", {
+    token: googleToken,
+  });
+
+  return data;
+};

@@ -2,8 +2,9 @@ import SignUpImage from "@/assets/image/SignUp.svg";
 import AuthFooter from "@/components/auth/AuthFooter";
 import GlassCard from "@/components/auth/GlassCard";
 import { useAuth } from "@/context/useAuth";
-import { facebookLoginRequest } from "@/services/auth";
+import { facebookLoginRequest, googleLoginRequest } from "@/services/auth";
 import { useFacebookLogin } from "@/hooks/useFacebookLogin";
+import { useGoogleLogin } from "@/hooks/useGoogleLogin";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ const SignUp = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { login: fbLogin, isLoading: isFbLoading } = useFacebookLogin();
+  const { login: googleLogin, isLoading: isGoogleLoading } = useGoogleLogin();
 
   const facebookMutation = useMutation({
     mutationFn: facebookLoginRequest,
@@ -27,6 +29,19 @@ const SignUp = () => {
     },
   });
 
+  const googleMutation = useMutation({
+    mutationFn: googleLoginRequest,
+    onSuccess: ({ token, user }) => {
+      console.log("✅ Google login successful:", { token, user });
+      login(token, user);
+      console.log("🚀 Navigating to dashboard...");
+      navigate("/dashboard", { replace: true });
+    },
+    onError: (error) => {
+      console.error("❌ Google mutation error:", error);
+    },
+  });
+
   const handleFacebookLogin = async () => {
     try {
       console.log("🔵 Starting Facebook login...");
@@ -35,6 +50,17 @@ const SignUp = () => {
       facebookMutation.mutate(fbToken);
     } catch (error) {
       console.error("❌ Facebook login error:", error);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      console.log("🟢 Starting Google login...");
+      const googleToken = await googleLogin();
+      console.log("🟢 Got Google token, calling backend...", googleToken);
+      googleMutation.mutate(googleToken);
+    } catch (error) {
+      console.error("❌ Google login error:", error);
     }
   };
 
@@ -138,6 +164,8 @@ const SignUp = () => {
             <GlassCard
               onFacebookLogin={handleFacebookLogin}
               isFacebookLoading={isFbLoading || facebookMutation.isPending}
+              onGoogleLogin={handleGoogleLogin}
+              isGoogleLoading={isGoogleLoading || googleMutation.isPending}
             />
           </Box>
         </Box>
