@@ -17,17 +17,24 @@ const SignUp = () => {
   const facebookMutation = useMutation({
     mutationFn: facebookLoginRequest,
     onSuccess: ({ token, user }) => {
+      console.log("✅ Facebook login successful:", { token, user });
       login(token, user);
-      navigate("/profile", { replace: true });
+      console.log("🚀 Navigating to dashboard...");
+      navigate("/dashboard", { replace: true });
+    },
+    onError: (error) => {
+      console.error("❌ Facebook mutation error:", error);
     },
   });
 
   const handleFacebookLogin = async () => {
     try {
+      console.log("🔵 Starting Facebook login...");
       const fbToken = await fbLogin();
+      console.log("🔵 Got Facebook token, calling backend...", fbToken);
       facebookMutation.mutate(fbToken);
     } catch (error) {
-      console.error("Facebook login error:", error);
+      console.error("❌ Facebook login error:", error);
     }
   };
 
