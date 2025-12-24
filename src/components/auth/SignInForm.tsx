@@ -14,6 +14,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignInForm = () => {
   const { login } = useAuth();
@@ -27,8 +28,12 @@ const SignInForm = () => {
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       loginRequest(email, password),
     onSuccess: ({ token, user }) => {
+      toast.success("Úspešne si sa prihlásil!");
       login(token, user);
       navigate("/dashboard", { replace: true });
+    },
+    onError: (error) => {
+      toast.error(error.message || "Prihlásenie zlyhalo. Skús to znova.");
     },
   });
 
@@ -51,11 +56,6 @@ const SignInForm = () => {
 
   return (
     <>
-      {mutation.isError && (
-        <Typography color="error" mb={2}>
-          {mutation.error.message}
-        </Typography>
-      )}
       <Box maxWidth={400} width="100%">
         <Box
           mb={3}

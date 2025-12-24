@@ -7,6 +7,7 @@ import { useFacebookLogin } from "@/hooks/useFacebookLogin";
 import { useGoogleLogin } from "@/hooks/useGoogleLogin";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -20,12 +21,14 @@ const SignUp = () => {
     mutationFn: facebookLoginRequest,
     onSuccess: ({ token, user }) => {
       console.log("✅ Facebook login successful:", { token, user });
+      toast.success("Úspešne si sa prihlásil cez Facebook!");
       login(token, user);
       console.log("🚀 Navigating to dashboard...");
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
       console.error("❌ Facebook mutation error:", error);
+      toast.error("Prihlásenie cez Facebook zlyhalo. Skús to znova.");
     },
   });
 
@@ -33,12 +36,14 @@ const SignUp = () => {
     mutationFn: googleLoginRequest,
     onSuccess: ({ token, user }) => {
       console.log("✅ Google login successful:", { token, user });
+      toast.success("Úspešne si sa prihlásil cez Google!");
       login(token, user);
       console.log("🚀 Navigating to dashboard...");
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
       console.error("❌ Google mutation error:", error);
+      toast.error("Prihlásenie cez Google zlyhalo. Skús to znova.");
     },
   });
 

@@ -61,7 +61,11 @@ const GlassCard = ({
         >
           <FacebookRoundedIcon />
         </IconButton>
-        <IconButton sx={iconStyle}>
+        <IconButton
+          sx={iconStyle}
+          disabled
+          title="Sign in with Apple coming soon"
+        >
           <AppleIcon />
         </IconButton>
         <IconButton
