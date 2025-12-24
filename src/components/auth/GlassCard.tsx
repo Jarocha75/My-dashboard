@@ -1,8 +1,8 @@
 import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import AppleIcon from "@mui/icons-material/Apple";
 import GoogleIcon from "@mui/icons-material/Google";
 import SignUpForm from "./SignUpForm";
+import AppleIcon from "@mui/icons-material/Apple";
 
 const iconStyle = {
   width: 56,
@@ -61,7 +61,7 @@ const GlassCard = ({
         >
           <FacebookRoundedIcon />
         </IconButton>
-        <IconButton sx={iconStyle} disabled>
+        <IconButton sx={iconStyle}>
           <AppleIcon />
         </IconButton>
         <IconButton
