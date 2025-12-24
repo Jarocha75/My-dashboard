@@ -56,3 +56,13 @@ export const googleLoginRequest = async (
 
   return data;
 };
+
+export const appleLoginRequest = async (
+  appleToken?: string
+): Promise<LoginResponse> => {
+  const { data } = await api.post<LoginResponse>("/auth/apple", {
+    token: appleToken,
+  });
+
+  return data;
+};
