@@ -3,6 +3,7 @@ import {
   Box,
   Card,
   IconButton,
+  Stack,
   Tab,
   Tabs,
   Typography,
@@ -50,14 +51,7 @@ const ProfileHeader = () => {
         background: theme.palette.card.gradientOverlay,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 2,
-        }}
-      >
+      <Stack direction="row" alignItems="center" spacing={2}>
         <Box sx={{ position: "relative" }}>
           <Avatar
             src={headerLogo}
@@ -86,7 +80,7 @@ const ProfileHeader = () => {
           </IconButton>
         </Box>
 
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+        <Stack spacing={0.5}>
           <Typography
             sx={{
               fontSize: 18,
@@ -105,8 +99,8 @@ const ProfileHeader = () => {
           >
             marc@simple.com
           </Typography>
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
 
       <Box sx={{ ml: "auto" }}>
         <Tabs
@@ -120,24 +114,19 @@ const ProfileHeader = () => {
             },
           }}
         >
-          <Tab
-            icon={<Codepen size={14} />}
-            iconPosition="start"
-            sx={tabSx}
-            label="OVERVIEW"
-          />
-          <Tab
-            icon={<Users size={14} />}
-            iconPosition="start"
-            sx={tabSx}
-            label="TEAMS"
-          />
-          <Tab
-            icon={<Wrench size={14} />}
-            iconPosition="start"
-            sx={tabSx}
-            label="PROJECTS"
-          />
+          {[
+            { icon: <Codepen size={14} />, label: "OVERVIEW" },
+            { icon: <Users size={14} />, label: "TEAMS" },
+            { icon: <Wrench size={14} />, label: "PROJECTS" },
+          ].map((tabData, index) => (
+            <Tab
+              key={index}
+              icon={tabData.icon}
+              iconPosition="start"
+              sx={tabSx}
+              label={tabData.label}
+            />
+          ))}
         </Tabs>
       </Box>
     </Card>

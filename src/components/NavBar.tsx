@@ -15,11 +15,23 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const theme = useTheme();
+  const location = useLocation();
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
+
+  const getPageTitle = () => {
+    const path = location.pathname;
+    if (path === "/" || path === "/dashboard") return "Dashboard";
+    if (path === "/profile") return "Dashboard / Profile";
+    if (path === "/tables") return "Dashboard / Tables";
+    if (path === "/billing") return "Dashboard / Billing";
+    if (path === "/rtl") return "Dashboard / RTL";
+    return "Dashboard";
+  };
 
   return (
     <>
@@ -54,7 +66,7 @@ const Navbar = () => {
               color="#fff"
               sx={{ display: { xs: "none", sm: "flex" } }}
             >
-              Dashboard
+              {getPageTitle()}
             </Typography>
           </Box>
 
