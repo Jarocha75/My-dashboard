@@ -2,16 +2,30 @@ import { Box, Card, Grid, Stack, Typography, useTheme } from "@mui/material";
 import ArcProgress from "../common/ArcProgress";
 import iconBattery from "@/assets/icons/iconBattery.svg";
 import MiniCard from "./MiniCard";
-import IconBattery01 from "@/assets/icons/IconBattery01.png";
-import IconCar from "@/assets/icons/IconCar.png";
-import LineChart01 from "@/assets/charts/LineChart01.png";
-import LineChart02 from "@/assets/charts/LineChart02.png";
 
 const score = 6.8;
 const scorePercent = Math.round(score * 10);
 const restTime = "0h58min";
 
-const CarInfoCard = () => {
+interface MiniCardData {
+  title: string;
+  value: string;
+  icon: string;
+}
+
+interface Props {
+  title?: string;
+  userName?: string;
+  actionText?: string;
+  miniCards?: MiniCardData[];
+}
+
+const CarInfoCard = ({
+  title = "Car Information",
+  userName = "Mark Johnson",
+  actionText = "Your Car is ready",
+  miniCards = [],
+}: Props) => {
   const theme = useTheme();
 
   const titleStyle = {
@@ -66,7 +80,7 @@ const CarInfoCard = () => {
             fontWeight={700}
             color={theme.palette.text.primary}
           >
-            Car Information
+            {title}
           </Typography>
           <Typography
             fontSize="14px"
@@ -74,7 +88,7 @@ const CarInfoCard = () => {
             color={theme.palette.text.primary}
             sx={{ textAlign: { xs: "center", md: "left" } }}
           >
-            Hello, Mark Johnson! Your Car is ready.
+            Hello, {userName}! {actionText}.
           </Typography>
         </Stack>
 
@@ -180,61 +194,21 @@ const CarInfoCard = () => {
             maxWidth: "100%",
           }}
         >
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <MiniCard
-              title="Battery Health"
-              value="76%"
-              icon={
-                <img
-                  src={IconCar}
-                  alt="Car"
-                  style={{ width: 48, height: 48 }}
-                />
-              }
-            />
-          </Grid>
-
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <MiniCard
-              title="Efficiency"
-              value="+20%"
-              icon={
-                <img
-                  src={LineChart01}
-                  alt="Chart"
-                  style={{ width: 48, height: 48 }}
-                />
-              }
-            />
-          </Grid>
-
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <MiniCard
-              title="Consumption"
-              value="163W/km"
-              icon={
-                <img
-                  src={IconBattery01}
-                  alt="Battery"
-                  style={{ width: 48, height: 48 }}
-                />
-              }
-            />
-          </Grid>
-
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <MiniCard
-              title="This week"
-              value="1.342km"
-              icon={
-                <img
-                  src={LineChart02}
-                  alt="Chart"
-                  style={{ width: 48, height: 48 }}
-                />
-              }
-            />
-          </Grid>
+          {miniCards.map((card, index) => (
+            <Grid key={index} size={{ xs: 12, sm: 6 }}>
+              <MiniCard
+                title={card.title}
+                value={card.value}
+                icon={
+                  <img
+                    src={card.icon}
+                    alt={card.title}
+                    style={{ width: 48, height: 48 }}
+                  />
+                }
+              />
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Card>

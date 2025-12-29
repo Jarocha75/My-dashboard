@@ -1,7 +1,21 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
 import ImageWelcome from "@/assets/image/ImageWelcome02.png";
 
-const WelcomeBackCard = () => {
+interface Props {
+  userName?: string;
+  title?: string;
+  actionText?: string;
+  backgroundImage?: string;
+  onActionClick?: () => void;
+}
+
+const WelcomeBackCard = ({
+  userName = "Mark Johnson",
+  title = "Welcome back!",
+  actionText = "Turn on your car",
+  backgroundImage = ImageWelcome,
+  onActionClick,
+}: Props) => {
   return (
     <Card
       sx={{
@@ -9,7 +23,7 @@ const WelcomeBackCard = () => {
         overflow: "hidden",
         borderRadius: "28px",
         height: 377,
-        background: `url(${ImageWelcome})`,
+        background: `url(${backgroundImage})`,
       }}
     >
       <Stack
@@ -23,16 +37,15 @@ const WelcomeBackCard = () => {
           <Typography
             sx={{ fontSize: 30, fontWeight: 700, mb: 1, color: "white" }}
           >
-            Welcome back!
+            {title}
           </Typography>
-          <Typography
-            sx={{ fontSize: 14, fontWeight: 400, color: "white" }}
-          >
-            Nice to see you, Mark Johnson!
+          <Typography sx={{ fontSize: 14, fontWeight: 400, color: "white" }}>
+            Nice to see you,{userName}!
           </Typography>
         </Box>
 
         <Box
+          onClick={onActionClick}
           sx={{
             display: "flex",
             alignItems: "center",
@@ -43,7 +56,7 @@ const WelcomeBackCard = () => {
           }}
         >
           <Typography sx={{ fontSize: 12, fontWeight: 400, color: "white" }}>
-            Turn on your car
+            {actionText}
           </Typography>
 
           <Box
