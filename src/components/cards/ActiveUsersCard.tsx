@@ -41,9 +41,9 @@ const ActiveUsersCard = () => {
     <Card
       sx={{
         borderRadius: "28px",
-        minHeight: 450,
-        background: theme.palette.card.gradient,
-        position: "relative",
+        minHeight: 445,
+        background: theme.palette.card.basic,
+        backdropFilter: "blur(120px)",
         overflow: "hidden",
         display: "flex",
         p: { xs: 2, md: 3 },
@@ -52,29 +52,16 @@ const ActiveUsersCard = () => {
     >
       <Box
         sx={{
-          position: "absolute",
-          inset: 0,
-          background: theme.palette.card.highlighted,
-        }}
-      />
-
-      <Box
-        sx={{
-          position: "relative",
-          zIndex: 2,
-          height: { xs: 180, md: "100%" },
-          mb: 3,
+          height: 230,
+          background: theme.palette.card.chart,
+          borderRadius: "20px",
+          mb: 2,
         }}
       >
         <ActiveUsersChart />
       </Box>
 
-      <Stack
-        sx={{ position: "relative", zIndex: 2 }}
-        direction="column"
-        spacing={4}
-        mt={2}
-      >
+      <Stack direction="column" spacing={3} mt={1}>
         <Stack spacing={0.5}>
           <Typography sx={titleStyle}>Active Users</Typography>
           <Typography sx={subtitleStyle}>+23% than last week</Typography>

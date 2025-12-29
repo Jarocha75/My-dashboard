@@ -13,9 +13,28 @@ import headerLogo from "@/assets/logos/headerLogo.svg";
 import { Codepen, Pencil, Users, Wrench } from "lucide-react";
 import { useState } from "react";
 
-const ProfileHeader = () => {
+interface ProfileHeaderProps {
+  name?: string;
+  email?: string;
+  avatar?: string;
+  onTabChange?: (tab: number) => void;
+  onEditAvatar?: () => void;
+}
+
+const ProfileHeader = ({
+  name = "Mark Johnson",
+  email = "marc@simple.com",
+  avatar = headerLogo,
+  onTabChange,
+  onEditAvatar,
+}: ProfileHeaderProps) => {
   const theme = useTheme();
   const [tab, setTab] = useState(0);
+
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+    setTab(newValue);
+    onTabChange?.(newValue);
+  };
 
   const tabSx = {
     minHeight: 32,
@@ -48,19 +67,21 @@ const ProfileHeader = () => {
         borderRadius: "20px",
         height: 129,
         px: 3,
-        background: theme.palette.card.gradientOverlay,
+        background: theme.palette.card.overlay,
       }}
     >
       <Stack direction="row" alignItems="center" spacing={2}>
         <Box sx={{ position: "relative" }}>
           <Avatar
-            src={headerLogo}
+            src={avatar}
             alt="Profile Logo"
             variant="rounded"
             sx={{ width: 80, height: 80, borderRadius: "20px" }}
           />
           <IconButton
             size="small"
+            onClick={onEditAvatar}
+            aria-label="Edit profile picture"
             sx={{
               position: "absolute",
               bottom: -4,
@@ -69,14 +90,14 @@ const ProfileHeader = () => {
               height: 26,
               borderRadius: "50%",
               border: "1px solid rgba(255,255,255,0.15)",
-              background: theme.palette.card.gradient,
+              background: theme.palette.card.basic,
               boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
               "&:hover": {
                 background: theme.palette.card.gradientOverlay,
               },
             }}
           >
-            <Pencil fontSize={14} color="#fff" />
+            <Pencil size={14} color="#fff" />
           </IconButton>
         </Box>
 
@@ -88,7 +109,7 @@ const ProfileHeader = () => {
               color: theme.palette.text.primary,
             }}
           >
-            Mark Johnson
+            {name}
           </Typography>
           <Typography
             sx={{
@@ -97,7 +118,7 @@ const ProfileHeader = () => {
               color: theme.palette.text.secondary,
             }}
           >
-            marc@simple.com
+            {email}
           </Typography>
         </Stack>
       </Stack>
@@ -105,7 +126,7 @@ const ProfileHeader = () => {
       <Box sx={{ ml: "auto" }}>
         <Tabs
           value={tab}
-          onChange={(_, newValue) => setTab(newValue)}
+          onChange={handleTabChange}
           TabIndicatorProps={{ style: { display: "none" } }}
           sx={{
             minHeight: 0,

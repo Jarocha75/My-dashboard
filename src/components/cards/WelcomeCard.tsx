@@ -25,7 +25,7 @@ const WelcomeCard = () => {
           backgroundSize: "160%",
           backgroundPosition: "center",
           transform: "scaleX(-1)",
-          filter: "brightness(1.4) contrast(1.2)",
+          filter: "brightness(1.4) contrast(1.1) saturate(1.1)",
           zIndex: 1,
         }}
       />
@@ -37,7 +37,7 @@ const WelcomeCard = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          background: theme.palette.card.highlighted,
+          background: theme.palette.card.overlay,
           zIndex: 2,
         }}
       />
@@ -48,12 +48,10 @@ const WelcomeCard = () => {
           zIndex: 3,
           color: "white",
           height: "100%",
-          p: 4,
+          p: 3,
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
-          mt: -3,
-          ml: -3,
         }}
       >
         <Typography

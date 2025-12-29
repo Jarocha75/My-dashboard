@@ -10,24 +10,15 @@ const SatisfactionRateCard = () => {
       sx={{
         borderRadius: "28px",
         height: 340,
-        background: theme.palette.card.gradient,
-        position: "relative",
+        background: theme.palette.card.basic,
+        backdropFilter: "blur(120px)",
         overflow: "hidden",
         p: 3,
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Stack
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background: theme.palette.card.gradientOverlay,
-          zIndex: 1,
-        }}
-      />
-
-      <Stack sx={{ position: "relative", zIndex: 2 }}>
+      <Stack>
         <Typography sx={{ fontSize: 16, fontWeight: 700, color: "white" }}>
           Satisfaction Rate
         </Typography>
@@ -36,13 +27,7 @@ const SatisfactionRateCard = () => {
         </Typography>
       </Stack>
 
-      <Stack
-        mt={3}
-        position="relative"
-        zIndex={2}
-        alignItems={"center"}
-        gap={2}
-      >
+      <Stack mt={3} alignItems={"center"} gap={2}>
         <Stack sx={{ position: "relative" }}>
           <ArcProgress
             value={95}
@@ -74,7 +59,7 @@ const SatisfactionRateCard = () => {
           justifyContent={"space-between"}
           alignItems={"center"}
           sx={{
-            background: theme.palette.card.gradient,
+            background: theme.palette.card.overlay,
             borderRadius: "20px",
             py: 1.2,
             px: 2,

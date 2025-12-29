@@ -24,7 +24,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
   return (
     <Card
       sx={{
-        background: theme.palette.card.gradient,
+        background: theme.palette.card.gradientOverlay,
         borderRadius: 3,
         px: 3,
         py: 2,

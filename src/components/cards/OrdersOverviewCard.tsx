@@ -54,7 +54,8 @@ const OrdersOverviewCard = () => {
       sx={{
         borderRadius: "28px",
         height: "100%",
-        background: theme.palette.card.gradient,
+        background: theme.palette.card.basic,
+        backdropFilter: "blur(120px)",
         p: { xs: 2, md: 3 },
       }}
     >

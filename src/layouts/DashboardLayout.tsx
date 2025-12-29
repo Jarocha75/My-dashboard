@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/NavBar";
 import { Outlet } from "react-router-dom";
+import backgroundImage from "@/assets/background/backgroundImage.png";
 
 const SIDEBAR_WIDTH = 250;
 
@@ -11,9 +12,21 @@ const DashboardLayout = () => {
       display="flex"
       minHeight="100vh"
       sx={{
-        backgroundImage: `
-          radial-gradient(circle at 20% 0%, rgba(49, 85, 215, 0.15) 0%, transparent 60%),
-          linear-gradient(180deg, #0F1535 0%, #111A4B 40%, #0F1535 100%)`,
+        position: "relative",
+        "&::before": {
+          content: '""',
+          position: "fixed",
+          top: 0,
+          left: "-331px",
+          width: "2526px",
+          height: "1980.43px",
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          filter: "blur(272px)",
+          opacity: 1,
+          zIndex: -1,
+        },
       }}
     >
       <Box

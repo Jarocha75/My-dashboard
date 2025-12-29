@@ -8,48 +8,37 @@ const SalesOverviewCard = () => {
     <Card
       sx={{
         borderRadius: "28px",
-        minHeight: 450,
-        background: theme.palette.card.gradient,
-        position: "relative",
+        minHeight: 445,
+        background: theme.palette.card.basic,
+        backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Box
+      <Typography
         sx={{
-          position: "absolute",
-          inset: 0,
-          background: theme.palette.card.highlighted,
-          zIndex: 1,
+          fontSize: 18,
+          fontWeight: 700,
+          color: theme.palette.text.primary,
         }}
-      />
+      >
+        Sales overview
+      </Typography>
 
-      <Box sx={{ position: "relative", zIndex: 2 }}>
-        <Typography
-          sx={{
-            fontSize: 18,
-            fontWeight: 700,
-            color: theme.palette.text.primary,
-          }}
-        >
-          Sales overview
-        </Typography>
+      <Typography
+        sx={{
+          fontSize: 12,
+          mt: 0.5,
+          color: "#38E68F",
+          fontWeight: 500,
+        }}
+      >
+        (+5) more in 2021
+      </Typography>
 
-        <Typography
-          sx={{
-            fontSize: 12,
-            mt: 0.5,
-            color: "#38E68F",
-            fontWeight: 500,
-          }}
-        >
-          (+5) more in 2021
-        </Typography>
-
-        <Box mt={3} minHeight={320}>
-          <SalesOverviewChart />
-        </Box>
+      <Box mt={3} minHeight={320}>
+        <SalesOverviewChart />
       </Box>
     </Card>
   );

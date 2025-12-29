@@ -7,9 +7,12 @@ declare module "@mui/material/styles" {
       gradient: string;
     };
     card: {
+      basic: string;
+      overlay: string;
+      chart: string;
       glass: string;
-      gradientOverlay: string;
       highlighted: string;
+      gradientOverlay: string;
     };
     icon: {
       blue: string;
@@ -23,9 +26,12 @@ declare module "@mui/material/styles" {
       gradient: string;
     };
     card?: {
-      glass: string;
-      gradientOverlay: string;
-      highlighted: string;
+      basic?: string;
+      overlay?: string;
+      chart?: string;
+      glass?: string;
+      highlighted?: string;
+      gradientOverlay?: string;
     };
     icon?: {
       blue: string;
@@ -76,24 +82,55 @@ const theme = createTheme({
 
     navbar: {
       main: "#0f1535",
-      gradient: "linear-gradient(135deg, #0f1535 0%, #1a1f37 100%)",
+      gradient: "linear-gradient(135deg, rgba(6, 11, 40, 0.3) 0%, rgba(10, 14, 35, 0.25) 100%)",
     },
 
     card: {
-      gradientOverlay: `
+      // 🎨 BASIC - Základný gradient pre väčšinu kariet (SalesOverview, atď.)
+      basic: `
         linear-gradient(
-          135deg,
-          rgba(6, 11, 40, 0.9) 0%,
-          rgba(10, 14, 35, 0.75) 100%
+          126.97deg,
+          rgba(10, 18, 65, 0.85) 28.26%,
+          rgba(15, 22, 60, 0.8) 91.2%
         )
       `,
+
+      // 🌊 OVERLAY - Pre karty s obrázkami (WelcomeCard - medúza)
+      overlay: `
+        linear-gradient(
+          127.09deg,
+          rgba(6, 11, 40, 0.94) 19.41%,
+          rgba(10, 14, 35, 0.49) 76.65%
+        )
+      `,
+
+      // 📊 CHART - Pre grafy a chart pozadia (Active Users)
+      chart: `
+        linear-gradient(
+          126.97deg,
+          #060C29 28.26%,
+          rgba(4, 12, 48, 0.5) 91.2%
+        )
+      `,
+
+      // ✨ GLASS - Sklenený efekt
       glass: "rgba(255,255,255,0.04)",
+
+      // 🔵 HIGHLIGHTED - Pre zvýraznené karty (modrý odtieň)
       highlighted: `
         linear-gradient(
           135deg,
           rgba(10, 20, 60, 0.9) 0%,
           rgba(15, 25, 50, 0.85) 100%
         )
+      `,
+
+      // LEGACY - Pre spätnú kompatibilitu
+      gradientOverlay: `
+        linear-gradient(
+          135deg,
+          rgba(6, 11, 40, 0.9) 0%,
+          rgba(10, 14, 35, 0.75) 100%        )
       `,
     },
 
@@ -163,7 +200,6 @@ const theme = createTheme({
         )
       `,
           backdropFilter: "blur(120px)",
-          border: "1px solid rgba(255,255,255,0.08)",
           boxShadow: "0px 20px 40px rgba(0,0,0,0.4)",
         },
       },

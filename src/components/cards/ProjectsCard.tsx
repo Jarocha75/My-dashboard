@@ -77,7 +77,8 @@ const ProjectsCard = () => {
     <Card
       sx={{
         borderRadius: "28px",
-        background: theme.palette.card.gradient,
+        background: theme.palette.card.basic,
+        backdropFilter: "blur(120px)",
         p: { xs: 2, md: 3 },
       }}
     >

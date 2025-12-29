@@ -75,7 +75,8 @@ const Navbar = () => {
               sx={{
                 display: { xs: "none", md: "flex" },
                 alignItems: "center",
-                backgroundColor: alpha("#ffffff", 0.12),
+                background: theme.palette.navbar.gradient,
+                border: "0.5px solid rgba(226, 232, 240, 0.3)",
                 padding: "6px 12px",
                 borderRadius: "10px",
                 width: "200",

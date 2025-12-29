@@ -42,7 +42,7 @@ const ReferralTrackingCard = () => {
         position: "relative",
         borderRadius: "28px",
         minHeight: 340,
-        background: theme.palette.card.gradient,
+        background: theme.palette.card.basic,
         backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
@@ -76,7 +76,7 @@ const ReferralTrackingCard = () => {
           sx={{
             p: 2,
             borderRadius: "18px",
-            background: theme.palette.card.glass,
+            background: theme.palette.card.chart,
             backdropFilter: "blur(12px)",
           }}
         >
@@ -90,7 +90,7 @@ const ReferralTrackingCard = () => {
           sx={{
             p: 2,
             borderRadius: "18px",
-            background: theme.palette.card.glass,
+            background: theme.palette.card.chart,
             backdropFilter: "blur(12px)",
           }}
         >

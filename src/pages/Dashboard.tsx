@@ -16,8 +16,6 @@ const Dashboard = () => {
       spacing={3}
       sx={{
         overflow: "hidden",
-        width: "100%",
-        m: 0,
       }}
     >
       <Grid size={{ xs: 12, sm: 6, lg: 3 }}>

@@ -40,7 +40,7 @@ const CarInfoCard = () => {
         position: "relative",
         borderRadius: "28px",
         height: { xs: "auto", md: 377 },
-        background: theme.palette.card.gradientOverlay,
+        background: theme.palette.card.overlay,
         backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
