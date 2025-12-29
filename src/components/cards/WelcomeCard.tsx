@@ -25,6 +25,7 @@ const WelcomeCard = () => {
           backgroundSize: "160%",
           backgroundPosition: "center",
           transform: "scaleX(-1)",
+          filter: "brightness(1.4) contrast(1.2)",
           zIndex: 1,
         }}
       />
@@ -36,7 +37,7 @@ const WelcomeCard = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          background: theme.palette.card.gradientOverlay,
+          background: theme.palette.card.highlighted,
           zIndex: 2,
         }}
       />

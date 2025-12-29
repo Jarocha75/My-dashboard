@@ -54,7 +54,7 @@ const ActiveUsersCard = () => {
         sx={{
           position: "absolute",
           inset: 0,
-          background: theme.palette.card.gradientOverlay,
+          background: theme.palette.card.highlighted,
         }}
       />
 

@@ -7,9 +7,9 @@ declare module "@mui/material/styles" {
       gradient: string;
     };
     card: {
-      gradient: string;
       glass: string;
       gradientOverlay: string;
+      highlighted: string;
     };
     icon: {
       blue: string;
@@ -23,9 +23,9 @@ declare module "@mui/material/styles" {
       gradient: string;
     };
     card?: {
-      gradient: string;
       glass: string;
       gradientOverlay: string;
+      highlighted: string;
     };
     icon?: {
       blue: string;
@@ -65,8 +65,8 @@ const theme = createTheme({
     },
 
     background: {
-      default: "#0F1535",
-      paper: "rgba(255,255,255,0.06)",
+      default: "#060B28",
+      paper: "transparent",
     },
 
     text: {
@@ -75,22 +75,26 @@ const theme = createTheme({
     },
 
     navbar: {
-      main: "#1A1F3C",
-      gradient: "linear-gradient(135deg, #1A1F3C 0%, #3A416F 100%)",
+      main: "#0f1535",
+      gradient: "linear-gradient(135deg, #0f1535 0%, #1a1f37 100%)",
     },
 
     card: {
-      gradient: "linear-gradient(135deg, #060B26 0%, #1A1F37 100%)",
-      glass: "rgba(255,255,255,0.05)",
-
       gradientOverlay: `
-      linear-gradient(
-      180deg,
-      rgba(6, 11, 40, 0.8) 0%,
-      rgba(67, 83, 192, 0.35) 45%,
-      rgba(6, 11, 40, 0.85) 100%
-    )
-  `,
+        linear-gradient(
+          135deg,
+          rgba(6, 11, 40, 0.9) 0%,
+          rgba(10, 14, 35, 0.75) 100%
+        )
+      `,
+      glass: "rgba(255,255,255,0.04)",
+      highlighted: `
+        linear-gradient(
+          135deg,
+          rgba(10, 20, 60, 0.9) 0%,
+          rgba(15, 25, 50, 0.85) 100%
+        )
+      `,
     },
 
     icon: {
@@ -123,11 +127,26 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
-          background: "linear-gradient(135deg, #1A1F3C 0%, #3A416F 100%)",
-          backdropFilter: "blur(10px)",
-          boxShadow: "0px 4px 20px rgba(0,0,0,0.4)",
-          padding: "4px 0",
+          background: `
+        linear-gradient(
+          135deg,
+          rgba(6, 11, 40, 0.95) 0%,
+          rgba(10, 14, 35, 0.85) 100%
+        )
+      `,
+          backdropFilter: "blur(42px)",
+          boxShadow: "0px 10px 30px rgba(0,0,0,0.6)",
+        },
+      },
+    },
+
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          background: "#060B28",
+          backgroundImage:
+            "linear-gradient(180deg, rgba(6,11,40,0.98) 0%, rgba(10,14,35,0.95) 100%)",
+          borderRight: "1px solid rgba(255,255,255,0.04)",
         },
       },
     },
@@ -136,11 +155,16 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
-          background: "linear-gradient(135deg, #060B26 0%, #1A1F37 100%)",
-          backdropFilter: "blur(12px)",
-          color: "white",
-          padding: "1.3rem",
-          boxShadow: "0px 4px 18px rgba(0,0,0,0.4)",
+          background: `
+        linear-gradient(
+          135deg,
+          rgba(6, 11, 40, 0.9) 0%,
+          rgba(10, 14, 35, 0.75) 100%
+        )
+      `,
+          backdropFilter: "blur(120px)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0px 20px 40px rgba(0,0,0,0.4)",
         },
       },
     },
@@ -148,10 +172,8 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
-          background: "rgba(255,255,255,0.06)",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0px 4px 20px rgba(0,0,0,0.25)",
+          background: "transparent",
+          boxShadow: "none",
         },
       },
     },

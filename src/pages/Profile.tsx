@@ -1,3 +1,4 @@
+import CarInfoCard from "@/components/profile/CarInfoCard";
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
 import { Grid } from "@mui/material";
@@ -19,6 +20,10 @@ const Profile = () => {
 
       <Grid size={{ xs: 12, lg: 3 }}>
         <WelcomeBackCard />
+      </Grid>
+
+      <Grid size={{ xs: 12, lg: 6 }}>
+        <CarInfoCard />
       </Grid>
     </Grid>
   );

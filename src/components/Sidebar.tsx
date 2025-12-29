@@ -43,7 +43,7 @@ const Sidebar = ({ onLinkClick }: Props) => {
         width: 250,
         height: "100vh",
         position: "fixed",
-        background: theme.palette.card.gradient,
+        background: theme.palette.card.gradientOverlay,
         backdropFilter: "blur(12px)",
         borderRight: "1px solid rgba(255,255,255,0.08)",
         color: "white",
