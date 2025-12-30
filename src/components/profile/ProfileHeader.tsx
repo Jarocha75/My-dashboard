@@ -65,8 +65,9 @@ const ProfileHeader = ({
         display: "flex",
         alignItems: "center",
         borderRadius: "20px",
-        height: 129,
-        px: 3,
+        height: { xs: "auto", md: 129 },
+        px: { xs: 2, md: 3 },
+        py: { xs: 2, md: 0 },
         background: theme.palette.card.overlay,
       }}
     >
@@ -76,7 +77,11 @@ const ProfileHeader = ({
             src={avatar}
             alt="Profile Logo"
             variant="rounded"
-            sx={{ width: 80, height: 80, borderRadius: "20px" }}
+            sx={{
+              width: { xs: 60, md: 80 },
+              height: { xs: 60, md: 80 },
+              borderRadius: "20px",
+            }}
           />
           <IconButton
             size="small"
@@ -104,7 +109,7 @@ const ProfileHeader = ({
         <Stack spacing={0.5}>
           <Typography
             sx={{
-              fontSize: 18,
+              fontSize: { xs: 16, md: 18 },
               fontWeight: 700,
               color: theme.palette.text.primary,
             }}
@@ -113,7 +118,7 @@ const ProfileHeader = ({
           </Typography>
           <Typography
             sx={{
-              fontSize: 14,
+              fontSize: { xs: 12, md: 14 },
               fontWeight: 400,
               color: theme.palette.text.secondary,
             }}
@@ -123,7 +128,7 @@ const ProfileHeader = ({
         </Stack>
       </Stack>
 
-      <Box sx={{ ml: "auto" }}>
+      <Box sx={{ ml: "auto", display: { xs: "none", md: "block" } }}>
         <Tabs
           value={tab}
           onChange={handleTabChange}

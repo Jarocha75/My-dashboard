@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 interface ArcProgressProps {
   value: number;
@@ -23,7 +23,15 @@ const ArcProgress = ({
   gradientEnd = "#00E1FF",
   clip = "none",
 }: ArcProgressProps) => {
-  const numericSize = typeof size === "number" ? size : size.md;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+
+  const numericSize =
+    typeof size === "number"
+      ? size
+      : isMobile
+      ? size.xs
+      : size.md;
   const radius = (numericSize - thickness) / 2;
 
   const sweepAngle = endAngle - startAngle;

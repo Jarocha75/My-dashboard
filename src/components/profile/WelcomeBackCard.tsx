@@ -22,24 +22,37 @@ const WelcomeBackCard = ({
         position: "relative",
         overflow: "hidden",
         borderRadius: "28px",
-        height: 377,
+        height: { xs: 280, lg: 377 },
         background: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Stack
         sx={{
           height: "100%",
           justifyContent: "space-between",
-          p: 3,
+          p: { xs: 2.5, lg: 3 },
         }}
       >
         <Box>
           <Typography
-            sx={{ fontSize: 30, fontWeight: 700, mb: 1, color: "white" }}
+            sx={{
+              fontSize: { xs: 24, lg: 30 },
+              fontWeight: 700,
+              mb: 1,
+              color: "white",
+            }}
           >
             {title}
           </Typography>
-          <Typography sx={{ fontSize: 14, fontWeight: 400, color: "white" }}>
+          <Typography
+            sx={{
+              fontSize: { xs: 13, lg: 14 },
+              fontWeight: 400,
+              color: "white",
+            }}
+          >
             Nice to see you,{userName}!
           </Typography>
         </Box>

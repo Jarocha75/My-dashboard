@@ -33,12 +33,14 @@ const CarInfoCard = ({
     fontWeight: 700,
     color: theme.palette.text.primary,
     mb: 1,
+    textAlign: "center",
   };
 
   const subtitleStyle = {
     fontSize: 12,
     fontWeight: 400,
     color: theme.palette.text.secondary,
+    textAlign: "center",
   };
 
   const valueStyle = {
@@ -46,6 +48,7 @@ const CarInfoCard = ({
     fontWeight: 700,
     color: theme.palette.text.primary,
     lineHeight: 1.1,
+    textAlign: "center",
   };
 
   return (
@@ -53,27 +56,27 @@ const CarInfoCard = ({
       sx={{
         position: "relative",
         borderRadius: "28px",
-        height: { xs: "auto", md: 377 },
+        height: { xs: "auto", lg: 377 },
         background: theme.palette.card.overlay,
         backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column", lg: "row" },
       }}
     >
       <Stack
-        flex={{ xs: 0, md: 1 }}
-        width={{ xs: "100%", md: "50%" }}
+        flex={{ xs: 0, lg: 1 }}
+        width={{ xs: "100%", lg: "50%" }}
         spacing={2}
         sx={{
           justifyContent: "space-between",
           height: "100%",
-          alignItems: { xs: "center", md: "flex-start" },
+          alignItems: { xs: "center", lg: "flex-start" },
         }}
       >
         <Stack
           spacing={0.5}
-          sx={{ width: "100%", alignItems: { xs: "center", md: "flex-start" } }}
+          sx={{ width: "100%", alignItems: { xs: "center", lg: "flex-start" } }}
         >
           <Typography
             fontSize="18px"
@@ -86,7 +89,7 @@ const CarInfoCard = ({
             fontSize="14px"
             fontWeight={400}
             color={theme.palette.text.primary}
-            sx={{ textAlign: { xs: "center", md: "left" } }}
+            sx={{ textAlign: { xs: "center", lg: "left" } }}
           >
             Hello, {userName}! {actionText}.
           </Typography>
@@ -104,27 +107,38 @@ const CarInfoCard = ({
           <Box
             sx={{
               position: "relative",
-              width: { xs: 160, md: 200 },
-              height: { xs: 160, md: 200 },
+              width: { xs: 160, lg: 200 },
+              height: { xs: 160, lg: 200 },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <ArcProgress
-              value={scorePercent}
-              size={{ xs: 160, md: 200 }}
-              thickness={12}
-              startAngle={220}
-              endAngle={480}
-              gradientId="referralGradient"
-              gradientStart="#00E1FF"
-              gradientEnd="#00FF85"
-            />
+            <Box
+              sx={{
+                width: { xs: 160, lg: 200 },
+                height: { xs: 160, lg: 200 },
+                position: "absolute",
+                top: 0,
+                left: 0,
+              }}
+            >
+              <ArcProgress
+                value={scorePercent}
+                size={{ xs: 160, md: 200 }}
+                thickness={12}
+                startAngle={220}
+                endAngle={480}
+                gradientId="referralGradient"
+                gradientStart="#00E1FF"
+                gradientEnd="#00FF85"
+              />
+            </Box>
 
             <Box
               sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
+                position: "relative",
+                zIndex: 1,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -168,7 +182,7 @@ const CarInfoCard = ({
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              width: { xs: 160, md: 200 },
+              width: { xs: 160, lg: 200 },
             }}
           >
             <Typography sx={titleStyle}>{restTime}</Typography>
@@ -183,19 +197,27 @@ const CarInfoCard = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          mt: { xs: 3, md: 0 },
+          mt: { xs: 3, lg: 0 },
         }}
       >
         <Grid
           container
           spacing={1.5}
           sx={{
-            width: { xs: "100%", md: 452 },
-            maxWidth: "100%",
+            width: "100%",
+            maxWidth: { xl: 452 },
+            justifyContent: { xs: "center", xl: "flex-start" },
           }}
         >
           {miniCards.map((card, index) => (
-            <Grid key={index} size={{ xs: 12, sm: 6 }}>
+            <Grid
+              key={index}
+              size={{ xs: 12, sm: 6, lg: 12, xl: 6 }}
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", xl: "flex-start" },
+              }}
+            >
               <MiniCard
                 title={card.title}
                 value={card.value}

@@ -40,7 +40,7 @@ const Profile = () => {
         m: 0,
       }}
     >
-      <Grid size={{ xs: 12, lg: 12 }}>
+      <Grid size={{ xs: 12 }}>
         <ProfileHeader />
       </Grid>
 

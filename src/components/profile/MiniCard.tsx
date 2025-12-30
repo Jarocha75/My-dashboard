@@ -10,7 +10,8 @@ const MiniCard = ({ title, value, icon }: MiniCardProps) => {
   return (
     <Box
       sx={{
-        width: { xs: "100%", sm: 220 },
+        width: "100%",
+        maxWidth: { sm: 220 },
         height: 84,
         py: 1.25,
         px: 1.75,
