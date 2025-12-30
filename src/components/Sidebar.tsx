@@ -1,6 +1,6 @@
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
 import BuildIcon from "@mui/icons-material/Build";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
 import HouseIcon from "@mui/icons-material/House";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonIcon from "@mui/icons-material/Person";
@@ -13,8 +13,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import theme from "../theme";
 
 interface Props {
@@ -22,7 +21,7 @@ interface Props {
 }
 
 const Sidebar = ({ onLinkClick }: Props) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const location = useLocation();
 
   const mainItems = [
     { text: "Dashboard", icon: <HouseIcon />, path: "/dashboard" },
@@ -81,12 +80,11 @@ const Sidebar = ({ onLinkClick }: Props) => {
       </Typography>
 
       <List sx={{ flexGrow: 1 }}>
-        {mainItems.map((item, index) => (
+        {mainItems.map((item) => (
           <ListItemButton
             key={item.text}
-            selected={activeIndex === index}
+            selected={location.pathname === item.path}
             onClick={() => {
-              setActiveIndex(index);
               onLinkClick?.();
             }}
             component={Link}
@@ -130,12 +128,11 @@ const Sidebar = ({ onLinkClick }: Props) => {
           Account Pages
         </Typography>
 
-        {accountItems.map((item, index) => (
+        {accountItems.map((item) => (
           <ListItemButton
             key={item.text}
-            selected={activeIndex === index + mainItems.length}
+            selected={location.pathname === item.path}
             onClick={() => {
-              setActiveIndex(index + mainItems.length);
               onLinkClick?.();
             }}
             component={Link}

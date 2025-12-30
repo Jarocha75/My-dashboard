@@ -6,10 +6,10 @@ import CarInfoCard from "@/components/profile/CarInfoCard";
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileInfoCard from "@/components/profile/ProfileInfoCard";
 import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
-import { Grid } from "@mui/material";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { Grid } from "@mui/material";
 
 const Profile = () => {
   const miniCardsData = [
