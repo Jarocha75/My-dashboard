@@ -65,13 +65,13 @@ const CarInfoCard = ({
       }}
     >
       <Stack
-        flex={{ xs: 0, lg: 1 }}
-        width={{ xs: "100%", lg: "50%" }}
         spacing={2}
         sx={{
+          width: { xs: "100%", lg: "auto" },
           justifyContent: "space-between",
           height: "100%",
           alignItems: { xs: "center", lg: "flex-start" },
+          flexShrink: 0,
         }}
       >
         <Stack
@@ -205,7 +205,7 @@ const CarInfoCard = ({
           spacing={1.5}
           sx={{
             width: "100%",
-            maxWidth: { xl: 452 },
+            maxWidth: 452,
             justifyContent: { xs: "center", xl: "flex-start" },
           }}
         >

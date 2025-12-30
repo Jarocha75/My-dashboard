@@ -1,11 +1,15 @@
-import CarInfoCard from "@/components/profile/CarInfoCard";
-import ProfileHeader from "@/components/profile/ProfileHeader";
-import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
-import { Grid } from "@mui/material";
-import IconBattery01 from "@/assets/icons/IconBattery01.png";
-import IconCar from "@/assets/icons/IconCar.png";
 import LineChart01 from "@/assets/charts/LineChart01.png";
 import LineChart02 from "@/assets/charts/LineChart02.png";
+import IconBattery01 from "@/assets/icons/IconBattery01.png";
+import IconCar from "@/assets/icons/IconCar.png";
+import CarInfoCard from "@/components/profile/CarInfoCard";
+import ProfileHeader from "@/components/profile/ProfileHeader";
+import ProfileInfoCard from "@/components/profile/ProfileInfoCard";
+import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
+import { Grid } from "@mui/material";
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Profile = () => {
   const miniCardsData = [
@@ -30,6 +34,25 @@ const Profile = () => {
       icon: LineChart02,
     },
   ];
+
+  const socialMediaData = [
+    {
+      name: "Facebook",
+      icon: <FacebookRoundedIcon />,
+      link: "https://facebook.com/",
+    },
+    {
+      name: "Twitter",
+      icon: <TwitterIcon />,
+      link: "https://twitter.com/",
+    },
+    {
+      name: "Instagram",
+      icon: <InstagramIcon />,
+      link: "https://instagram.com/",
+    },
+  ];
+
   return (
     <Grid
       container
@@ -50,6 +73,10 @@ const Profile = () => {
 
       <Grid size={{ xs: 12, lg: 6 }}>
         <CarInfoCard miniCards={miniCardsData} />
+      </Grid>
+
+      <Grid size={{ xs: 12, lg: 3 }}>
+        <ProfileInfoCard socialMedia={socialMediaData} />
       </Grid>
     </Grid>
   );
