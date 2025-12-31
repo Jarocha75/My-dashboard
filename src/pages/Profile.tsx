@@ -3,6 +3,7 @@ import LineChart02 from "@/assets/charts/LineChart02.png";
 import IconBattery01 from "@/assets/icons/IconBattery01.png";
 import IconCar from "@/assets/icons/IconCar.png";
 import CarInfoCard from "@/components/profile/CarInfoCard";
+import PlatformSetCard from "@/components/profile/PlatformSetCard";
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileInfoCard from "@/components/profile/ProfileInfoCard";
 import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
@@ -77,6 +78,10 @@ const Profile = () => {
 
       <Grid size={{ xs: 12, lg: 3 }}>
         <ProfileInfoCard socialMedia={socialMediaData} />
+      </Grid>
+
+      <Grid size={{ xs: 12, lg: 3 }}>
+        <PlatformSetCard />
       </Grid>
     </Grid>
   );
