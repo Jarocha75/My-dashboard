@@ -3,10 +3,15 @@ import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/NavBar";
 import { Outlet } from "react-router-dom";
 import backgroundImage from "@/assets/background/backgroundImage.png";
+import { useSidebarState } from "@/hooks/useSidebarState";
 
 const SIDEBAR_WIDTH = 250;
+const SIDEBAR_COLLAPSED_WIDTH = 80;
 
 const DashboardLayout = () => {
+  const { isCollapsed } = useSidebarState();
+  const currentSidebarWidth = isCollapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH;
+
   return (
     <Box
       display="flex"
@@ -31,9 +36,10 @@ const DashboardLayout = () => {
     >
       <Box
         sx={{
-          width: SIDEBAR_WIDTH,
+          width: currentSidebarWidth,
           display: { xs: "none", md: "block" },
           flexShrink: 0,
+          transition: "width 0.3s ease",
         }}
       >
         <Sidebar onLinkClick={() => {}} />

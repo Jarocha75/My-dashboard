@@ -150,7 +150,7 @@ const Navbar = () => {
           },
         }}
       >
-        <Sidebar onLinkClick={() => setMenuMobileOpen(false)} />
+        <Sidebar onLinkClick={() => setMenuMobileOpen(false)} isInDrawer />
       </Drawer>
     </>
   );
