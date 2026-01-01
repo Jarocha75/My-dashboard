@@ -15,12 +15,13 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
 
   const getPageTitle = () => {
@@ -31,6 +32,10 @@ const Navbar = () => {
     if (path === "/billing") return "Dashboard / Billing";
     if (path === "/rtl") return "Dashboard / RTL";
     return "Dashboard";
+  };
+
+  const handleSignInClick = () => {
+    navigate("/auth/signin");
   };
 
   return (
@@ -94,7 +99,9 @@ const Navbar = () => {
               alignItems="center"
               sx={{
                 cursor: "pointer",
+                "&:hover": { opacity: 0.7 },
               }}
+              onClick={handleSignInClick}
             >
               <PersonIcon sx={{ color: "#fff", opacity: 0.85 }} />
               <Typography

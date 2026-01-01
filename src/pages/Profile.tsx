@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import CarInfoCard from "@/components/profile/CarInfoCard";
 import PlatformSetCard from "@/components/profile/PlatformSetCard";
 import ProfileHeader from "@/components/profile/ProfileHeader";
@@ -41,6 +42,10 @@ const Profile = () => {
 
       <Grid size={{ xs: 12, lg: 9 }}>
         <ProjectsProfileCard />
+      </Grid>
+
+      <Grid size={{ xs: 12 }}>
+        <Footer />
       </Grid>
     </Grid>
   );
