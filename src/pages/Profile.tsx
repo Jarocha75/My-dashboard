@@ -6,6 +6,7 @@ import CarInfoCard from "@/components/profile/CarInfoCard";
 import PlatformSetCard from "@/components/profile/PlatformSetCard";
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileInfoCard from "@/components/profile/ProfileInfoCard";
+import ProjectsProfileCard from "@/components/profile/ProjectsProfileCard";
 import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -82,6 +83,10 @@ const Profile = () => {
 
       <Grid size={{ xs: 12, lg: 3 }}>
         <PlatformSetCard />
+      </Grid>
+
+      <Grid size={{ xs: 12, lg: 9 }}>
+        <ProjectsProfileCard />
       </Grid>
     </Grid>
   );
