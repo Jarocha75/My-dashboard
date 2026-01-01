@@ -1,11 +1,7 @@
 import { Card, Stack, Typography, useTheme, Box } from "@mui/material";
 import ProjectsItem from "./ProjectsItem";
 import { projectsData } from "@/data/projectsData";
-
-const CARD_CONTENT = {
-  title: "Projects",
-  description: "Architecture and design portfolio",
-};
+import { CARD_CONTENT } from "@/data/projectsData";
 
 const ProjectsProfileCard = () => {
   const theme = useTheme();

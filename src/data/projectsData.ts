@@ -7,6 +7,11 @@ import Picture02 from "@/assets/image/Picture02.png";
 import Picture03 from "@/assets/image/Picture03.png";
 import Picture04 from "@/assets/image/Picture04.png";
 
+export const CARD_CONTENT = {
+  title: "Projects",
+  description: "Architecture and design portfolio",
+};
+
 export interface Project {
   id: number;
   title: string;
