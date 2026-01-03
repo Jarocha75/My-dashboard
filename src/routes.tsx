@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import SignIn from "./pages/auth/SignIn";
 import AuthLayout from "./layouts/AuthLayout";
 import SignUp from "./pages/auth/SignUp";
+import Table from "./pages/Table";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "tables",
-        element: <div>Tables Page</div>,
+        element: <Table />,
       },
       {
         path: "billing",
