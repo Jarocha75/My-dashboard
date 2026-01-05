@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import AuthorsTableCard from "@/components/tables/AuthorsTableCard";
 import ProjectsTableCard from "@/components/tables/ProjectsTableCard";
 import { Grid } from "@mui/material";
@@ -19,6 +20,10 @@ const Table = () => {
 
       <Grid size={{ xs: 12, lg: 12 }}>
         <ProjectsTableCard />
+      </Grid>
+
+      <Grid size={{ xs: 12 }}>
+        <Footer />
       </Grid>
     </Grid>
   );
