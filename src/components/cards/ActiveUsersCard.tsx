@@ -3,6 +3,11 @@ import ActiveUsersChart from "../common/ActiveUsersChart";
 import { Rocket, ShoppingCart, WalletMinimal, Wrench } from "lucide-react";
 import StatProgress from "../common/StatProgress";
 import { formatNumberShort } from "@/utils/formatNumber";
+import {
+  cardStyles,
+  typographyStyles,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const users = 1245;
 const clicks = 2_420_430;
@@ -11,19 +16,6 @@ const items = 320;
 
 const ActiveUsersCard = () => {
   const theme = useTheme();
-
-  const titleStyle = {
-    fontSize: 18,
-    fontWeight: 700,
-    color: theme.palette.text.primary,
-  };
-
-  const subtitleStyle = {
-    fontSize: 12,
-    mt: 0.5,
-    color: "#38E68F",
-    fontWeight: 500,
-  };
 
   const labelStyle = {
     fontSize: 14,
@@ -39,16 +31,12 @@ const ActiveUsersCard = () => {
 
   return (
     <Card
-      sx={{
-        borderRadius: "28px",
+      sx={mergeSx(cardStyles.basicCard(theme), {
         minHeight: 445,
-        background: theme.palette.card.basic,
-        backdropFilter: "blur(120px)",
-        overflow: "hidden",
         display: "flex",
         p: { xs: 2, md: 3 },
         flexDirection: "column",
-      }}
+      })}
     >
       <Box
         sx={{
@@ -63,8 +51,17 @@ const ActiveUsersCard = () => {
 
       <Stack direction="column" spacing={3} mt={1}>
         <Stack spacing={0.5}>
-          <Typography sx={titleStyle}>Active Users</Typography>
-          <Typography sx={subtitleStyle}>+23% than last week</Typography>
+          <Typography sx={typographyStyles.cardTitle(theme)}>Active Users</Typography>
+          <Typography
+            sx={{
+              fontSize: 12,
+              mt: 0.5,
+              color: "#38E68F",
+              fontWeight: 500,
+            }}
+          >
+            +23% than last week
+          </Typography>
         </Stack>
 
         <Stack

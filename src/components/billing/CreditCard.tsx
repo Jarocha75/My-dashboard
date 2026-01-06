@@ -1,6 +1,12 @@
 import { Card, Stack, Typography, useTheme, Box } from "@mui/material";
 import { CreditCard as CreditCardIcon } from "lucide-react";
 import backgroundImage from "@/assets/background/Background.png";
+import {
+  borderRadius,
+  heights,
+  spacing,
+  typographyStyles,
+} from "@/styles/commonStyles";
 
 interface Props {
   title?: string;
@@ -64,8 +70,8 @@ const CreditCard = ({
       sx={{
         position: "relative",
         overflow: "hidden",
-        borderRadius: "20px",
-        height: { xs: 160, lg: 240 },
+        borderRadius: borderRadius.large,
+        height: heights.smallCard,
         background: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -75,17 +81,11 @@ const CreditCard = ({
         sx={{
           height: "100%",
           justifyContent: "space-between",
-          p: { xs: 2.5, lg: 3 },
+          p: spacing.cardPadding,
         }}
       >
         <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <Typography
-            sx={{
-              fontWeight: 700,
-              fontSize: { xs: 16, lg: 18 },
-              color: theme.palette.text.primary,
-            }}
-          >
+          <Typography sx={typographyStyles.cardTitle(theme)}>
             {title}
           </Typography>
           <CardLogo />

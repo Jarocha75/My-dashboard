@@ -1,25 +1,27 @@
 import { Card, Stack, Typography, useTheme } from "@mui/material";
 import { Smile } from "lucide-react";
 import ArcProgress from "../common/ArcProgress";
+import {
+  cardStyles,
+  typographyStyles,
+  borderRadius,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const SatisfactionRateCard = () => {
   const theme = useTheme();
 
   return (
     <Card
-      sx={{
-        borderRadius: "28px",
+      sx={mergeSx(cardStyles.basicCard(theme), {
         height: 340,
-        background: theme.palette.card.basic,
-        backdropFilter: "blur(120px)",
-        overflow: "hidden",
         p: 3,
         display: "flex",
         flexDirection: "column",
-      }}
+      })}
     >
       <Stack>
-        <Typography sx={{ fontSize: 16, fontWeight: 700, color: "white" }}>
+        <Typography sx={typographyStyles.cardTitle(theme)}>
           Satisfaction Rate
         </Typography>
         <Typography sx={{ fontSize: 12, color: "#A0AEC0", mt: 0.5 }}>
@@ -60,7 +62,7 @@ const SatisfactionRateCard = () => {
           alignItems={"center"}
           sx={{
             background: theme.palette.card.overlay,
-            borderRadius: "20px",
+            borderRadius: borderRadius.large,
             py: 1.2,
             px: 2,
             width: "90%",

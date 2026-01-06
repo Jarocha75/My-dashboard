@@ -1,28 +1,24 @@
 import { Card, Typography, useTheme, Box } from "@mui/material";
 import SalesOverviewChart from "../common/SalesOverviewChart";
+import {
+  cardStyles,
+  typographyStyles,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const SalesOverviewCard = () => {
   const theme = useTheme();
 
   return (
     <Card
-      sx={{
-        borderRadius: "28px",
+      sx={mergeSx(cardStyles.basicCard(theme), {
         minHeight: 445,
-        background: theme.palette.card.basic,
-        backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
         flexDirection: "column",
-      }}
+      })}
     >
-      <Typography
-        sx={{
-          fontSize: 18,
-          fontWeight: 700,
-          color: theme.palette.text.primary,
-        }}
-      >
+      <Typography sx={typographyStyles.cardTitle(theme)}>
         Sales overview
       </Typography>
 

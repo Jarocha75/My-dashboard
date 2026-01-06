@@ -1,4 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
+import {
+  cardStyles,
+  typographyStyles,
+  heights,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 type MiniCardProps = {
   title: string;
@@ -7,25 +13,29 @@ type MiniCardProps = {
 };
 
 const MiniCard = ({ title, value, icon }: MiniCardProps) => {
+  const theme = useTheme();
+
   return (
     <Box
-      sx={{
+      sx={mergeSx(cardStyles.miniCard(), {
         width: "100%",
         maxWidth: { sm: 220 },
-        height: 84,
+        height: heights.miniCard.md,
         py: 1.25,
         px: 1.75,
-        borderRadius: "16px",
-        background:
-          "linear-gradient(135deg, rgba(6,11,38,0.94), rgba(26,31,55,0.94))",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         gap: 1.5,
-      }}
+      })}
     >
       <Box sx={{ flex: 1 }}>
-        <Typography fontSize={12} color="text.secondary" sx={{ mb: 0.5 }}>
+        <Typography
+          sx={mergeSx(typographyStyles.cardLabel(theme), {
+            mb: 0.5,
+            textTransform: "none",
+          })}
+        >
           {title}
         </Typography>
         <Typography fontSize={20} fontWeight={700}>

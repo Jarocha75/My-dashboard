@@ -24,6 +24,11 @@ import {
   useTheme,
 } from "@mui/material";
 import ProjectRow from "../projects/ProjectRow";
+import {
+  cardStyles,
+  typographyStyles,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const projects = [
   {
@@ -75,12 +80,9 @@ const ProjectsCard = () => {
 
   return (
     <Card
-      sx={{
-        borderRadius: "28px",
-        background: theme.palette.card.basic,
-        backdropFilter: "blur(120px)",
+      sx={mergeSx(cardStyles.basicCard(theme), {
         p: { xs: 2, md: 3 },
-      }}
+      })}
     >
       <IconButton
         sx={{
@@ -96,7 +98,7 @@ const ProjectsCard = () => {
 
       {/* Header */}
       <Stack mb={3}>
-        <Typography fontSize={18} fontWeight={700}>
+        <Typography sx={typographyStyles.cardTitle(theme)}>
           Projects
         </Typography>
         <Typography fontSize={12} color="#38E68F">

@@ -1,6 +1,11 @@
 import { Card, List, Stack, Typography, useTheme } from "@mui/material";
 import OrderRow, { type OrderType } from "../projects/OrderRow";
 import { Bell, ShoppingCart, CreditCard, Package } from "lucide-react";
+import {
+  cardStyles,
+  typographyStyles,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const orders: Array<{
   title: string;
@@ -51,16 +56,13 @@ const OrdersOverviewCard = () => {
 
   return (
     <Card
-      sx={{
-        borderRadius: "28px",
+      sx={mergeSx(cardStyles.basicCard(theme), {
         height: "100%",
-        background: theme.palette.card.basic,
-        backdropFilter: "blur(120px)",
         p: { xs: 2, md: 3 },
-      }}
+      })}
     >
       <Stack mb={3}>
-        <Typography fontSize={18} fontWeight={700}>
+        <Typography sx={typographyStyles.cardTitle(theme)}>
           Orders Overview
         </Typography>
         <Typography fontSize={12} mt={0.5} color={"#38E68F"} fontWeight={500}>

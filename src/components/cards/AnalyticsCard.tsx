@@ -3,6 +3,12 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {
+  cardStyles,
+  containerStyles,
+  colorUtils,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 interface Props {
   title: string;
@@ -23,9 +29,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
 
   return (
     <Card
-      sx={{
-        background: theme.palette.card.gradientOverlay,
-        borderRadius: 3,
+      sx={mergeSx(cardStyles.gradientCard(theme), {
         px: 3,
         py: 2,
         color: "white",
@@ -33,8 +37,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        boxShadow: "0px 4px 14px rgba(0,0,0,0.3)",
-      }}
+      })}
     >
       <Stack>
         <Typography
@@ -47,7 +50,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
           {title}
         </Typography>
 
-        <Stack direction={"row"} alignItems={"baseline"} gap={1}>
+        <Stack direction="row" alignItems="baseline" gap={1}>
           <Typography sx={{ fontSize: "24px", fontWeight: 700 }}>
             {value}
           </Typography>
@@ -56,7 +59,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
             sx={{
               fontSize: "14px",
               fontWeight: 600,
-              color: change.startsWith("-") ? "#f5365c" : "#5BE374",
+              color: colorUtils.getChangeColor(change),
             }}
           >
             {change}
@@ -64,18 +67,7 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
         </Stack>
       </Stack>
 
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        flexShrink={0}
-        sx={{
-          borderRadius: "12px",
-          width: "46px",
-          height: "46px",
-          background: theme.palette.icon.blueGradient,
-        }}
-      >
+      <Stack sx={containerStyles.iconContainer(theme)}>
         {iconMap[icon]}
       </Stack>
     </Card>

@@ -2,6 +2,11 @@ import { Card, Typography, useTheme, IconButton, Stack } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ArcProgress from "../common/ArcProgress";
 import { formatNumberShort } from "@/utils/formatNumber";
+import {
+  cardStyles,
+  typographyStyles,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const peopleInvited = 145;
 const bonusAmount = 1465;
@@ -10,18 +15,6 @@ const scorePercent = score * 10;
 
 const ReferralTrackingCard = () => {
   const theme = useTheme();
-
-  const titleStyle = {
-    fontSize: 18,
-    fontWeight: 700,
-    color: theme.palette.text.primary,
-    mb: 1,
-  };
-
-  const subtitleStyle = {
-    fontSize: 14,
-    color: theme.palette.text.secondary,
-  };
 
   const labelStyle = {
     fontSize: 22,
@@ -38,18 +31,14 @@ const ReferralTrackingCard = () => {
 
   return (
     <Card
-      sx={{
+      sx={mergeSx(cardStyles.basicCard(theme), {
         position: "relative",
-        borderRadius: "28px",
         minHeight: 340,
-        background: theme.palette.card.basic,
-        backdropFilter: "blur(120px)",
         p: 3,
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
-        overflow: "hidden",
         gap: { xs: 3, md: 0 },
-      }}
+      })}
     >
       <IconButton
         sx={{
@@ -70,7 +59,7 @@ const ReferralTrackingCard = () => {
         gap={3}
         pr={{ md: 2 }}
       >
-        <Typography sx={titleStyle}>Referral Tracking</Typography>
+        <Typography sx={typographyStyles.cardTitle(theme)}>Referral Tracking</Typography>
 
         <Stack
           sx={{
@@ -80,7 +69,7 @@ const ReferralTrackingCard = () => {
             backdropFilter: "blur(12px)",
           }}
         >
-          <Typography sx={subtitleStyle}>Invited</Typography>
+          <Typography sx={typographyStyles.bodySecondary(theme)}>Invited</Typography>
           <Typography sx={labelStyle}>
             {formatNumberShort(peopleInvited)} people
           </Typography>
@@ -94,7 +83,7 @@ const ReferralTrackingCard = () => {
             backdropFilter: "blur(12px)",
           }}
         >
-          <Typography sx={subtitleStyle}>Bonus</Typography>
+          <Typography sx={typographyStyles.bodySecondary(theme)}>Bonus</Typography>
           <Typography sx={labelStyle}>
             ${formatNumberShort(bonusAmount)}
           </Typography>
@@ -128,11 +117,11 @@ const ReferralTrackingCard = () => {
             transform: "translateY(-20%)",
           }}
         >
-          <Typography sx={subtitleStyle}>Safety</Typography>
+          <Typography sx={typographyStyles.bodySecondary(theme)}>Safety</Typography>
 
           <Typography sx={valueStyle}>{score}</Typography>
 
-          <Typography sx={subtitleStyle}>Total Score</Typography>
+          <Typography sx={typographyStyles.bodySecondary(theme)}>Total Score</Typography>
         </Stack>
       </Stack>
 

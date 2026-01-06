@@ -1,5 +1,12 @@
 import { Box, Card, Typography, useTheme } from "@mui/material";
 import welcomeImg from "@/assets/image/picture01.jpg";
+import {
+  borderRadius,
+  containerStyles,
+  heights,
+  hoverEffects,
+  mergeSx,
+} from "@/styles/commonStyles";
 
 const WelcomeCard = () => {
   const theme = useTheme();
@@ -9,8 +16,8 @@ const WelcomeCard = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        borderRadius: "28px",
-        height: 340,
+        borderRadius: borderRadius.xLarge,
+        height: heights.mediumCard.lg,
         background: "transparent",
       }}
     >
@@ -30,17 +37,7 @@ const WelcomeCard = () => {
         }}
       />
 
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: theme.palette.card.overlay,
-          zIndex: 2,
-        }}
-      />
+      <Box sx={containerStyles.overlay(theme)} />
 
       <Box
         sx={{
@@ -71,30 +68,24 @@ const WelcomeCard = () => {
           <br /> Ask me anything.
         </Typography>
         <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
+          sx={mergeSx(containerStyles.flexCenter(), {
+            justifyContent: "flex-start",
             gap: 1,
             mt: 10,
             cursor: "pointer",
-            opacity: 0.85,
-            "&:hover": { opacity: 1 },
-          }}
+          }, hoverEffects.opacity())}
         >
           <Typography sx={{ fontSize: 12, fontWeight: 400, color: "#fff" }}>
             Tap to record
           </Typography>
 
           <Box
-            sx={{
+            sx={mergeSx(containerStyles.flexCenter(), {
               width: 18,
               height: 18,
               borderRadius: "50%",
               background: "rgba(255,255,255,0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            })}
           >
             <svg
               width="10"
