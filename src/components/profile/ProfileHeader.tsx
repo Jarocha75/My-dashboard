@@ -12,6 +12,7 @@ import {
 import headerLogo from "@/assets/logos/headerLogo.svg";
 import { Codepen, Pencil, Users, Wrench } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/context/useAuth";
 
 interface ProfileHeaderProps {
   name?: string;
@@ -22,14 +23,15 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader = ({
-  name = "Mark Johnson",
-  email = "marc@simple.com",
-  avatar = headerLogo,
+  name,
+  email,
+  avatar,
   onTabChange,
   onEditAvatar,
 }: ProfileHeaderProps) => {
   const theme = useTheme();
   const [tab, setTab] = useState(0);
+  const { user } = useAuth();
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
@@ -74,7 +76,7 @@ const ProfileHeader = ({
       <Stack direction="row" alignItems="center" spacing={2}>
         <Box sx={{ position: "relative" }}>
           <Avatar
-            src={avatar}
+            src={avatar || user?.avatar || headerLogo}
             alt="Profile Logo"
             variant="rounded"
             sx={{
@@ -114,7 +116,7 @@ const ProfileHeader = ({
               color: theme.palette.text.primary,
             }}
           >
-            {name}
+            {name || user?.name || "Používateľ"}
           </Typography>
           <Typography
             sx={{
@@ -123,7 +125,7 @@ const ProfileHeader = ({
               color: theme.palette.text.secondary,
             }}
           >
-            {email}
+            {email || user?.email || ""}
           </Typography>
         </Stack>
       </Stack>

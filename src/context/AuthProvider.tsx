@@ -25,7 +25,8 @@ const AuthProvider = ({ children }: Props) => {
 
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY);
-    queryClient.clear();
+    queryClient.setQueryData(["me"], null);
+    queryClient.invalidateQueries({ queryKey: ["me"] });
   };
 
   useEffect(() => {

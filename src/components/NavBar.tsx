@@ -6,6 +6,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import {
   AppBar,
   Box,
+  Button,
   Drawer,
   IconButton,
   InputBase,
@@ -17,12 +18,14 @@ import {
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useAuth } from "@/context/useAuth";
 
 const Navbar = () => {
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
 
   const getPageTitle = () => {
     const path = location.pathname;
@@ -35,6 +38,11 @@ const Navbar = () => {
   };
 
   const handleSignInClick = () => {
+    navigate("/auth/signin");
+  };
+
+  const handleLogout = () => {
+    logout();
     navigate("/auth/signin");
   };
 
@@ -94,30 +102,69 @@ const Navbar = () => {
               />
             </Box>
 
-            <Box
-              display="flex"
-              alignItems="center"
-              sx={{
-                cursor: "pointer",
-                "&:hover": { opacity: 0.7 },
-              }}
-              onClick={handleSignInClick}
-            >
-              <PersonIcon sx={{ color: "#fff", opacity: 0.85 }} />
-              <Typography
-                variant="body1"
-                color={theme.palette.common.white}
+            {isAuthenticated && user ? (
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={1.5}
                 sx={{
-                  color: "#fff",
-                  ml: 1,
-                  fontWeight: 500,
-                  display: { xs: "none", md: "block" },
-                  opacity: 0.9,
+                  cursor: "pointer",
+                  "&:hover": { opacity: 0.8 },
                 }}
               >
-                Sign In
-              </Typography>
-            </Box>
+                <PersonIcon sx={{ color: "#fff", opacity: 0.85 }} />
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#fff",
+                    fontWeight: 500,
+                    display: { xs: "none", md: "block" },
+                  }}
+                >
+                  {user.name || user.email}
+                </Typography>
+                <Button
+                  onClick={handleLogout}
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    color: "#fff",
+                    borderColor: "rgba(255, 255, 255, 0.3)",
+                    "&:hover": {
+                      borderColor: "#fff",
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
+                    display: { xs: "none", md: "block" },
+                  }}
+                >
+                  Odhlásiť sa
+                </Button>
+              </Box>
+            ) : (
+              <Box
+                display="flex"
+                alignItems="center"
+                sx={{
+                  cursor: "pointer",
+                  "&:hover": { opacity: 0.7 },
+                }}
+                onClick={handleSignInClick}
+              >
+                <PersonIcon sx={{ color: "#fff", opacity: 0.85 }} />
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#fff",
+                    ml: 1,
+                    fontWeight: 500,
+                    display: { xs: "none", md: "block" },
+                    opacity: 0.9,
+                  }}
+                >
+                  Sign In
+                </Typography>
+              </Box>
+            )}
 
             <IconButton
               sx={{
