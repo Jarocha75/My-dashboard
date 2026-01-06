@@ -6,6 +6,7 @@ import SignIn from "./pages/auth/SignIn";
 import AuthLayout from "./layouts/AuthLayout";
 import SignUp from "./pages/auth/SignUp";
 import Table from "./pages/Table";
+import Billing from "./pages/Billing";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "billing",
-        element: <div>Billing Page</div>,
+        element: <Billing />,
       },
       {
         path: "rtl",
