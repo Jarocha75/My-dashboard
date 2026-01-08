@@ -16,7 +16,8 @@ interface Props {
   day?: string;
   time?: string;
   amount?: string;
-  type?: 'income' | 'expense';
+  type?: "income" | "expense";
+  className: string;
 }
 
 const CreditBalanceCard = ({
@@ -26,19 +27,23 @@ const CreditBalanceCard = ({
   time = "16:36",
   amount = "-$154.50",
   type,
+  className,
 }: Props) => {
   const theme = useTheme();
 
   const amountColor = type
-    ? (type === 'expense' ? theme.palette.error.main : theme.palette.success.main)
+    ? type === "expense"
+      ? theme.palette.error.main
+      : theme.palette.success.main
     : colorUtils.getAmountColor(amount, theme);
 
   return (
     <Card
+      className={className}
       sx={mergeSx(cardStyles.glassCard(theme), {
         p: spacing.cardPadding,
         height: heights.smallCard,
-        minHeight: { xs: 160 },
+        minHeight: { xs: 160, lg: 239 },
       })}
     >
       <Box>
@@ -59,7 +64,12 @@ const CreditBalanceCard = ({
           alignItems="center"
           justifyContent="space-between"
         >
-          <Stack direction="row" spacing={spacing.responsiveGap} alignItems="center" flex={1}>
+          <Stack
+            direction="row"
+            spacing={spacing.responsiveGap}
+            alignItems="center"
+            flex={1}
+          >
             <Box
               component="img"
               src={Domain}

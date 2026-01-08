@@ -14,6 +14,7 @@ interface Props {
   validThru?: string;
   cvv?: string;
   cardType?: "visa" | "mastercard";
+  className?: string;
 }
 
 const CreditCard = ({
@@ -22,6 +23,7 @@ const CreditCard = ({
   validThru = "05/24",
   cvv = "09X",
   cardType = "mastercard",
+  className,
 }: Props) => {
   const theme = useTheme();
 
@@ -67,6 +69,7 @@ const CreditCard = ({
 
   return (
     <Card
+      className={className}
       sx={{
         position: "relative",
         overflow: "hidden",
@@ -75,6 +78,7 @@ const CreditCard = ({
         background: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        minHeight: 239,
       }}
     >
       <Stack
@@ -84,7 +88,11 @@ const CreditCard = ({
           p: spacing.cardPadding,
         }}
       >
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Typography sx={typographyStyles.cardTitle(theme)}>
             {title}
           </Typography>

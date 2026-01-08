@@ -6,7 +6,7 @@ import SignIn from "./pages/auth/SignIn";
 import AuthLayout from "./layouts/AuthLayout";
 import SignUp from "./pages/auth/SignUp";
 import Table from "./pages/Table";
-import Billing from "./pages/Billing";
+import Billing from "./pages/billing/Billing";
 
 const router = createBrowserRouter([
   {
