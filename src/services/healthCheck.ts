@@ -1,4 +1,4 @@
-import api from "./apiClient";
+import { api } from "@/services/apiClient";
 
 export const healthCheck = async (): Promise<boolean> => {
   try {
