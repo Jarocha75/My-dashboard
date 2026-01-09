@@ -27,9 +27,9 @@ const SignInForm = () => {
   >({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       loginRequest(email, password),
-    onSuccess: ({ token, user }) => {
+    onSuccess: (response) => {
       toast.success("Úspešne si sa prihlásil!");
-      login(token, user);
+      login(response.accessToken, response.user, response.refreshToken);
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {

@@ -2,7 +2,8 @@ import { api } from "@/services/apiClient";
 import { type User } from "@/context/authContext";
 
 export interface LoginResponse {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   user: User;
 }
 
@@ -62,6 +63,16 @@ export const appleLoginRequest = async (
 ): Promise<LoginResponse> => {
   const { data } = await api.post<LoginResponse>("/auth/apple", {
     token: appleToken,
+  });
+
+  return data;
+};
+
+export const refreshTokenRequest = async (
+  refreshToken: string
+): Promise<LoginResponse> => {
+  const { data } = await api.post<LoginResponse>("/auth/refresh", {
+    refreshToken,
   });
 
   return data;

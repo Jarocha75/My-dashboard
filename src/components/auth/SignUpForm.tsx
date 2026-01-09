@@ -21,8 +21,8 @@ const SignUpForm = () => {
 
   const mutation = useMutation({
     mutationFn: signUpRequest,
-    onSuccess: ({ token, user }) => {
-      login(token, user);
+    onSuccess: ({ accessToken, refreshToken, user }) => {
+      login(accessToken, user, refreshToken);
       navigate("/profile", { replace: true });
     },
   });

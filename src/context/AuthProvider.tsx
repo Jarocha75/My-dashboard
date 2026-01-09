@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import AuthContext from "./authContext";
 
 const TOKEN_KEY = "auth_token";
+const REFRESH_TOKEN_KEY = "refresh_token";
 
 interface Props {
   children: React.ReactNode;
@@ -17,25 +18,38 @@ const AuthProvider = ({ children }: Props) => {
     return localStorage.getItem(TOKEN_KEY);
   };
 
+  const getRefreshToken = () => {
+    return localStorage.getItem(REFRESH_TOKEN_KEY);
+  };
+
   const { data: user, isLoading } = useQuery({
     queryKey: ["me"],
     queryFn: getMe,
     enabled: !!getToken(),
+    retry: false,
   });
 
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
     queryClient.setQueryData(["me"], null);
     queryClient.invalidateQueries({ queryKey: ["me"] });
   };
 
   useEffect(() => {
-    setupInterceptors(getToken, logout);
+    setupInterceptors(getToken, getRefreshToken, logout);
   }, []);
 
-  const login = (token: string, user: import("./authContext").User) => {
+  const login = (token: string, user: import("./authContext").User, refreshToken?: string) => {
     localStorage.setItem(TOKEN_KEY, token);
+    if (refreshToken) {
+      localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+    }
     queryClient.setQueryData(["me"], user);
+    // Invalidate all queries to refetch with new token
+    queryClient.invalidateQueries({
+      predicate: (query) => query.queryKey[0] !== "me",
+    });
   };
 
   return (

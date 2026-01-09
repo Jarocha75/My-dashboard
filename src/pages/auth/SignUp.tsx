@@ -19,53 +19,43 @@ const SignUp = () => {
 
   const facebookMutation = useMutation({
     mutationFn: facebookLoginRequest,
-    onSuccess: ({ token, user }) => {
-      console.log("✅ Facebook login successful:", { token, user });
+    onSuccess: ({ accessToken, refreshToken, user }) => {
       toast.success("Úspešne si sa prihlásil cez Facebook!");
-      login(token, user);
-      console.log("🚀 Navigating to dashboard...");
+      login(accessToken, user, refreshToken);
       navigate("/dashboard", { replace: true });
     },
-    onError: (error) => {
-      console.error("❌ Facebook mutation error:", error);
+    onError: () => {
       toast.error("Prihlásenie cez Facebook zlyhalo. Skús to znova.");
     },
   });
 
   const googleMutation = useMutation({
     mutationFn: googleLoginRequest,
-    onSuccess: ({ token, user }) => {
-      console.log("✅ Google login successful:", { token, user });
+    onSuccess: ({ accessToken, refreshToken, user }) => {
       toast.success("Úspešne si sa prihlásil cez Google!");
-      login(token, user);
-      console.log("🚀 Navigating to dashboard...");
+      login(accessToken, user, refreshToken);
       navigate("/dashboard", { replace: true });
     },
-    onError: (error) => {
-      console.error("❌ Google mutation error:", error);
+    onError: () => {
       toast.error("Prihlásenie cez Google zlyhalo. Skús to znova.");
     },
   });
 
   const handleFacebookLogin = async () => {
     try {
-      console.log("🔵 Starting Facebook login...");
       const fbToken = await fbLogin();
-      console.log("🔵 Got Facebook token, calling backend...", fbToken);
       facebookMutation.mutate(fbToken);
     } catch (error) {
-      console.error("❌ Facebook login error:", error);
+      console.error("Facebook login error:", error);
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
-      console.log("🟢 Starting Google login...");
       const googleToken = await googleLogin();
-      console.log("🟢 Got Google token, calling backend...", googleToken);
       googleMutation.mutate(googleToken);
     } catch (error) {
-      console.error("❌ Google login error:", error);
+      console.error("Google login error:", error);
     }
   };
 
