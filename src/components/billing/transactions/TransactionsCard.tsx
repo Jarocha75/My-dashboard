@@ -1,25 +1,25 @@
 import { Card, Stack, Typography, List, Box, useTheme } from "@mui/material";
 import { Calendar } from "lucide-react";
-import { transactionsData } from "../../data/transactionsData";
+import { transactionsData } from "../../../data/transactionsData";
 import { TransactionRow } from "./TransactionRow";
 import {
   cardStyles,
   typographyStyles,
   spacing,
   mergeSx,
-} from "../../styles/commonStyles";
+} from "../../../styles/commonStyles";
 
-interface TransactionsCardProps {
+interface Props {
   title?: string;
   dateRange?: string;
   className?: string;
 }
 
-export const TransactionsCard: React.FC<TransactionsCardProps> = ({
+const TransactionsCard = ({
   title = "Your Transactions",
   dateRange = "23 - 30 March 2020",
   className,
-}) => {
+}: Props) => {
   const theme = useTheme();
 
   const groupedTransactions = [
@@ -64,7 +64,6 @@ export const TransactionsCard: React.FC<TransactionsCardProps> = ({
       <Box sx={{ overflowY: "auto", maxHeight: "calc(100% - 60px)" }}>
         {groupedTransactions.map((group, index) => (
           <Box key={group.label} sx={{ mb: index === 0 ? 3 : 0 }}>
-            {/* Group Label */}
             <Typography
               sx={{
                 ...typographyStyles.bodySecondary(theme),
@@ -89,3 +88,5 @@ export const TransactionsCard: React.FC<TransactionsCardProps> = ({
     </Card>
   );
 };
+
+export default TransactionsCard;

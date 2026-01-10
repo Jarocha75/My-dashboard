@@ -3,7 +3,7 @@ import CreditBalanceCard from "@/components/billing/CreditBalanceCard";
 import CreditCard from "@/components/billing/CreditCard";
 import InvoicesCard from "@/components/billing/InvoicesCard";
 import PaymentMethodCard from "@/components/billing/PaymentMethodCard";
-import { TransactionsCard } from "@/components/transactions/TransactionsCard";
+import TransactionsCard from "@/components/billing/transactions/TransactionsCard";
 import styles from "@/pages/billing/Billing.module.css";
 import { Box } from "@mui/material";
 

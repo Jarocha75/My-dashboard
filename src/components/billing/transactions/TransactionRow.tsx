@@ -1,7 +1,10 @@
 import { ListItem, Stack, Typography, Box, useTheme } from "@mui/material";
 import { ArrowDown, ArrowUp, Clock } from "lucide-react";
-import type { Transaction, TransactionType } from "../../data/transactionsData";
-import { typographyStyles } from "../../styles/commonStyles";
+import type {
+  Transaction,
+  TransactionType,
+} from "../../../data/transactionsData";
+import { typographyStyles } from "../../../styles/commonStyles";
 
 interface TransactionRowProps extends Transaction {}
 

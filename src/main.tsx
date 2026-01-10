@@ -3,7 +3,6 @@ import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
-// Initialize interceptors before any API calls
 import "./services/setupInterceptors.ts";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -34,20 +33,20 @@ createRoot(document.getElementById("root")!).render(
               toastOptions={{
                 duration: 4000,
                 style: {
-                  background: '#0F1535',
-                  color: '#fff',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  background: "#0F1535",
+                  color: "#fff",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
                 },
                 success: {
                   iconTheme: {
-                    primary: '#01B574',
-                    secondary: '#fff',
+                    primary: "#01B574",
+                    secondary: "#fff",
                   },
                 },
                 error: {
                   iconTheme: {
-                    primary: '#E31A1A',
-                    secondary: '#fff',
+                    primary: "#E31A1A",
+                    secondary: "#fff",
                   },
                 },
               }}
