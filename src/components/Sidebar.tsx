@@ -32,14 +32,13 @@ const Sidebar = ({ onLinkClick, isInDrawer = false }: SidebarProps) => {
   const location = useLocation();
   const { isCollapsed, toggleSidebar } = useSidebarState();
 
-  // V Draweri (mobile) nikdy nepoužívame collapsed mód
   const shouldBeCollapsed = !isInDrawer && isCollapsed;
 
   const mainItems = [
     { text: "Dashboard", icon: <HouseIcon />, path: "/dashboard" },
     { text: "Tables", icon: <TableChartIcon />, path: "/tables" },
     { text: "Billing", icon: <CreditCardIcon />, path: "/billing" },
-    { text: "RTL", icon: <BuildIcon />, path: "/rtl" },
+    { text: "Settings", icon: <BuildIcon />, path: "/settings" },
   ];
 
   const accountItems = [
@@ -72,7 +71,9 @@ const Sidebar = ({ onLinkClick, isInDrawer = false }: SidebarProps) => {
             mt: 2,
           }}
         >
-          <Tooltip title={shouldBeCollapsed ? "Expand sidebar" : "Collapse sidebar"}>
+          <Tooltip
+            title={shouldBeCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
             <IconButton
               onClick={toggleSidebar}
               sx={{
