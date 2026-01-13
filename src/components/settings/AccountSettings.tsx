@@ -20,7 +20,16 @@ import {
   accountSettingsSchema,
   type AccountSettingsFormData,
 } from "@/validation/accountSettings";
-import toast from "react-hot-toast";
+import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { useEffect } from "react";
+
+const ACCOUNT_CONTENT = {
+  title: "Account Settings",
+  subTitle: "Manage your account information and security",
+  infoAccount: "Account Information",
+  profileInfo: "Profile Details",
+};
 
 interface Props {
   className?: string;
@@ -28,6 +37,8 @@ interface Props {
 
 const AccountSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { data: userProfile, isLoading, isError } = useUserProfile();
+  const updateProfile = useUpdateUserProfile();
 
   const {
     register,
@@ -36,21 +47,55 @@ const AccountSettings = ({ className }: Props) => {
     reset,
   } = useForm<AccountSettingsFormData>({
     resolver: zodResolver(accountSettingsSchema),
-    defaultValues: {
-      fullName: "",
-      userName: "",
-      phoneNumber: "",
-    },
   });
 
+  useEffect(() => {
+    if (userProfile) {
+      reset({
+        name: userProfile.name || "",
+        userName: userProfile.userName || "",
+        phoneNumber: userProfile.phoneNumber || "",
+      });
+    }
+  }, [userProfile, reset]);
+
   const onSubmit = (data: AccountSettingsFormData) => {
-    console.log("Validaované dáta:", data);
-    toast.success("Zmeny boli úspešne uložené");
+    updateProfile.mutate(data);
   };
 
   const handleCancel = () => {
-    reset();
+    if (userProfile) {
+      reset({
+        name: userProfile.name || "",
+        userName: userProfile.userName || "",
+        phoneNumber: userProfile.phoneNumber || "",
+      });
+    }
   };
+
+  if (isLoading) {
+    return (
+      <Box className={className}>
+        <Card
+          sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
+        >
+          <Typography>Načítavam...</Typography>
+        </Card>
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Box className={className}>
+        <Card
+          sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
+        >
+          <Typography color="error">Chyba pri načítaní profilu</Typography>
+        </Card>
+      </Box>
+    );
+  }
 
   return (
     <Box className={className}>
@@ -64,10 +109,10 @@ const AccountSettings = ({ className }: Props) => {
         <Stack spacing={3}>
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              Account Settings
+              {ACCOUNT_CONTENT.title}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              Manage your account information and security
+              {ACCOUNT_CONTENT.subTitle}
             </Typography>
           </Stack>
 
@@ -80,12 +125,12 @@ const AccountSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Account Information
+              {ACCOUNT_CONTENT.infoAccount}
             </Typography>
 
             <TextField
               label="Email"
-              defaultValue="user@example.com"
+              value={userProfile?.email || ""}
               disabled
               fullWidth
               variant="outlined"
@@ -110,7 +155,7 @@ const AccountSettings = ({ className }: Props) => {
 
             <TextField
               label="User ID"
-              defaultValue="USR-2024-001234"
+              value={userProfile?.id || ""}
               disabled
               fullWidth
               variant="outlined"
@@ -144,15 +189,14 @@ const AccountSettings = ({ className }: Props) => {
                   fontSize: 16,
                 })}
               >
-                Profile Details
+                {ACCOUNT_CONTENT.profileInfo}
               </Typography>
 
               <TextField
-                {...register("fullName")}
-                label="Full Name"
-                defaultValue="John Doe"
-                error={!!errors.fullName}
-                helperText={errors.fullName?.message}
+                {...register("name")}
+                label="Name"
+                error={!!errors.name}
+                helperText={errors.name?.message}
                 fullWidth
                 variant="outlined"
                 sx={{
@@ -175,7 +219,6 @@ const AccountSettings = ({ className }: Props) => {
               <TextField
                 {...register("userName")}
                 label="Username"
-                defaultValue="johndoe"
                 error={!!errors.userName}
                 helperText={errors.userName?.message}
                 fullWidth
@@ -200,7 +243,6 @@ const AccountSettings = ({ className }: Props) => {
               <TextField
                 {...register("phoneNumber")}
                 label="Phone Number"
-                defaultValue="+421 123 456 789"
                 error={!!errors.phoneNumber}
                 helperText={errors.phoneNumber?.message}
                 fullWidth
@@ -232,11 +274,13 @@ const AccountSettings = ({ className }: Props) => {
                 type="submit"
                 variant="contained"
                 fullWidth
+                disabled={updateProfile.isPending}
                 sx={{
                   borderRadius: "12px",
                   textTransform: "none",
                   fontWeight: 600,
-                  background: "linear-gradient(135deg, #3A7BFF 0%, #0066FF 100%)",
+                  background:
+                    "linear-gradient(135deg, #3A7BFF 0%, #0066FF 100%)",
                   boxShadow: "0px 4px 14px rgba(0, 102, 255, 0.35)",
                   "&:hover": {
                     background:
@@ -244,12 +288,13 @@ const AccountSettings = ({ className }: Props) => {
                   },
                 }}
               >
-                Save Changes
+                {updateProfile.isPending ? "Ukladá sa..." : "Save Changes"}
               </Button>
               <Button
                 onClick={handleCancel}
                 variant="outlined"
                 fullWidth
+                disabled={updateProfile.isPending}
                 sx={{
                   borderRadius: "12px",
                   textTransform: "none",

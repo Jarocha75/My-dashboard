@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const accountSettingsSchema = z.object({
-  fullName: z
+  name: z
     .string()
     .min(3, "Meno musí mať minimálne 3 znaky")
     .max(50, "Meno môže mať maximálne 50 znakov"),
