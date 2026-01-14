@@ -10,7 +10,7 @@ export const useUpdateUserProfile = () => {
     mutationFn: (profileData: AccountSettingsFormData) =>
       updateUserProfile(profileData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["useProfile"] });
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
       toast.success("Zmeny boli úspešne uložené");
     },
     onError: (error: any) => {

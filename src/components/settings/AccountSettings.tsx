@@ -22,7 +22,7 @@ import {
 } from "@/validation/accountSettings";
 import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
 import { useUserProfile } from "@/hooks/useUserProfile";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const ACCOUNT_CONTENT = {
   title: "Account Settings",
@@ -49,35 +49,36 @@ const AccountSettings = ({ className }: Props) => {
     resolver: zodResolver(accountSettingsSchema),
   });
 
+  const getDefaultValues = useCallback(
+    () => ({
+      name: userProfile?.name || "",
+      userName: userProfile?.userName || "",
+      phoneNumber: userProfile?.phoneNumber || "",
+    }),
+    [userProfile]
+  );
+
   useEffect(() => {
     if (userProfile) {
-      reset({
-        name: userProfile.name || "",
-        userName: userProfile.userName || "",
-        phoneNumber: userProfile.phoneNumber || "",
-      });
+      reset(getDefaultValues());
     }
-  }, [userProfile, reset]);
+  }, [userProfile, reset, getDefaultValues]);
 
   const onSubmit = (data: AccountSettingsFormData) => {
     updateProfile.mutate(data);
   };
 
   const handleCancel = () => {
-    if (userProfile) {
-      reset({
-        name: userProfile.name || "",
-        userName: userProfile.userName || "",
-        phoneNumber: userProfile.phoneNumber || "",
-      });
-    }
+    reset(getDefaultValues());
   };
 
   if (isLoading) {
     return (
       <Box className={className}>
         <Card
-          sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
+          sx={mergeSx(cardStyles.glassCard(theme), {
+            p: spacing.cardPadding,
+          })}
         >
           <Typography>Načítavam...</Typography>
         </Card>
@@ -89,7 +90,9 @@ const AccountSettings = ({ className }: Props) => {
     return (
       <Box className={className}>
         <Card
-          sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
+          sx={mergeSx(cardStyles.glassCard(theme), {
+            p: spacing.cardPadding,
+          })}
         >
           <Typography color="error">Chyba pri načítaní profilu</Typography>
         </Card>

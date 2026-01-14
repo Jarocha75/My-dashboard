@@ -1,9 +1,16 @@
+import { useUpdateProfileSettings } from "@/hooks/useUpdateProfileSettings";
+import { useUserProfile } from "@/hooks/useUserProfile";
 import {
   cardStyles,
   mergeSx,
   spacing,
   typographyStyles,
 } from "@/styles/commonStyles";
+import {
+  profileSettingsSchema,
+  type ProfileSettingsFormData,
+} from "@/validation/profileSettings";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
   Button,
@@ -16,6 +23,26 @@ import {
   Avatar,
 } from "@mui/material";
 import { Camera } from "lucide-react";
+import { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+
+const PROFILE_CONTENT = {
+  title: "Profile Settings",
+  subTitle: "Manage you public profile information",
+  picture: "Profile Picture",
+  personal: "Personal Information",
+};
+
+const getInitials = (name?: string, displayName?: string): string => {
+  const nameToUse = displayName || name || "";
+  const words = nameToUse.trim().split(/\s+/);
+
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+
+  return nameToUse.slice(0, 2).toUpperCase();
+};
 
 interface Props {
   className?: string;
@@ -23,6 +50,44 @@ interface Props {
 
 const ProfileSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { data: userProfile, isLoading, isError } = useUserProfile();
+  const updateProfile = useUpdateProfileSettings();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ProfileSettingsFormData>({
+    resolver: zodResolver(profileSettingsSchema),
+  });
+
+  const getDefaultValues = useCallback(
+    () => ({
+      displayName: userProfile?.displayName || "",
+      bio: userProfile?.bio || "",
+      location: userProfile?.location || "",
+      website: userProfile?.website || "",
+      linkedin: userProfile?.linkedin || "",
+      github: userProfile?.github || "",
+      whatsup: userProfile?.whatsup || "",
+    }),
+    [userProfile]
+  );
+
+  useEffect(() => {
+    if (userProfile) {
+      reset(getDefaultValues());
+    }
+  }, [userProfile, reset, getDefaultValues]);
+
+  const onSubmit = (data: ProfileSettingsFormData) => {
+    updateProfile.mutate(data);
+  };
+
+  const handleCancel = () => {
+    reset(getDefaultValues());
+  };
 
   const textFieldSx = {
     "& .MuiOutlinedInput-root": {
@@ -40,6 +105,30 @@ const ProfileSettings = ({ className }: Props) => {
     },
   };
 
+  if (isLoading) {
+    return (
+      <Box className={className}>
+        <Card
+          sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
+        >
+          <Typography>Načítavam...</Typography>
+        </Card>
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Box className={className}>
+        <Card
+          sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
+        >
+          <Typography color="error">Chyba pri načítaní profilu</Typography>
+        </Card>
+      </Box>
+    );
+  }
+
   return (
     <Box className={className}>
       <Card
@@ -49,14 +138,14 @@ const ProfileSettings = ({ className }: Props) => {
           mx: "auto",
         })}
       >
-        <Stack spacing={3}>
+        <Stack spacing={3} component="form" onSubmit={handleSubmit(onSubmit)}>
           {/* Header */}
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              Profile Settings
+              {PROFILE_CONTENT.title}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              Manage your public profile information
+              {PROFILE_CONTENT.subTitle}
             </Typography>
           </Stack>
 
@@ -70,7 +159,7 @@ const ProfileSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Profile Picture
+              {PROFILE_CONTENT.picture}
             </Typography>
 
             <Stack direction="row" alignItems="center" spacing={3}>
@@ -78,10 +167,11 @@ const ProfileSettings = ({ className }: Props) => {
                 sx={{
                   width: 100,
                   height: 100,
-                  background: "linear-gradient(135deg, #3A7BFF 0%, #0066FF 100%)",
+                  background:
+                    "linear-gradient(135deg, #3A7BFF 0%, #0066FF 100%)",
                 }}
               >
-                JD
+                {getInitials(userProfile?.name ?? undefined, userProfile?.displayName ?? undefined)}
               </Avatar>
               <Button
                 variant="outlined"
@@ -113,20 +203,24 @@ const ProfileSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Personal Information
+              {PROFILE_CONTENT.personal}
             </Typography>
 
             <TextField
+              {...register("displayName")}
               label="Display Name"
-              defaultValue="John Doe"
+              error={!!errors.displayName}
+              helperText={errors.displayName?.message}
               fullWidth
               variant="outlined"
               sx={textFieldSx}
             />
 
             <TextField
+              {...register("bio")}
               label="Bio"
-              defaultValue="Full-stack developer passionate about building great user experiences"
+              error={!!errors.bio}
+              helperText={errors.bio?.message}
               fullWidth
               multiline
               rows={3}
@@ -136,15 +230,19 @@ const ProfileSettings = ({ className }: Props) => {
 
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
               <TextField
+                {...register("location")}
                 label="Location"
-                defaultValue="Bratislava, Slovakia"
+                error={!!errors.location}
+                helperText={errors.location?.message}
                 fullWidth
                 variant="outlined"
                 sx={textFieldSx}
               />
               <TextField
+                {...register("website")}
                 label="Website"
-                defaultValue="https://johndoe.com"
+                error={!!errors.website}
+                helperText={errors.website?.message}
                 fullWidth
                 variant="outlined"
                 sx={textFieldSx}
@@ -166,24 +264,30 @@ const ProfileSettings = ({ className }: Props) => {
             </Typography>
 
             <TextField
+              {...register("linkedin")}
               label="LinkedIn"
-              defaultValue="linkedin.com/in/johndoe"
+              error={!!errors.linkedin}
+              helperText={errors.linkedin?.message}
               fullWidth
               variant="outlined"
               sx={textFieldSx}
             />
 
             <TextField
+              {...register("github")}
               label="GitHub"
-              defaultValue="github.com/johndoe"
+              error={!!errors.github}
+              helperText={errors.github?.message}
               fullWidth
               variant="outlined"
               sx={textFieldSx}
             />
 
             <TextField
-              label="Twitter"
-              defaultValue="@johndoe"
+              {...register("whatsup")}
+              label="WhatsApp"
+              error={!!errors.whatsup}
+              helperText={errors.whatsup?.message}
               fullWidth
               variant="outlined"
               sx={textFieldSx}
@@ -197,6 +301,8 @@ const ProfileSettings = ({ className }: Props) => {
             sx={{ mt: 2 }}
           >
             <Button
+              type="submit"
+              disabled={updateProfile.isPending}
               variant="contained"
               fullWidth
               sx={{
@@ -211,9 +317,10 @@ const ProfileSettings = ({ className }: Props) => {
                 },
               }}
             >
-              Save Changes
+              {updateProfile.isPending ? "Ukladám..." : "Save Changes"}
             </Button>
             <Button
+              onClick={handleCancel}
               variant="outlined"
               fullWidth
               sx={{
