@@ -24,8 +24,8 @@ const SignUp = () => {
       login(accessToken, user, refreshToken);
       navigate("/dashboard", { replace: true });
     },
-    onError: () => {
-      toast.error("Prihlásenie cez Facebook zlyhalo. Skús to znova.");
+    onError: (error) => {
+      toast.error(error.message || "Prihlásenie cez Facebook zlyhalo. Skús to znova.");
     },
   });
 
@@ -36,8 +36,8 @@ const SignUp = () => {
       login(accessToken, user, refreshToken);
       navigate("/dashboard", { replace: true });
     },
-    onError: () => {
-      toast.error("Prihlásenie cez Google zlyhalo. Skús to znova.");
+    onError: (error) => {
+      toast.error(error.message || "Prihlásenie cez Google zlyhalo. Skús to znova.");
     },
   });
 

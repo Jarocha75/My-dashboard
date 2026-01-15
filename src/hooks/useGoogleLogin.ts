@@ -16,8 +16,8 @@ export const useGoogleLogin = () => {
         rejectRef.current = null;
       }
     },
-    onError: () => {
-      console.error("❌ Google login failed");
+    onError: (error) => {
+      console.error("❌ Google login failed:", error);
       setIsLoading(false);
       if (rejectRef.current) {
         rejectRef.current(new Error("Google login failed or was cancelled"));
@@ -26,6 +26,7 @@ export const useGoogleLogin = () => {
       }
     },
     flow: "implicit",
+    scope: "email profile",
   });
 
   const login = async (): Promise<string> => {

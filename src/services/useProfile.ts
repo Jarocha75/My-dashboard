@@ -37,3 +37,15 @@ export const updateProfileSettings = async (
   const { data } = await api.put<UserProfile>("/user/profile", profileData);
   return data;
 };
+
+export const uploadAvatar = async (file: File): Promise<UserProfile> => {
+  const formData = new FormData();
+  formData.append("avatar", file);
+
+  const { data } = await api.post<UserProfile>("/user/avatar", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return data;
+};

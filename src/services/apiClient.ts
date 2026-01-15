@@ -1,9 +1,19 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import axios, { type AxiosRequestConfig, isAxiosError } from "axios";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (isAxiosError(error) && error.response?.data?.error) {
+      error.message = error.response.data.error;
+    }
+    return Promise.reject(error);
+  }
+);
 
 class APIClient<T> {
   endpoint: string;

@@ -1,4 +1,5 @@
 import { useUpdateProfileSettings } from "@/hooks/useUpdateProfileSettings";
+import { useUploadAvatar } from "@/hooks/useUploadAvatar";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import {
   cardStyles,
@@ -23,7 +24,7 @@ import {
   Avatar,
 } from "@mui/material";
 import { Camera } from "lucide-react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, type ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
 const PROFILE_CONTENT = {
@@ -50,8 +51,10 @@ interface Props {
 
 const ProfileSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { data: userProfile, isLoading, isError } = useUserProfile();
   const updateProfile = useUpdateProfileSettings();
+  const uploadAvatar = useUploadAvatar();
 
   const {
     register,
@@ -87,6 +90,17 @@ const ProfileSettings = ({ className }: Props) => {
 
   const handleCancel = () => {
     reset(getDefaultValues());
+  };
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadAvatar.mutate(file);
+    }
   };
 
   const textFieldSx = {
@@ -164,6 +178,7 @@ const ProfileSettings = ({ className }: Props) => {
 
             <Stack direction="row" alignItems="center" spacing={3}>
               <Avatar
+                src={userProfile?.avatar ?? undefined}
                 sx={{
                   width: 100,
                   height: 100,
@@ -173,8 +188,17 @@ const ProfileSettings = ({ className }: Props) => {
               >
                 {getInitials(userProfile?.name ?? undefined, userProfile?.displayName ?? undefined)}
               </Avatar>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="image/*"
+                hidden
+              />
               <Button
                 variant="outlined"
+                onClick={handleAvatarClick}
+                disabled={uploadAvatar.isPending}
                 startIcon={<Camera size={18} />}
                 sx={{
                   borderRadius: "12px",
@@ -188,7 +212,7 @@ const ProfileSettings = ({ className }: Props) => {
                   },
                 }}
               >
-                Change Photo
+                {uploadAvatar.isPending ? "Nahrávam..." : "Change Photo"}
               </Button>
             </Stack>
           </Stack>
