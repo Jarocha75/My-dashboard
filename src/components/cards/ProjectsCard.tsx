@@ -30,6 +30,17 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
+const CARD_CONTENT = {
+  title: "Projects",
+  subtitle: "30 done this month",
+  tableHeaders: {
+    companies: "Companies",
+    members: "Members",
+    budget: "Budget",
+    completion: "Completion",
+  },
+};
+
 const projects = [
   {
     company: "Chakra Soft UI Version",
@@ -99,10 +110,14 @@ const ProjectsCard = () => {
       {/* Header */}
       <Stack mb={3}>
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          Projects
+          {CARD_CONTENT.title}
         </Typography>
-        <Typography fontSize={12} color="#38E68F">
-          ● 30 done this month
+        <Typography
+          sx={mergeSx(typographyStyles.bodySecondary(theme), {
+            color: "#38E68F",
+          })}
+        >
+          ● {CARD_CONTENT.subtitle}
         </Typography>
       </Stack>
 
@@ -122,10 +137,10 @@ const ProjectsCard = () => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Companies</TableCell>
-              <TableCell>Members</TableCell>
-              <TableCell>Budget</TableCell>
-              <TableCell>Completion</TableCell>
+              <TableCell>{CARD_CONTENT.tableHeaders.companies}</TableCell>
+              <TableCell>{CARD_CONTENT.tableHeaders.members}</TableCell>
+              <TableCell>{CARD_CONTENT.tableHeaders.budget}</TableCell>
+              <TableCell>{CARD_CONTENT.tableHeaders.completion}</TableCell>
             </TableRow>
           </TableHead>
 

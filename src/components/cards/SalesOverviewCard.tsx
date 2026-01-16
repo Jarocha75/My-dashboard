@@ -6,6 +6,11 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
+const CARD_CONTENT = {
+  title: "Sales overview",
+  subtitle: "(+5) more in 2021",
+};
+
 const SalesOverviewCard = () => {
   const theme = useTheme();
 
@@ -19,18 +24,17 @@ const SalesOverviewCard = () => {
       })}
     >
       <Typography sx={typographyStyles.cardTitle(theme)}>
-        Sales overview
+        {CARD_CONTENT.title}
       </Typography>
 
       <Typography
-        sx={{
-          fontSize: 12,
+        sx={mergeSx(typographyStyles.bodySecondary(theme), {
           mt: 0.5,
           color: "#38E68F",
           fontWeight: 500,
-        }}
+        })}
       >
-        (+5) more in 2021
+        {CARD_CONTENT.subtitle}
       </Typography>
 
       <Box mt={3} minHeight={320}>

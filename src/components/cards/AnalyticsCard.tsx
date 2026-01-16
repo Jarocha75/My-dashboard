@@ -6,6 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   cardStyles,
   containerStyles,
+  typographyStyles,
   colorUtils,
   mergeSx,
 } from "@/styles/commonStyles";
@@ -40,27 +41,18 @@ const AnalyticsCard = ({ title, value, change, icon }: Props) => {
       })}
     >
       <Stack>
-        <Typography
-          sx={{
-            fontSize: "12px",
-            fontWeight: 600,
-            color: "#A0AEC0",
-          }}
-        >
-          {title}
-        </Typography>
+        <Typography sx={typographyStyles.cardLabel(theme)}>{title}</Typography>
 
         <Stack direction="row" alignItems="baseline" gap={1}>
-          <Typography sx={{ fontSize: "24px", fontWeight: 700 }}>
+          <Typography sx={typographyStyles.valueDisplay(theme)}>
             {value}
           </Typography>
 
           <Typography
-            sx={{
-              fontSize: "14px",
-              fontWeight: 600,
+            sx={mergeSx(typographyStyles.bodyPrimary(theme), {
               color: colorUtils.getChangeColor(change),
-            }}
+              fontWeight: 600,
+            })}
           >
             {change}
           </Typography>

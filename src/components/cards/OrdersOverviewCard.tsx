@@ -1,55 +1,16 @@
 import { Card, List, Stack, Typography, useTheme } from "@mui/material";
-import OrderRow, { type OrderType } from "../projects/OrderRow";
-import { Bell, ShoppingCart, CreditCard, Package } from "lucide-react";
+import OrderRow from "../projects/OrderRow";
+import { ordersData } from "@/data/ordersData";
 import {
   cardStyles,
   typographyStyles,
   mergeSx,
 } from "@/styles/commonStyles";
 
-const orders: Array<{
-  title: string;
-  date: string;
-  icon: typeof Bell;
-  type: OrderType;
-}> = [
-  {
-    title: "Design Changes",
-    date: "Jan 9, 2014",
-    icon: Bell,
-    type: "design",
-  },
-  {
-    title: "New Order #1832412",
-    date: "Jan 7, 2014",
-    icon: ShoppingCart,
-    type: "order",
-  },
-  {
-    title: "Server Payments for April",
-    date: "July 20, 2014",
-    icon: CreditCard,
-    type: "payment",
-  },
-  {
-    title: "New card added for order",
-    date: "July 20, 2014",
-    icon: CreditCard,
-    type: "payment",
-  },
-  {
-    title: "Unlock packages for development",
-    date: "July 20, 2014",
-    icon: Package,
-    type: "system",
-  },
-  {
-    title: "New order #1832412",
-    date: "July 20, 2014",
-    icon: ShoppingCart,
-    type: "order",
-  },
-];
+const CARD_CONTENT = {
+  title: "Orders Overview",
+  subtitle: "+ 30% this month",
+};
 
 const OrdersOverviewCard = () => {
   const theme = useTheme();
@@ -63,10 +24,16 @@ const OrdersOverviewCard = () => {
     >
       <Stack mb={3}>
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          Orders Overview
+          {CARD_CONTENT.title}
         </Typography>
-        <Typography fontSize={12} mt={0.5} color={"#38E68F"} fontWeight={500}>
-          + 30% this month
+        <Typography
+          sx={mergeSx(typographyStyles.bodySecondary(theme), {
+            mt: 0.5,
+            color: "#38E68F",
+            fontWeight: 500,
+          })}
+        >
+          {CARD_CONTENT.subtitle}
         </Typography>
       </Stack>
 
@@ -79,9 +46,9 @@ const OrdersOverviewCard = () => {
           },
         }}
       >
-        {orders.map((order) => (
+        {ordersData.map((order) => (
           <OrderRow
-            key={order.title}
+            key={order.id}
             title={order.title}
             date={order.date}
             icon={order.icon}
