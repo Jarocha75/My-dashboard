@@ -7,12 +7,12 @@ import {
 import {
   Alert,
   Card,
-  CircularProgress,
   Stack,
   Typography,
   useTheme,
 } from "@mui/material";
 import BillingMiniCard from "./BillingMiniCard";
+import BillingInfoSkeleton from "./BillingInfoSkeleton";
 import EditBillingDialog from "./EditBillingDialog";
 import { type Billing } from "@/data/billingData";
 import useBillings from "@/hooks/useBillings";
@@ -56,11 +56,7 @@ const BillingInfoCard = ({ className }: Props) => {
           {BILLING_CONTENT.title}
         </Typography>
 
-        {isLoading && (
-          <Stack alignItems="center" sx={{ mt: 4 }}>
-            <CircularProgress />
-          </Stack>
-        )}
+        {isLoading && <BillingInfoSkeleton className={className} />}
 
         {isError && (
           <Alert severity="error" sx={{ mt: 2 }}>
