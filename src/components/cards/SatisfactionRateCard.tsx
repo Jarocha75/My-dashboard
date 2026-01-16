@@ -8,6 +8,15 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
+const CARD_CONTENT = {
+  title: "Satisfaction Rate",
+  subtitle: "From all projects",
+  description: "Based on likes",
+  value: 95,
+  minValue: 0,
+  maxValue: 100,
+};
+
 const SatisfactionRateCard = () => {
   const theme = useTheme();
 
@@ -22,17 +31,17 @@ const SatisfactionRateCard = () => {
     >
       <Stack>
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          Satisfaction Rate
+          {CARD_CONTENT.title}
         </Typography>
         <Typography sx={{ fontSize: 12, color: "#A0AEC0", mt: 0.5 }}>
-          From all projects
+          {CARD_CONTENT.subtitle}
         </Typography>
       </Stack>
 
       <Stack mt={3} alignItems={"center"} gap={2}>
         <Stack sx={{ position: "relative" }}>
           <ArcProgress
-            value={95}
+            value={CARD_CONTENT.value}
             size={180}
             thickness={10}
             startAngle={270}
@@ -68,18 +77,22 @@ const SatisfactionRateCard = () => {
             width: "90%",
           }}
         >
-          <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>0%</Typography>
+          <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>
+            {CARD_CONTENT.minValue}%
+          </Typography>
 
           <Stack alignItems={"center"}>
             <Typography color="white" fontSize={26} fontWeight={700}>
-              95%
+              {CARD_CONTENT.value}%
             </Typography>
             <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>
-              Based on likes
+              {CARD_CONTENT.description}
             </Typography>
           </Stack>
 
-          <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>100%</Typography>
+          <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>
+            {CARD_CONTENT.maxValue}%
+          </Typography>
         </Stack>
       </Stack>
     </Card>

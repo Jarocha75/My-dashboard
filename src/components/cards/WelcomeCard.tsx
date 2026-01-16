@@ -6,10 +6,20 @@ import {
   heights,
   hoverEffects,
   mergeSx,
+  spacing,
+  typographyStyles,
 } from "@/styles/commonStyles";
+import { useUserProfile } from "@/hooks/useUserProfile";
+
+const CARD_CONTENT = {
+  title: "Welcome back",
+  text: "Tap to record",
+};
 
 const WelcomeCard = () => {
   const theme = useTheme();
+  const { data: profile } = useUserProfile();
+  const name = profile?.name || profile?.displayName || "User";
 
   return (
     <Card
@@ -17,7 +27,7 @@ const WelcomeCard = () => {
         position: "relative",
         overflow: "hidden",
         borderRadius: borderRadius.xLarge,
-        height: heights.mediumCard.lg,
+        height: heights.mediumCard,
         background: "transparent",
       }}
     >
@@ -45,38 +55,43 @@ const WelcomeCard = () => {
           zIndex: 3,
           color: "white",
           height: "100%",
-          p: 3,
+          p: spacing.cardPadding,
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
         }}
       >
         <Typography
-          sx={{ fontSize: 14, fontWeight: 400, mb: 1, color: "#A0AEC0" }}
+          sx={mergeSx(typographyStyles.bodySecondary(theme), { mb: 1 })}
         >
-          Welcome back
+          {CARD_CONTENT.title}
         </Typography>
 
-        <Typography sx={{ fontSize: 26, fontWeight: 700, color: "white" }}>
-          Mark Johnson
+        <Typography sx={typographyStyles.valueDisplay(theme)}>
+          {name}
         </Typography>
 
         <Typography
-          sx={{ fontSize: 16, fontWeight: 400, mt: 3, color: "#A0AEC0" }}
+          sx={mergeSx(typographyStyles.bodyPrimary(theme), { mt: 3 })}
         >
           Glad to see you again!
           <br /> Ask me anything.
         </Typography>
+
         <Box
-          sx={mergeSx(containerStyles.flexCenter(), {
-            justifyContent: "flex-start",
-            gap: 1,
-            mt: 10,
-            cursor: "pointer",
-          }, hoverEffects.opacity())}
+          sx={mergeSx(
+            containerStyles.flexCenter(),
+            {
+              justifyContent: "flex-start",
+              gap: spacing.responsiveGap,
+              mt: "auto",
+              cursor: "pointer",
+            },
+            hoverEffects.opacity()
+          )}
         >
-          <Typography sx={{ fontSize: 12, fontWeight: 400, color: "#fff" }}>
-            Tap to record
+          <Typography sx={typographyStyles.cardLabel(theme)}>
+            {CARD_CONTENT.text}
           </Typography>
 
           <Box
