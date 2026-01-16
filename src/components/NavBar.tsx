@@ -26,6 +26,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getPageTitle = () => {
     const path = location.pathname;
@@ -44,6 +45,13 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     navigate("/auth/signin");
+  };
+
+  const handleSearch = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery("");
+    }
   };
 
   return (
@@ -98,6 +106,9 @@ const Navbar = () => {
               <SearchIcon sx={{ color: "white", fontSize: 18, mr: 1 }} />
               <InputBase
                 placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearch}
                 sx={{ color: "white", fontSize: "14px", width: "100%" }}
               />
             </Box>
@@ -172,6 +183,7 @@ const Navbar = () => {
                 opacity: 0.8,
                 display: { xs: "none", md: "flex" },
               }}
+              onClick={() => navigate("/settings")}
             >
               <SettingsIcon />
             </IconButton>
@@ -182,6 +194,7 @@ const Navbar = () => {
                 opacity: 0.8,
                 display: { xs: "none", md: "flex" },
               }}
+              onClick={() => navigate("/settings/notifications")}
             >
               <NotificationsIcon />
             </IconButton>

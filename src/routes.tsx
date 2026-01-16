@@ -13,6 +13,7 @@ import ProfileSettings from "./components/settings/ProfileSettings";
 import NotificationSettings from "./components/settings/NotificationSettings";
 import PrivacySettings from "./components/settings/PrivacySettings";
 import PreferencesSettings from "./components/settings/PreferencesSettings";
+import Search from "./pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "billing",
         element: <Billing />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
     ],
   },
