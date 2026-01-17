@@ -1,5 +1,6 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
 import ImageWelcome from "@/assets/image/ImageWelcome02.png";
+import { useUserProfile } from "@/hooks/useUserProfile";
 
 interface Props {
   userName?: string;
@@ -10,12 +11,14 @@ interface Props {
 }
 
 const WelcomeBackCard = ({
-  userName = "Mark Johnson",
   title = "Welcome back!",
   actionText = "Turn on your car",
   backgroundImage = ImageWelcome,
   onActionClick,
 }: Props) => {
+  const { data: profile } = useUserProfile();
+  const name = profile?.name || profile?.displayName || "User";
+
   return (
     <Card
       sx={{
@@ -53,7 +56,7 @@ const WelcomeBackCard = ({
               color: "white",
             }}
           >
-            Nice to see you,{userName}!
+            Nice to see you,{name}!
           </Typography>
         </Box>
 

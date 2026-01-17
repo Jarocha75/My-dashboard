@@ -1,5 +1,6 @@
 import { Card, Stack, Typography, useTheme } from "@mui/material";
 import SocialMediaLink, { type SocialMediaItem } from "./SocialMediaLink";
+import { useUserProfile } from "@/hooks/useUserProfile";
 
 interface Props {
   title?: string;
@@ -13,14 +14,15 @@ interface Props {
 
 const ProfileInfoCard = ({
   title = "Profile Informations",
-  bio = "Hi, I'm Mark Johnson, Decisions: If you can't decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).",
-  fullName = "Mark Johnson",
-  mobile = "+421 123 456 789",
-  email = "mark.johnson@example.com",
-  location = "Slovakia",
   socialMedia,
 }: Props) => {
   const theme = useTheme();
+  const { data: profile } = useUserProfile();
+  const fullName = profile?.name || profile?.displayName || "User";
+  const mobile = profile?.phoneNumber || "";
+  const email = profile?.email || "";
+  const location = profile?.location || "";
+  const bio = profile?.bio || "Default bio text...";
 
   const profileData = [
     { label: "Full Name", value: fullName },

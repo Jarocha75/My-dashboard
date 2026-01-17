@@ -51,7 +51,7 @@ const ActiveUsersChart = () => {
           itemStyle={{ color: "white" }}
         />
 
-        <Bar dataKey="uv" fill="#ffffff" barSize={15} />
+        <Bar dataKey="uv" fill="#ffffff" barSize={15} activeBar={false} />
       </BarChart>
     </ResponsiveContainer>
   );

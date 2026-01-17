@@ -11,8 +11,10 @@ import {
 } from "@mui/material";
 import headerLogo from "@/assets/logos/headerLogo.svg";
 import { Codepen, Pencil, Users, Wrench } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "@/context/useAuth";
+import { useUserProfile } from "@/hooks/useUserProfile";
+import { useUploadAvatar } from "@/hooks/useUploadAvatar";
 
 interface ProfileHeaderProps {
   name?: string;
@@ -32,10 +34,25 @@ const ProfileHeader = ({
   const theme = useTheme();
   const [tab, setTab] = useState(0);
   const { user } = useAuth();
+  const { data: profile } = useUserProfile();
+  const { mutate: uploadAvatar } = useUploadAvatar();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
     onTabChange?.(newValue);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadAvatar(file);
+    }
+    e.target.value = "";
+  };
+
+  const handleEdtiClick = () => {
+    fileInputRef.current?.click();
   };
 
   const tabSx = {
@@ -76,7 +93,7 @@ const ProfileHeader = ({
       <Stack direction="row" alignItems="center" spacing={2}>
         <Box sx={{ position: "relative" }}>
           <Avatar
-            src={avatar || user?.avatar || headerLogo}
+            src={avatar || profile?.avatar || user?.avatar || headerLogo}
             alt="Profile Logo"
             variant="rounded"
             sx={{
@@ -87,7 +104,7 @@ const ProfileHeader = ({
           />
           <IconButton
             size="small"
-            onClick={onEditAvatar}
+            onClick={onEditAvatar || handleEdtiClick}
             aria-label="Edit profile picture"
             sx={{
               position: "absolute",
@@ -106,6 +123,13 @@ const ProfileHeader = ({
           >
             <Pencil size={14} color="#fff" />
           </IconButton>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/"
+            style={{ display: "none" }}
+          />
         </Box>
 
         <Stack spacing={0.5}>
