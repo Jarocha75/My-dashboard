@@ -14,7 +14,7 @@ import { createRoot } from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider.tsx";
-import router from "./routes.tsx";
+import router from "./components/routing/routes.tsx";
 import theme from "./theme.ts";
 
 const queryClient = new QueryClient();

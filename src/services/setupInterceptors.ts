@@ -76,7 +76,7 @@ api.interceptors.response.use(
 
       const refreshToken = getRefreshToken();
 
-      if (!refreshToken) {
+      if (!refreshToken || refreshToken === "undefined" || refreshToken === "null") {
         isRefreshing = false;
         if (logoutCallback) logoutCallback();
         window.location.href = "/auth/signin";

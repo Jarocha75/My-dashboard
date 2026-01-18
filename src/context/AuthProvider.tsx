@@ -39,8 +39,10 @@ const AuthProvider = ({ children }: Props) => {
 
   const login = (token: string, user: import("./authContext").User, refreshToken?: string) => {
     localStorage.setItem(TOKEN_KEY, token);
-    if (refreshToken) {
+    if (refreshToken && refreshToken !== "undefined") {
       localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+    } else {
+      localStorage.removeItem(REFRESH_TOKEN_KEY);
     }
     queryClient.setQueryData(["me"], user);
     // Invalidate all queries to refetch with new token
