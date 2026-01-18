@@ -10,12 +10,31 @@ const useDeleteBilling = () => {
 
   return useMutation({
     mutationFn: (id: string) => apiClient.delete(id),
+    onMutate: async (id: string) => {
+      await queryClient.cancelQueries({ queryKey: ["billings"] });
+
+      const previousBillings = queryClient.getQueryData<Billing[]>([
+        "billings",
+      ]);
+
+      queryClient.setQueryData<Billing[]>(
+        ["billings"],
+        (old) => old?.filter((billing) => billing.id !== id) ?? []
+      );
+
+      return { previousBillings };
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["billings"] });
       toast.success("Billing was successfully deleted.");
     },
-    onError: () => {
+    onError: (_error, _id, context) => {
+      if (context?.previousBillings) {
+        queryClient.setQueryData(["billings"], context.previousBillings);
+      }
       toast.error("Delete failed.");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["billings"] });
     },
   });
 };
