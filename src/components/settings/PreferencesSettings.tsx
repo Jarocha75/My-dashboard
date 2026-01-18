@@ -1,4 +1,12 @@
 import {
+  dateFormatOptions,
+  fontSizeOptions,
+  languageOptions,
+  preferencesDefaults,
+  themeOptions,
+  timezoneOptions,
+} from "@/data/preferencesData";
+import {
   cardStyles,
   mergeSx,
   spacing,
@@ -27,6 +35,62 @@ interface Props {
 
 const PreferencesSettings = ({ className }: Props) => {
   const theme = useTheme();
+
+  const selectStyles = {
+    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: "12px",
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "rgba(255,255,255,0.1)",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "rgba(255,255,255,0.15)",
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: theme.palette.primary.main,
+    },
+    "& .MuiSelect-select": {
+      color: theme.palette.text.primary,
+    },
+  };
+
+  const menuProps = {
+    PaperProps: {
+      sx: {
+        backgroundColor: "rgba(30, 30, 40, 0.98)",
+        backdropFilter: "blur(20px)",
+        borderRadius: "12px",
+        border: "1px solid rgba(255,255,255,0.1)",
+        "& .MuiMenuItem-root": {
+          color: theme.palette.text.primary,
+          "&:hover": {
+            backgroundColor: "rgba(255,255,255,0.08)",
+          },
+          "&.Mui-selected": {
+            backgroundColor: "rgba(58, 123, 255, 0.2)",
+            "&:hover": {
+              backgroundColor: "rgba(58, 123, 255, 0.3)",
+            },
+          },
+        },
+      },
+    },
+  };
+
+  const radioStyles = {
+    color: "rgba(255,255,255,0.3)",
+    "&.Mui-checked": {
+      color: theme.palette.primary.main,
+    },
+  };
+
+  const switchStyles = {
+    "& .MuiSwitch-switchBase.Mui-checked": {
+      color: theme.palette.primary.main,
+    },
+    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+      backgroundColor: theme.palette.primary.main,
+    },
+  };
 
   return (
     <Box className={className}>
@@ -68,49 +132,18 @@ const PreferencesSettings = ({ className }: Props) => {
                 Theme
               </Typography>
               <FormControl component="fieldset">
-                <RadioGroup defaultValue="dark" name="theme-group">
-                  <FormControlLabel
-                    value="light"
-                    control={
-                      <Radio
-                        sx={{
-                          color: "rgba(255,255,255,0.3)",
-                          "&.Mui-checked": {
-                            color: theme.palette.primary.main,
-                          },
-                        }}
-                      />
-                    }
-                    label="Light"
-                  />
-                  <FormControlLabel
-                    value="dark"
-                    control={
-                      <Radio
-                        sx={{
-                          color: "rgba(255,255,255,0.3)",
-                          "&.Mui-checked": {
-                            color: theme.palette.primary.main,
-                          },
-                        }}
-                      />
-                    }
-                    label="Dark"
-                  />
-                  <FormControlLabel
-                    value="system"
-                    control={
-                      <Radio
-                        sx={{
-                          color: "rgba(255,255,255,0.3)",
-                          "&.Mui-checked": {
-                            color: theme.palette.primary.main,
-                          },
-                        }}
-                      />
-                    }
-                    label="System Default"
-                  />
+                <RadioGroup
+                  defaultValue={preferencesDefaults.theme}
+                  name="theme-group"
+                >
+                  {themeOptions.map((option) => (
+                    <FormControlLabel
+                      key={option.value}
+                      value={option.value}
+                      control={<Radio sx={radioStyles} />}
+                      label={option.label}
+                    />
+                  ))}
                 </RadioGroup>
               </FormControl>
             </Box>
@@ -118,15 +151,8 @@ const PreferencesSettings = ({ className }: Props) => {
             <FormControlLabel
               control={
                 <Switch
-                  defaultChecked
-                  sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: theme.palette.primary.main,
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: theme.palette.primary.main,
-                    },
-                  }}
+                  defaultChecked={preferencesDefaults.compactMode}
+                  sx={switchStyles}
                 />
               }
               label={
@@ -170,27 +196,16 @@ const PreferencesSettings = ({ className }: Props) => {
                 Language
               </Typography>
               <Select
-                defaultValue="en"
+                defaultValue={preferencesDefaults.language}
                 fullWidth
-                sx={{
-                  backgroundColor: "rgba(255,255,255,0.02)",
-                  borderRadius: "12px",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.1)",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.15)",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                }}
+                sx={selectStyles}
+                MenuProps={menuProps}
               >
-                <MenuItem value="en">English</MenuItem>
-                <MenuItem value="sk">Slovenčina</MenuItem>
-                <MenuItem value="cs">Čeština</MenuItem>
-                <MenuItem value="de">Deutsch</MenuItem>
-                <MenuItem value="fr">Français</MenuItem>
+                {languageOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
               </Select>
             </Box>
 
@@ -204,31 +219,16 @@ const PreferencesSettings = ({ className }: Props) => {
                 Timezone
               </Typography>
               <Select
-                defaultValue="europe/bratislava"
+                defaultValue={preferencesDefaults.timezone}
                 fullWidth
-                sx={{
-                  backgroundColor: "rgba(255,255,255,0.02)",
-                  borderRadius: "12px",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.1)",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.15)",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                }}
+                sx={selectStyles}
+                MenuProps={menuProps}
               >
-                <MenuItem value="europe/bratislava">
-                  (GMT+01:00) Bratislava
-                </MenuItem>
-                <MenuItem value="europe/prague">(GMT+01:00) Prague</MenuItem>
-                <MenuItem value="europe/berlin">(GMT+01:00) Berlin</MenuItem>
-                <MenuItem value="europe/london">(GMT+00:00) London</MenuItem>
-                <MenuItem value="america/new_york">
-                  (GMT-05:00) New York
-                </MenuItem>
+                {timezoneOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
               </Select>
             </Box>
 
@@ -242,25 +242,16 @@ const PreferencesSettings = ({ className }: Props) => {
                 Date Format
               </Typography>
               <Select
-                defaultValue="dd/mm/yyyy"
+                defaultValue={preferencesDefaults.dateFormat}
                 fullWidth
-                sx={{
-                  backgroundColor: "rgba(255,255,255,0.02)",
-                  borderRadius: "12px",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.1)",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.15)",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                }}
+                sx={selectStyles}
+                MenuProps={menuProps}
               >
-                <MenuItem value="dd/mm/yyyy">DD/MM/YYYY</MenuItem>
-                <MenuItem value="mm/dd/yyyy">MM/DD/YYYY</MenuItem>
-                <MenuItem value="yyyy-mm-dd">YYYY-MM-DD</MenuItem>
+                {dateFormatOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
               </Select>
             </Box>
           </Stack>
@@ -281,14 +272,8 @@ const PreferencesSettings = ({ className }: Props) => {
             <FormControlLabel
               control={
                 <Switch
-                  sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: theme.palette.primary.main,
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: theme.palette.primary.main,
-                    },
-                  }}
+                  defaultChecked={preferencesDefaults.reducedMotion}
+                  sx={switchStyles}
                 />
               }
               label={
@@ -311,14 +296,8 @@ const PreferencesSettings = ({ className }: Props) => {
             <FormControlLabel
               control={
                 <Switch
-                  sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: theme.palette.primary.main,
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: theme.palette.primary.main,
-                    },
-                  }}
+                  defaultChecked={preferencesDefaults.highContrast}
+                  sx={switchStyles}
                 />
               }
               label={
@@ -348,26 +327,16 @@ const PreferencesSettings = ({ className }: Props) => {
                 Font Size
               </Typography>
               <Select
-                defaultValue="medium"
+                defaultValue={preferencesDefaults.fontSize}
                 fullWidth
-                sx={{
-                  backgroundColor: "rgba(255,255,255,0.02)",
-                  borderRadius: "12px",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.1)",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255,255,255,0.15)",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                }}
+                sx={selectStyles}
+                MenuProps={menuProps}
               >
-                <MenuItem value="small">Small</MenuItem>
-                <MenuItem value="medium">Medium</MenuItem>
-                <MenuItem value="large">Large</MenuItem>
-                <MenuItem value="extra-large">Extra Large</MenuItem>
+                {fontSizeOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
               </Select>
             </Box>
           </Stack>
