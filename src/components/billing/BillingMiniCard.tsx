@@ -16,6 +16,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { Billing } from "@/data/billingData";
 import useDeleteBilling from "@/hooks/useDeleteBilling";
+import ConfirmDeleteDialog from "../common/ConfirmDeleteDialog";
+import { useState } from "react";
 
 interface Props {
   billing: Billing;
@@ -25,14 +27,19 @@ interface Props {
 const BillingMiniCard = ({ billing, onEditClick }: Props) => {
   const theme = useTheme();
   const deleteMutation = useDeleteBilling();
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const handleDelete = () => {
-    if (
-      !window.confirm(`Naozaj chcete zmazať billing pre ${billing.fullName}?`)
-    ) {
-      return;
-    }
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
     deleteMutation.mutate(billing.id);
+    setDeleteDialogOpen(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteDialogOpen(false);
   };
 
   const handleEdit = () => {
@@ -47,11 +54,7 @@ const BillingMiniCard = ({ billing, onEditClick }: Props) => {
         p: spacing.cardPadding,
       })}
     >
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack spacing={0.5}>
           <Typography sx={typographyStyles.bodyPrimary(theme)}>
             {billing.fullName}
@@ -137,6 +140,14 @@ const BillingMiniCard = ({ billing, onEditClick }: Props) => {
           </Typography>
         </Stack>
       </Stack>
+      <ConfirmDeleteDialog
+        open={deleteDialogOpen}
+        message={`Naozaj chcete zmazať billing pre ${billing.fullName}?`}
+        cancelText="Zrušiť"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        isLoading={deleteMutation.isPending}
+      />
     </Card>
   );
 };
