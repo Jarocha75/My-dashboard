@@ -13,6 +13,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
+import ErrorBoundary from "./components/common/ErrorBoundary.tsx";
 import AuthProvider from "./context/AuthProvider.tsx";
 import router from "./components/routing/routes.tsx";
 import theme from "./theme.ts";
@@ -27,7 +28,9 @@ createRoot(document.getElementById("root")!).render(
         <AuthProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <RouterProvider router={router} />
+            <ErrorBoundary>
+              <RouterProvider router={router} />
+            </ErrorBoundary>
             <Toaster
               position="top-right"
               toastOptions={{
