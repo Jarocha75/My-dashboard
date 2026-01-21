@@ -32,7 +32,7 @@ class APIClient<T> {
     return res.data;
   };
 
-  post = async (data: T) => {
+  post = async (data: Partial<T>) => {
     const res = await axiosInstance.post<T>(this.endpoint, data);
     return res.data;
   };

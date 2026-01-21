@@ -1,6 +1,13 @@
-import { Card, Stack, Typography, List, Box, useTheme } from "@mui/material";
+import {
+  Card,
+  Stack,
+  Typography,
+  List,
+  Box,
+  useTheme,
+  CircularProgress,
+} from "@mui/material";
 import { Calendar } from "lucide-react";
-import { transactionsData } from "../../../data/transactionsData";
 import { TransactionRow } from "./TransactionRow";
 import {
   cardStyles,
@@ -8,6 +15,10 @@ import {
   spacing,
   mergeSx,
 } from "../../../styles/commonStyles";
+import useTransactions from "@/hooks/transactions/useTransactions";
+import { useMemo, useState } from "react";
+import type { Transaction } from "@/types/transactions";
+import EditTransactionDialog from "./EditTransactionDialog";
 
 interface Props {
   title?: string;
@@ -21,71 +32,168 @@ const TransactionsCard = ({
   className,
 }: Props) => {
   const theme = useTheme();
+  const { data: transactions, isLoading, isError } = useTransactions();
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
 
-  const groupedTransactions = [
-    {
-      label: "NEWEST",
-      items: transactionsData.slice(0, 2),
-    },
-    {
-      label: "YESTERDAY",
-      items: transactionsData.slice(2),
-    },
-  ];
+  const handleEditClick = (transaction: Transaction) => {
+    setSelectedTransaction(transaction);
+    setEditDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setEditDialogOpen(false);
+    setSelectedTransaction(null);
+  };
+
+  const groupedTransactions = useMemo(() => {
+    if (!transactions || transactions.length === 0) return [];
+
+    const sorted = [...transactions].sort(
+      (a, b) => new Date(b.ISO).getTime() - new Date(a.ISO).getTime()
+    );
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const newest: Transaction[] = [];
+    const yesterdayItems: Transaction[] = [];
+    const older: Transaction[] = [];
+
+    sorted.forEach((t) => {
+      const date = new Date(t.ISO);
+      date.setHours(0, 0, 0, 0);
+
+      if (date.getTime() >= today.getTime()) {
+        newest.push(t);
+      } else if (date.getTime() >= yesterday.getTime()) {
+        yesterdayItems.push(t);
+      } else {
+        older.push(t);
+      }
+    });
+
+    const groups = [];
+    if (newest.length > 0) groups.push({ label: "NEWEST", items: newest });
+    if (yesterdayItems.length > 0)
+      groups.push({ label: "YESTERDAY", items: yesterdayItems });
+    if (older.length > 0) groups.push({ label: "OLDER", items: older });
+
+    return groups;
+  }, [transactions]);
 
   return (
-    <Card
-      className={className}
-      sx={mergeSx(cardStyles.basicCard(theme), {
-        p: spacing.cardPadding,
-        height: "100%",
-      })}
-    >
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={3}
+    <>
+      <Card
+        className={className}
+        sx={mergeSx(cardStyles.basicCard(theme), {
+          p: spacing.cardPadding,
+          height: "100%",
+        })}
       >
-        <Typography sx={typographyStyles.cardTitle(theme)}>{title}</Typography>
-        <Stack direction="row" spacing={1} alignItems="center">
-          <Calendar size={16} color="#A0AEC0" />
-          <Typography
-            sx={{
-              ...typographyStyles.bodySecondary(theme),
-              fontSize: "0.875rem",
-            }}
-          >
-            {dateRange}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={3}
+        >
+          <Typography sx={typographyStyles.cardTitle(theme)}>
+            {title}
           </Typography>
-        </Stack>
-      </Stack>
-
-      <Box sx={{ overflowY: "auto", maxHeight: "calc(100% - 60px)" }}>
-        {groupedTransactions.map((group, index) => (
-          <Box key={group.label} sx={{ mb: index === 0 ? 3 : 0 }}>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Calendar size={16} color="#A0AEC0" />
             <Typography
               sx={{
                 ...typographyStyles.bodySecondary(theme),
-                fontSize: "0.75rem",
-                fontWeight: 700,
-                letterSpacing: "0.5px",
-                mb: 1,
-                color: "#A0AEC0",
+                fontSize: "0.875rem",
               }}
             >
-              {group.label}
+              {dateRange}
             </Typography>
+          </Stack>
+        </Stack>
 
-            <List sx={{ py: 0 }}>
-              {group.items.map((transaction) => (
-                <TransactionRow key={transaction.id} {...transaction} />
-              ))}
-            </List>
-          </Box>
-        ))}
-      </Box>
-    </Card>
+        <Box sx={{ overflowY: "auto", maxHeight: "calc(100% - 60px)" }}>
+          {isLoading && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                py: 4,
+              }}
+            >
+              <CircularProgress size={32} />
+            </Box>
+          )}
+
+          {isError && (
+            <Typography
+              sx={{
+                ...typographyStyles.bodySecondary(theme),
+                textAlign: "center",
+                py: 4,
+                color: "#F5365C",
+              }}
+            >
+              Nepodarilo sa načítať transakcie
+            </Typography>
+          )}
+
+          {!isLoading && !isError && groupedTransactions.length === 0 && (
+            <Typography
+              sx={{
+                ...typographyStyles.bodySecondary(theme),
+                textAlign: "center",
+                py: 4,
+              }}
+            >
+              Žiadne transakcie
+            </Typography>
+          )}
+
+          {!isLoading &&
+            !isError &&
+            groupedTransactions.map((group, index) => (
+              <Box
+                key={group.label}
+                sx={{ mb: index < groupedTransactions.length - 1 ? 3 : 0 }}
+              >
+                <Typography
+                  sx={{
+                    ...typographyStyles.bodySecondary(theme),
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.5px",
+                    mb: 1,
+                    color: "#A0AEC0",
+                  }}
+                >
+                  {group.label}
+                </Typography>
+
+                <List sx={{ py: 0 }}>
+                  {group.items.map((transaction) => (
+                    <TransactionRow
+                      key={transaction.id}
+                      transaction={transaction}
+                      onEditClick={handleEditClick}
+                    />
+                  ))}
+                </List>
+              </Box>
+            ))}
+        </Box>
+      </Card>
+      <EditTransactionDialog
+        open={editDialogOpen}
+        transaction={selectedTransaction}
+        onClose={handleCloseDialog}
+      />
+    </>
   );
 };
 

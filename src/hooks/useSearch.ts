@@ -4,7 +4,7 @@ import { authorsData } from "@/data/authorsData";
 import { projectsData } from "@/data/projectsData";
 import { billingsData } from "@/data/billingData";
 import { invoicesData } from "@/data/invoicesData";
-import { transactionsData } from "@/data/transactionsData";
+import useTransactions from "@/hooks/transactions/useTransactions";
 import PersonIcon from "@mui/icons-material/Person";
 import FolderIcon from "@mui/icons-material/Folder";
 import ReceiptIcon from "@mui/icons-material/Receipt";
@@ -12,6 +12,8 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import PaymentIcon from "@mui/icons-material/Payment";
 
 export const useSearch = (query: string) => {
+  const { data: transactions } = useTransactions();
+
   const results = useMemo<SearchResult[]>(() => {
     if (!query.trim()) return [];
 
@@ -22,7 +24,7 @@ export const useSearch = (query: string) => {
     searchablePages.forEach((page) => {
       const matchesTitle = page.title.toLowerCase().includes(searchTerm);
       const matchesKeywords = page.keywords.some((keyword) =>
-        keyword.toLowerCase().includes(searchTerm)
+        keyword.toLowerCase().includes(searchTerm),
       );
 
       if (matchesTitle || matchesKeywords) {
@@ -40,7 +42,9 @@ export const useSearch = (query: string) => {
     authorsData.forEach((author) => {
       const matchesName = author.fullName.toLowerCase().includes(searchTerm);
       const matchesEmail = author.email.toLowerCase().includes(searchTerm);
-      const matchesFunction = author.function.toLowerCase().includes(searchTerm);
+      const matchesFunction = author.function
+        .toLowerCase()
+        .includes(searchTerm);
 
       if (matchesName || matchesEmail || matchesFunction) {
         searchResults.push({
@@ -57,7 +61,9 @@ export const useSearch = (query: string) => {
     // Vyhľadávanie v projektoch
     projectsData.forEach((project) => {
       const matchesTitle = project.title.toLowerCase().includes(searchTerm);
-      const matchesDescription = project.description.toLowerCase().includes(searchTerm);
+      const matchesDescription = project.description
+        .toLowerCase()
+        .includes(searchTerm);
 
       if (matchesTitle || matchesDescription) {
         searchResults.push({
@@ -91,7 +97,9 @@ export const useSearch = (query: string) => {
 
     // Vyhľadávanie vo faktúrach
     invoicesData.forEach((invoice) => {
-      const matchesNumber = invoice.invoiceNumber.toLowerCase().includes(searchTerm);
+      const matchesNumber = invoice.invoiceNumber
+        .toLowerCase()
+        .includes(searchTerm);
       const matchesAmount = invoice.amount.toLowerCase().includes(searchTerm);
       const matchesDate = invoice.date.toLowerCase().includes(searchTerm);
 
@@ -107,7 +115,7 @@ export const useSearch = (query: string) => {
     });
 
     // Vyhľadávanie v transakciách
-    transactionsData.forEach((transaction) => {
+    transactions?.forEach((transaction) => {
       const matchesName = transaction.name.toLowerCase().includes(searchTerm);
 
       if (matchesName) {
@@ -115,10 +123,13 @@ export const useSearch = (query: string) => {
           transaction.amount >= 0
             ? `+$${transaction.amount}`
             : `-$${Math.abs(transaction.amount)}`;
+        const formattedDate = new Date(transaction.ISO).toLocaleDateString(
+          "sk-SK"
+        );
         searchResults.push({
           type: "transaction",
           title: transaction.name,
-          subtitle: `${transaction.date} - ${amountStr}`,
+          subtitle: `${formattedDate} - ${amountStr}`,
           path: "/billing",
           icon: PaymentIcon,
         });
@@ -126,7 +137,7 @@ export const useSearch = (query: string) => {
     });
 
     return searchResults;
-  }, [query]);
+  }, [query, transactions]);
 
   return {
     results,

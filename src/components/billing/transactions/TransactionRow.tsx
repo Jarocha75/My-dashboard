@@ -1,12 +1,19 @@
-import { ListItem, Stack, Typography, Box, useTheme } from "@mui/material";
-import { ArrowDown, ArrowUp, Clock } from "lucide-react";
-import type {
-  Transaction,
-  TransactionType,
-} from "../../../data/transactionsData";
+import {
+  ListItem,
+  Stack,
+  Typography,
+  Box,
+  useTheme,
+  IconButton,
+} from "@mui/material";
+import { ArrowDown, ArrowUp, Clock, Pencil } from "lucide-react";
+import type { Transaction, TransactionType } from "@/types/transactions";
 import { typographyStyles } from "../../../styles/commonStyles";
 
-interface TransactionRowProps extends Transaction {}
+interface TransactionRowProps {
+  transaction: Transaction;
+  onEditClick?: (transaction: Transaction) => void;
+}
 
 const getTransactionIcon = (type: TransactionType) => {
   switch (type) {
@@ -15,6 +22,8 @@ const getTransactionIcon = (type: TransactionType) => {
     case "deposit":
       return ArrowUp;
     case "pending":
+      return Clock;
+    default:
       return Clock;
   }
 };
@@ -36,6 +45,11 @@ const getTransactionColor = (type: TransactionType) => {
         color: "#A0AEC0",
         bg: "rgba(160, 174, 192, 0.15)",
       };
+    default:
+      return {
+        color: "#A0AEC0",
+        bg: "rgba(160, 174, 192, 0.15)",
+      };
   }
 };
 
@@ -50,13 +64,21 @@ const getAmountColor = (amount: number, type: TransactionType) => {
   return amount > 0 ? "#5BE374" : "#F5365C";
 };
 
+const formatDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString("sk-SK", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
 export const TransactionRow: React.FC<TransactionRowProps> = ({
-  name,
-  date,
-  amount,
-  type,
+  transaction,
+  onEditClick,
 }) => {
   const theme = useTheme();
+  const { name, ISO, amount, type } = transaction;
   const Icon = getTransactionIcon(type);
   const colorScheme = getTransactionColor(type);
 
@@ -108,20 +130,36 @@ export const TransactionRow: React.FC<TransactionRowProps> = ({
                 fontSize: "0.875rem",
               }}
             >
-              {date}
+              {formatDate(ISO)}
             </Typography>
           </Stack>
         </Stack>
 
-        <Typography
-          sx={{
-            fontWeight: 700,
-            fontSize: "1rem",
-            color: getAmountColor(amount, type),
-          }}
-        >
-          {formatAmount(amount)}
-        </Typography>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Typography
+            sx={{
+              fontWeight: 700,
+              fontSize: "1rem",
+              color: getAmountColor(amount, type),
+            }}
+          >
+            {formatAmount(amount)}
+          </Typography>
+          {onEditClick && (
+            <IconButton
+              size="small"
+              onClick={() => onEditClick(transaction)}
+              sx={{
+                color: theme.palette.text.secondary,
+                "&:hover": {
+                  color: theme.palette.primary.main,
+                },
+              }}
+            >
+              <Pencil size={16} />
+            </IconButton>
+          )}
+        </Stack>
       </Stack>
     </ListItem>
   );
