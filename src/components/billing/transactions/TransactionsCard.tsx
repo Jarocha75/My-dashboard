@@ -26,9 +26,30 @@ interface Props {
   className?: string;
 }
 
+const getCurrentWeekRange = (): string => {
+  const now = new Date();
+  const dayOfWeek = now.getDay();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+
+  const formatDate = (date: Date) => date.getDate();
+  const formatMonth = (date: Date) =>
+    date.toLocaleDateString("en-US", { month: "long" });
+  const formatYear = (date: Date) => date.getFullYear();
+
+  if (monday.getMonth() === sunday.getMonth()) {
+    return `${formatDate(monday)} - ${formatDate(sunday)} ${formatMonth(sunday)} ${formatYear(sunday)}`;
+  }
+
+  return `${formatDate(monday)} ${formatMonth(monday)} - ${formatDate(sunday)} ${formatMonth(sunday)} ${formatYear(sunday)}`;
+};
+
 const TransactionsCard = ({
   title = "Your Transactions",
-  dateRange = "23 - 30 March 2020",
+  dateRange = getCurrentWeekRange(),
   className,
 }: Props) => {
   const theme = useTheme();

@@ -3,8 +3,8 @@ import { searchablePages, type SearchResult } from "@/data/searchData";
 import { authorsData } from "@/data/authorsData";
 import { projectsData } from "@/data/projectsData";
 import { billingsData } from "@/data/billingData";
-import { invoicesData } from "@/data/invoicesData";
 import useTransactions from "@/hooks/transactions/useTransactions";
+import useInvoices from "@/hooks/invoices/useInvoices";
 import PersonIcon from "@mui/icons-material/Person";
 import FolderIcon from "@mui/icons-material/Folder";
 import ReceiptIcon from "@mui/icons-material/Receipt";
@@ -13,6 +13,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 
 export const useSearch = (query: string) => {
   const { data: transactions } = useTransactions();
+  const { data: invoices } = useInvoices();
 
   const results = useMemo<SearchResult[]>(() => {
     if (!query.trim()) return [];
@@ -96,18 +97,19 @@ export const useSearch = (query: string) => {
     });
 
     // Vyhľadávanie vo faktúrach
-    invoicesData.forEach((invoice) => {
+    invoices?.forEach((invoice) => {
       const matchesNumber = invoice.invoiceNumber
         .toLowerCase()
         .includes(searchTerm);
       const matchesAmount = invoice.amount.toLowerCase().includes(searchTerm);
-      const matchesDate = invoice.date.toLowerCase().includes(searchTerm);
+      const matchesClient = invoice.clientName.toLowerCase().includes(searchTerm);
 
-      if (matchesNumber || matchesAmount || matchesDate) {
+      if (matchesNumber || matchesAmount || matchesClient) {
+        const formattedDate = new Date(invoice.createdAt).toLocaleDateString("sk-SK");
         searchResults.push({
           type: "invoice",
           title: invoice.invoiceNumber,
-          subtitle: `${invoice.date} - ${invoice.amount}`,
+          subtitle: `${invoice.clientName} - ${formattedDate} - ${invoice.amount}`,
           path: "/billing",
           icon: ReceiptIcon,
         });
@@ -124,7 +126,7 @@ export const useSearch = (query: string) => {
             ? `+$${transaction.amount}`
             : `-$${Math.abs(transaction.amount)}`;
         const formattedDate = new Date(transaction.ISO).toLocaleDateString(
-          "sk-SK"
+          "sk-SK",
         );
         searchResults.push({
           type: "transaction",
@@ -137,7 +139,7 @@ export const useSearch = (query: string) => {
     });
 
     return searchResults;
-  }, [query, transactions]);
+  }, [query, transactions, invoices]);
 
   return {
     results,
