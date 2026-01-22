@@ -8,6 +8,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Calendar } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { TransactionRow } from "./TransactionRow";
 import {
   cardStyles,
@@ -21,7 +22,6 @@ import type { Transaction } from "@/types/transactions";
 import EditTransactionDialog from "./EditTransactionDialog";
 
 interface Props {
-  title?: string;
   dateRange?: string;
   className?: string;
 }
@@ -48,11 +48,11 @@ const getCurrentWeekRange = (): string => {
 };
 
 const TransactionsCard = ({
-  title = "Your Transactions",
   dateRange = getCurrentWeekRange(),
   className,
 }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const { data: transactions, isLoading, isError } = useTransactions();
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] =
@@ -98,13 +98,13 @@ const TransactionsCard = ({
     });
 
     const groups = [];
-    if (newest.length > 0) groups.push({ label: "NEWEST", items: newest });
+    if (newest.length > 0) groups.push({ label: t("billing.newest"), items: newest });
     if (yesterdayItems.length > 0)
-      groups.push({ label: "YESTERDAY", items: yesterdayItems });
-    if (older.length > 0) groups.push({ label: "OLDER", items: older });
+      groups.push({ label: t("billing.yesterday"), items: yesterdayItems });
+    if (older.length > 0) groups.push({ label: t("billing.older"), items: older });
 
     return groups;
-  }, [transactions]);
+  }, [transactions, t]);
 
   return (
     <>
@@ -122,7 +122,7 @@ const TransactionsCard = ({
           mb={3}
         >
           <Typography sx={typographyStyles.cardTitle(theme)}>
-            {title}
+            {t("billing.yourTransactions")}
           </Typography>
           <Stack direction="row" spacing={1} alignItems="center">
             <Calendar size={16} color="#A0AEC0" />
@@ -160,7 +160,7 @@ const TransactionsCard = ({
                 color: "#F5365C",
               }}
             >
-              Nepodarilo sa načítať transakcie
+              {t("billing.errorLoadingTransactions")}
             </Typography>
           )}
 
@@ -172,7 +172,7 @@ const TransactionsCard = ({
                 py: 4,
               }}
             >
-              Žiadne transakcie
+              {t("billing.noTransactions")}
             </Typography>
           )}
 

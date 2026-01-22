@@ -8,6 +8,7 @@ import {
   Button,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { type Author } from "@/data/authorsData";
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 
 const AuthorRow = ({ author }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <TableRow
@@ -94,7 +96,7 @@ const AuthorRow = ({ author }: Props) => {
             color: "text.secondary",
           }}
         >
-          Edit
+          {t("tables.edit")}
         </Button>
       </TableCell>
     </TableRow>

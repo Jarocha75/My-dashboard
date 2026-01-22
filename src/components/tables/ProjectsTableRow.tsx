@@ -10,12 +10,14 @@ import {
   IconButton,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   project: Project;
 }
 
 const ProjectsTableRow = ({ project }: Props) => {
+  const { t } = useTranslation();
   return (
     <TableRow
       hover
@@ -40,7 +42,7 @@ const ProjectsTableRow = ({ project }: Props) => {
           fontWeight={600}
           color={project.budget ? "text.primary" : "text.secondary"}
         >
-          {project.budget ? `$${project.budget.toLocaleString()}` : "Not set"}
+          {project.budget ? `$${project.budget.toLocaleString()}` : t("tables.notSet")}
         </Typography>
       </TableCell>
 

@@ -15,37 +15,37 @@ import {
   UserPen,
   ArrowLeft,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 
 interface Props {
-  title?: string;
   onLinkClick?: () => void;
   isInDrawer?: boolean;
 }
 
 const SettingsSidebar = ({
-  title = "Settings",
   onLinkClick,
   isInDrawer = false,
 }: Props) => {
   const theme = useTheme();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const items = [
-    { text: "Account", icon: <UserRound />, path: "/settings/account" },
+    { text: t("settingsPage.account"), icon: <UserRound />, path: "/settings/account" },
     {
-      text: "Profile",
+      text: t("settingsPage.profile"),
       icon: <UserPen />,
       path: "/settings/profile",
     },
     {
-      text: "Notifications",
+      text: t("settingsPage.notifications"),
       icon: <BellRing />,
       path: "/settings/notifications",
     },
-    { text: "Privacy", icon: <EarthLock />, path: "/settings/privacy" },
-    { text: "Preferences", icon: <Bolt />, path: "/settings/preferences" },
+    { text: t("settingsPage.privacy"), icon: <EarthLock />, path: "/settings/privacy" },
+    { text: t("settingsPage.preferences"), icon: <Bolt />, path: "/settings/preferences" },
   ];
 
   return (
@@ -84,7 +84,7 @@ const SettingsSidebar = ({
           },
         }}
       >
-        Back to Dashboard
+        {t("settingsPage.backToDashboard")}
       </Button>
 
       <Typography
@@ -104,7 +104,7 @@ const SettingsSidebar = ({
           },
         })}
       >
-        {title}
+        {t("settingsPage.title")}
       </Typography>
       <Box sx={{ flex: 1, overflow: "auto" }}>
         {items.map((item) => (

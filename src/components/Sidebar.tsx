@@ -16,6 +16,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import theme from "../theme";
 import { useSidebarState } from "@/hooks/useSidebarState";
@@ -31,20 +32,21 @@ interface SidebarProps extends Props {
 const Sidebar = ({ onLinkClick, isInDrawer = false }: SidebarProps) => {
   const location = useLocation();
   const { isCollapsed, toggleSidebar } = useSidebarState();
+  const { t } = useTranslation();
 
   const shouldBeCollapsed = !isInDrawer && isCollapsed;
 
   const mainItems = [
-    { text: "Dashboard", icon: <HouseIcon />, path: "/dashboard" },
-    { text: "Tables", icon: <TableChartIcon />, path: "/tables" },
-    { text: "Billing", icon: <CreditCardIcon />, path: "/billing" },
-    { text: "Settings", icon: <BuildIcon />, path: "/settings" },
+    { text: t("sidebar.dashboard"), icon: <HouseIcon />, path: "/dashboard" },
+    { text: t("sidebar.tables"), icon: <TableChartIcon />, path: "/tables" },
+    { text: t("sidebar.billing"), icon: <CreditCardIcon />, path: "/billing" },
+    { text: t("sidebar.settings"), icon: <BuildIcon />, path: "/settings" },
   ];
 
   const accountItems = [
-    { text: "Profile", icon: <PersonIcon />, path: "/profile" },
-    { text: "Sign In", icon: <LoginIcon />, path: "/auth/signin" },
-    { text: "Sign Up", icon: <AssignmentIcon />, path: "/auth/signup" },
+    { text: t("sidebar.profile"), icon: <PersonIcon />, path: "/profile" },
+    { text: t("sidebar.signIn"), icon: <LoginIcon />, path: "/auth/signin" },
+    { text: t("sidebar.signUp"), icon: <AssignmentIcon />, path: "/auth/signup" },
   ];
 
   return (
@@ -72,7 +74,7 @@ const Sidebar = ({ onLinkClick, isInDrawer = false }: SidebarProps) => {
           }}
         >
           <Tooltip
-            title={shouldBeCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            title={shouldBeCollapsed ? t("sidebar.expandSidebar") : t("sidebar.collapseSidebar")}
           >
             <IconButton
               onClick={toggleSidebar}
@@ -179,7 +181,7 @@ const Sidebar = ({ onLinkClick, isInDrawer = false }: SidebarProps) => {
               letterSpacing: "1px",
             }}
           >
-            Account Pages
+            {t("sidebar.accountPages")}
           </Typography>
         )}
 

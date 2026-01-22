@@ -15,6 +15,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   className?: string;
@@ -22,6 +23,7 @@ interface Props {
 
 const NotificationSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Box className={className}>
@@ -35,10 +37,10 @@ const NotificationSettings = ({ className }: Props) => {
         <Stack spacing={3}>
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              Notification Settings
+              {t("notificationSettings.title")}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              Manage how you receive notifications
+              {t("notificationSettings.subtitle")}
             </Typography>
           </Stack>
 
@@ -51,7 +53,7 @@ const NotificationSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Email Notifications
+              {t("notificationSettings.emailNotifications")}
             </Typography>
 
             <Stack spacing={2}>
@@ -73,14 +75,14 @@ const NotificationSettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Account Activity
+                      {t("notificationSettings.accountActivity")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Get notified about important account changes
+                      {t("notificationSettings.accountActivityDesc")}
                     </Typography>
                   </Box>
                 }
@@ -105,14 +107,14 @@ const NotificationSettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Transaction Updates
+                      {t("notificationSettings.transactionUpdates")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Receive updates about your transactions
+                      {t("notificationSettings.transactionUpdatesDesc")}
                     </Typography>
                   </Box>
                 }
@@ -136,14 +138,14 @@ const NotificationSettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Marketing Emails
+                      {t("notificationSettings.marketingEmails")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Receive promotional content and updates
+                      {t("notificationSettings.marketingEmailsDesc")}
                     </Typography>
                   </Box>
                 }
@@ -168,14 +170,14 @@ const NotificationSettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Security Alerts
+                      {t("notificationSettings.securityAlerts")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Get notified about security-related activities
+                      {t("notificationSettings.securityAlertsDesc")}
                     </Typography>
                   </Box>
                 }
@@ -193,7 +195,7 @@ const NotificationSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Push Notifications
+              {t("notificationSettings.pushNotifications")}
             </Typography>
 
             <Stack spacing={2}>
@@ -215,14 +217,14 @@ const NotificationSettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Enable Push Notifications
+                      {t("notificationSettings.enablePush")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Receive real-time push notifications on your device
+                      {t("notificationSettings.enablePushDesc")}
                     </Typography>
                   </Box>
                 }
@@ -247,14 +249,14 @@ const NotificationSettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Sound
+                      {t("notificationSettings.sound")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Play sound for notifications
+                      {t("notificationSettings.soundDesc")}
                     </Typography>
                   </Box>
                 }
@@ -283,7 +285,7 @@ const NotificationSettings = ({ className }: Props) => {
                 },
               }}
             >
-              Save Changes
+              {t("notificationSettings.saveChanges")}
             </Button>
             <Button
               variant="outlined"
@@ -300,7 +302,7 @@ const NotificationSettings = ({ className }: Props) => {
                 },
               }}
             >
-              Cancel
+              {t("notificationSettings.cancel")}
             </Button>
           </Stack>
         </Stack>

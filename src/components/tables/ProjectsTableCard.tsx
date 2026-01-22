@@ -13,11 +13,19 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { PROJECTS_TABLE_CONFIG } from "./projectsTableConfig";
+import { useTranslation } from "react-i18next";
 import TableHeaderCell from "./TableHeaderCell";
 
 const ProjectsTableCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
+
+  const columns = [
+    { id: "companies", label: t("tables.companies"), align: "left" as const },
+    { id: "budget", label: t("tables.budget"), align: "left" as const },
+    { id: "status", label: t("tables.status"), align: "left" as const },
+    { id: "completion", label: t("tables.completion"), align: "left" as const },
+  ];
 
   return (
     <Card
@@ -38,7 +46,7 @@ const ProjectsTableCard = () => {
             color: theme.palette.text.primary,
           }}
         >
-          {PROJECTS_TABLE_CONFIG.title}
+          {t("tables.projects")}
         </Typography>
         <Stack direction="row" spacing={0.75} alignItems="center">
           <Box
@@ -52,7 +60,7 @@ const ProjectsTableCard = () => {
             fontWeight={700}
             color={theme.palette.text.secondary}
           >
-            {PROJECTS_TABLE_CONFIG.subTitle}
+            {t("tables.projectsSubtitle")}
           </Typography>
         </Stack>
       </Stack>
@@ -61,7 +69,7 @@ const ProjectsTableCard = () => {
         <Table sx={{ width: "100%", tableLayout: { xs: "auto", md: "fixed" }, minWidth: { xs: 600, md: "auto" } }}>
           <TableHead sx={{ display: { xs: "none", sm: "table-header-group" } }}>
             <TableRow>
-              {PROJECTS_TABLE_CONFIG.columns.map((column, index) => (
+              {columns.map((column, index) => (
                 <TableHeaderCell
                   key={column.id}
                   label={column.label}

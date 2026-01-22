@@ -10,12 +10,21 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import AuthorRow from "./AuthorRow";
 import TableHeaderCell from "./TableHeaderCell";
-import { AUTHORS_TABLE_CONFIG } from "./authorsTableConfig";
 
 const AuthorsTableCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
+
+  const columns = [
+    { id: "author", label: t("tables.author"), align: "left" as const },
+    { id: "function", label: t("tables.function"), align: "left" as const },
+    { id: "status", label: t("tables.status"), align: "left" as const },
+    { id: "employed", label: t("tables.employed"), align: "left" as const },
+    { id: "action", label: t("tables.action"), align: "right" as const },
+  ];
 
   return (
     <Card
@@ -36,7 +45,7 @@ const AuthorsTableCard = () => {
             color: theme.palette.text.primary,
           }}
         >
-          {AUTHORS_TABLE_CONFIG.title}
+          {t("tables.authorsTable")}
         </Typography>
       </Stack>
 
@@ -44,7 +53,7 @@ const AuthorsTableCard = () => {
         <Table sx={{ width: "100%" }}>
           <TableHead>
             <TableRow>
-              {AUTHORS_TABLE_CONFIG.columns.map((column) => (
+              {columns.map((column) => (
                 <TableHeaderCell
                   key={column.id}
                   label={column.label}

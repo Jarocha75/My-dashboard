@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useTranslation } from "react-i18next";
 import {
   cardStyles,
   typographyStyles,
@@ -29,6 +30,7 @@ interface Props {
 
 const InvoicesCard = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: invoices, isLoading, isError } = useInvoices();
   const deleteInvoice = useDeleteInvoice();
@@ -73,7 +75,7 @@ const InvoicesCard = ({ className }: Props) => {
         {/* Header */}
         <Box sx={containerStyles.flexBetween()}>
           <Typography sx={typographyStyles.cardTitle(theme)}>
-            Invoices
+            {t("billing.invoices")}
           </Typography>
           <Button
             variant="contained"
@@ -94,7 +96,7 @@ const InvoicesCard = ({ className }: Props) => {
               },
             }}
           >
-            View All
+            {t("billing.viewAll")}
           </Button>
         </Box>
 
@@ -120,7 +122,7 @@ const InvoicesCard = ({ className }: Props) => {
               color: "#F5365C",
             }}
           >
-            Nepodarilo sa načítať faktúry
+            {t("billing.errorLoadingInvoices")}
           </Typography>
         )}
 
@@ -132,7 +134,7 @@ const InvoicesCard = ({ className }: Props) => {
               py: 4,
             }}
           >
-            Žiadne faktúry
+            {t("billing.noInvoices")}
           </Typography>
         )}
 
@@ -219,7 +221,7 @@ const InvoicesCard = ({ className }: Props) => {
                           textTransform: "uppercase",
                         }}
                       >
-                        PDF
+                        {t("billing.pdf")}
                       </Typography>
                     </Box>
                     <IconButton

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useTranslation } from "react-i18next";
 import type { Billing } from "@/data/billingData";
 import useDeleteBilling from "@/hooks/billings/useDeleteBilling";
 import ConfirmDeleteDialog from "../common/ConfirmDeleteDialog";
@@ -26,6 +27,7 @@ interface Props {
 
 const BillingMiniCard = ({ billing, onEditClick }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const deleteMutation = useDeleteBilling();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -111,7 +113,7 @@ const BillingMiniCard = ({ billing, onEditClick }: Props) => {
               },
             })}
           >
-            Delete
+            {t("billing.delete")}
           </Typography>
 
           <IconButton
@@ -136,14 +138,14 @@ const BillingMiniCard = ({ billing, onEditClick }: Props) => {
               },
             })}
           >
-            Edit
+            {t("billing.edit")}
           </Typography>
         </Stack>
       </Stack>
       <ConfirmDeleteDialog
         open={deleteDialogOpen}
-        message={`Naozaj chcete zmazať billing pre ${billing.fullName}?`}
-        cancelText="Zrušiť"
+        message={t("billing.confirmDelete", { name: billing.fullName })}
+        cancelText={t("billing.cancel")}
         onConfirm={handleDeleteConfirm}
         onCancel={handleDeleteCancel}
         isLoading={deleteMutation.isPending}

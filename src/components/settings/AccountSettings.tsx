@@ -14,6 +14,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -24,19 +25,13 @@ import { useUpdateUserProfile } from "@/hooks/profile/useUpdateUserProfile";
 import { useUserProfile } from "@/hooks/profile/useUserProfile";
 import { useCallback, useEffect } from "react";
 
-const ACCOUNT_CONTENT = {
-  title: "Account Settings",
-  subTitle: "Manage your account information and security",
-  infoAccount: "Account Information",
-  profileInfo: "Profile Details",
-};
-
 interface Props {
   className?: string;
 }
 
 const AccountSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const { data: userProfile, isLoading, isError } = useUserProfile();
   const updateProfile = useUpdateUserProfile();
 
@@ -80,7 +75,7 @@ const AccountSettings = ({ className }: Props) => {
             p: spacing.cardPadding,
           })}
         >
-          <Typography>Načítavam...</Typography>
+          <Typography>{t("accountSettings.loading")}</Typography>
         </Card>
       </Box>
     );
@@ -94,7 +89,7 @@ const AccountSettings = ({ className }: Props) => {
             p: spacing.cardPadding,
           })}
         >
-          <Typography color="error">Chyba pri načítaní profilu</Typography>
+          <Typography color="error">{t("accountSettings.errorLoading")}</Typography>
         </Card>
       </Box>
     );
@@ -112,10 +107,10 @@ const AccountSettings = ({ className }: Props) => {
         <Stack spacing={3}>
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              {ACCOUNT_CONTENT.title}
+              {t("accountSettings.title")}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              {ACCOUNT_CONTENT.subTitle}
+              {t("accountSettings.subtitle")}
             </Typography>
           </Stack>
 
@@ -128,11 +123,11 @@ const AccountSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              {ACCOUNT_CONTENT.infoAccount}
+              {t("accountSettings.accountInformation")}
             </Typography>
 
             <TextField
-              label="Email"
+              label={t("accountSettings.email")}
               value={userProfile?.email || ""}
               disabled
               fullWidth
@@ -157,7 +152,7 @@ const AccountSettings = ({ className }: Props) => {
             />
 
             <TextField
-              label="User ID"
+              label={t("accountSettings.userId")}
               value={userProfile?.id || ""}
               disabled
               fullWidth
@@ -192,12 +187,12 @@ const AccountSettings = ({ className }: Props) => {
                   fontSize: 16,
                 })}
               >
-                {ACCOUNT_CONTENT.profileInfo}
+                {t("accountSettings.profileDetails")}
               </Typography>
 
               <TextField
                 {...register("name")}
-                label="Name"
+                label={t("accountSettings.name")}
                 error={!!errors.name}
                 helperText={errors.name?.message}
                 fullWidth
@@ -221,7 +216,7 @@ const AccountSettings = ({ className }: Props) => {
 
               <TextField
                 {...register("userName")}
-                label="Username"
+                label={t("accountSettings.username")}
                 error={!!errors.userName}
                 helperText={errors.userName?.message}
                 fullWidth
@@ -245,7 +240,7 @@ const AccountSettings = ({ className }: Props) => {
 
               <TextField
                 {...register("phoneNumber")}
-                label="Phone Number"
+                label={t("accountSettings.phoneNumber")}
                 error={!!errors.phoneNumber}
                 helperText={errors.phoneNumber?.message}
                 fullWidth
@@ -291,7 +286,7 @@ const AccountSettings = ({ className }: Props) => {
                   },
                 }}
               >
-                {updateProfile.isPending ? "Ukladá sa..." : "Save Changes"}
+                {updateProfile.isPending ? t("accountSettings.saving") : t("accountSettings.saveChanges")}
               </Button>
               <Button
                 onClick={handleCancel}
@@ -310,7 +305,7 @@ const AccountSettings = ({ className }: Props) => {
                   },
                 }}
               >
-                Cancel
+                {t("accountSettings.cancel")}
               </Button>
             </Stack>
           </Box>

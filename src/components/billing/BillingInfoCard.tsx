@@ -5,6 +5,7 @@ import {
   typographyStyles,
 } from "@/styles/commonStyles";
 import { Alert, Card, Stack, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import BillingMiniCard from "./BillingMiniCard";
 import BillingInfoSkeleton from "./BillingInfoSkeleton";
 import EditBillingDialog from "./EditBillingDialog";
@@ -12,16 +13,13 @@ import { type Billing } from "@/data/billingData";
 import useBillings from "@/hooks/billings/useBillings";
 import { useState } from "react";
 
-const BILLING_CONTENT = {
-  title: "Billing Information",
-};
-
 interface Props {
   className: string;
 }
 
 const BillingInfoCard = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const { data: billings, isLoading, isError } = useBillings();
   const [editDialoglOpen, setEditDialogOpen] = useState(false);
   const [selectedBilling, setSelectedBilling] = useState<Billing | null>(null);
@@ -47,14 +45,14 @@ const BillingInfoCard = ({ className }: Props) => {
         })}
       >
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          {BILLING_CONTENT.title}
+          {t("billing.billingInformation")}
         </Typography>
 
         {isLoading && <BillingInfoSkeleton className={className} />}
 
         {isError && (
           <Alert severity="error" sx={{ mt: 2 }}>
-            Chyba pri načítaní dát.
+            {t("billing.errorLoadingData")}
           </Alert>
         )}
 
@@ -65,7 +63,7 @@ const BillingInfoCard = ({ className }: Props) => {
               textAlign: "center",
             })}
           >
-            Žiadne billing informácie.
+            {t("billing.noData")}
           </Typography>
         )}
 

@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { useTranslation } from "react-i18next";
 import { cardStyles, typographyStyles, mergeSx } from "@/styles/commonStyles";
 
 interface PaymentMethod {
@@ -39,6 +40,7 @@ const PaymentMethodCard = ({
   className,
 }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const getCardIcon = (type: "mastercard" | "visa") => {
     if (type === "mastercard") {
@@ -121,7 +123,7 @@ const PaymentMethodCard = ({
           }}
         >
           <Typography sx={typographyStyles.cardTitle(theme)}>
-            Payment Method
+            {t("billing.paymentMethod")}
           </Typography>
           <Button
             variant="contained"
@@ -141,7 +143,7 @@ const PaymentMethodCard = ({
               },
             }}
           >
-            Add a New Card
+            {t("billing.addNewCard")}
           </Button>
         </Box>
 
