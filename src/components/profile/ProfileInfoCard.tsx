@@ -1,6 +1,6 @@
 import { Card, Stack, Typography, useTheme } from "@mui/material";
 import SocialMediaLink, { type SocialMediaItem } from "./SocialMediaLink";
-import { useUserProfile } from "@/hooks/useUserProfile";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
 
 interface Props {
   title?: string;

@@ -1,6 +1,6 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
 import ImageWelcome from "@/assets/image/ImageWelcome02.png";
-import { useUserProfile } from "@/hooks/useUserProfile";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
 
 interface Props {
   userName?: string;

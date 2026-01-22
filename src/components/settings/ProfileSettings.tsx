@@ -1,6 +1,6 @@
-import { useUpdateProfileSettings } from "@/hooks/useUpdateProfileSettings";
-import { useUploadAvatar } from "@/hooks/useUploadAvatar";
-import { useUserProfile } from "@/hooks/useUserProfile";
+import { useUpdateProfileSettings } from "@/hooks/profile/useUpdateProfileSettings";
+import { useUploadAvatar } from "@/hooks/profile/useUploadAvatar";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
 import {
   cardStyles,
   mergeSx,
@@ -75,7 +75,7 @@ const ProfileSettings = ({ className }: Props) => {
       github: userProfile?.github || "",
       whatsup: userProfile?.whatsup || "",
     }),
-    [userProfile]
+    [userProfile],
   );
 
   useEffect(() => {
@@ -186,7 +186,10 @@ const ProfileSettings = ({ className }: Props) => {
                     "linear-gradient(135deg, #3A7BFF 0%, #0066FF 100%)",
                 }}
               >
-                {getInitials(userProfile?.name ?? undefined, userProfile?.displayName ?? undefined)}
+                {getInitials(
+                  userProfile?.name ?? undefined,
+                  userProfile?.displayName ?? undefined,
+                )}
               </Avatar>
               <input
                 type="file"

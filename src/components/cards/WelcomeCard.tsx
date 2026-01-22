@@ -9,7 +9,7 @@ import {
   spacing,
   typographyStyles,
 } from "@/styles/commonStyles";
-import { useUserProfile } from "@/hooks/useUserProfile";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
 
 const CARD_CONTENT = {
   title: "Welcome back",
@@ -87,7 +87,7 @@ const WelcomeCard = () => {
               mt: "auto",
               cursor: "pointer",
             },
-            hoverEffects.opacity()
+            hoverEffects.opacity(),
           )}
         >
           <Typography sx={typographyStyles.cardLabel(theme)}>

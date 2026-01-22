@@ -20,8 +20,8 @@ import {
   accountSettingsSchema,
   type AccountSettingsFormData,
 } from "@/validation/accountSettings";
-import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
-import { useUserProfile } from "@/hooks/useUserProfile";
+import { useUpdateUserProfile } from "@/hooks/profile/useUpdateUserProfile";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
 import { useCallback, useEffect } from "react";
 
 const ACCOUNT_CONTENT = {
@@ -55,7 +55,7 @@ const AccountSettings = ({ className }: Props) => {
       userName: userProfile?.userName || "",
       phoneNumber: userProfile?.phoneNumber || "",
     }),
-    [userProfile]
+    [userProfile],
   );
 
   useEffect(() => {

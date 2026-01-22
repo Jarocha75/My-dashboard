@@ -13,8 +13,8 @@ import headerLogo from "@/assets/logos/headerLogo.svg";
 import { Codepen, Pencil, Users, Wrench } from "lucide-react";
 import { useState, useRef } from "react";
 import { useAuth } from "@/context/useAuth";
-import { useUserProfile } from "@/hooks/useUserProfile";
-import { useUploadAvatar } from "@/hooks/useUploadAvatar";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
+import { useUploadAvatar } from "@/hooks/profile/useUploadAvatar";
 
 interface ProfileHeaderProps {
   name?: string;

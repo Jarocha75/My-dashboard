@@ -3,8 +3,8 @@ import AuthFooter from "@/components/auth/AuthFooter";
 import GlassCard from "@/components/auth/GlassCard";
 import { useAuth } from "@/context/useAuth";
 import { facebookLoginRequest, googleLoginRequest } from "@/services/auth";
-import { useFacebookLogin } from "@/hooks/useFacebookLogin";
-import { useGoogleLogin } from "@/hooks/useGoogleLogin";
+import { useFacebookLogin } from "@/hooks/auth/useFacebookLogin";
+import { useGoogleLogin } from "@/hooks/auth/useGoogleLogin";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -25,7 +25,9 @@ const SignUp = () => {
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
-      toast.error(error.message || "Prihlásenie cez Facebook zlyhalo. Skús to znova.");
+      toast.error(
+        error.message || "Prihlásenie cez Facebook zlyhalo. Skús to znova.",
+      );
     },
   });
 
@@ -37,7 +39,9 @@ const SignUp = () => {
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
-      toast.error(error.message || "Prihlásenie cez Google zlyhalo. Skús to znova.");
+      toast.error(
+        error.message || "Prihlásenie cez Google zlyhalo. Skús to znova.",
+      );
     },
   });
 
