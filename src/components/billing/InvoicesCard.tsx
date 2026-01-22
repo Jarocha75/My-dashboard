@@ -19,6 +19,9 @@ import {
 } from "@/styles/commonStyles";
 import useInvoices from "@/hooks/invoices/useInvoices";
 import useDeleteInvoice from "@/hooks/invoices/useDeleteInvoice";
+import { useNavigate } from "react-router-dom";
+import { generateInvoicePdf } from "@/utils/generateInvoicePdf";
+import type { Invoice } from "@/types/invoices";
 
 interface Props {
   className?: string;
@@ -26,11 +29,16 @@ interface Props {
 
 const InvoicesCard = ({ className }: Props) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const { data: invoices, isLoading, isError } = useInvoices();
   const deleteInvoice = useDeleteInvoice();
 
   const handleDelete = (id: number) => {
     deleteInvoice.mutate(id);
+  };
+
+  const handleViewPdf = (invoice: Invoice) => {
+    generateInvoicePdf(invoice);
   };
 
   const getStatusColor = (status: string) => {
@@ -70,6 +78,7 @@ const InvoicesCard = ({ className }: Props) => {
           <Button
             variant="contained"
             size="small"
+            onClick={() => navigate("/invoices")}
             sx={{
               background: "linear-gradient(135deg, #5E8EFF 0%, #3d5afe 100%)",
               borderRadius: "8px",
@@ -190,6 +199,7 @@ const InvoicesCard = ({ className }: Props) => {
                       {invoice.amount}
                     </Typography>
                     <Box
+                      onClick={() => handleViewPdf(invoice)}
                       sx={{
                         display: "flex",
                         alignItems: "center",

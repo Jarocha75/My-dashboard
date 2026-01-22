@@ -7,6 +7,7 @@ import AuthLayout from "../../layouts/AuthLayout";
 import SignUp from "../../pages/auth/SignUp";
 import Table from "../../pages/Table";
 import Billing from "../../pages/billing/Billing";
+import Invoices from "../../pages/billing/Invoices";
 import SettingsLayout from "../../layouts/SettingsLayout";
 import AccountSettings from "../settings/AccountSettings";
 import ProfileSettings from "../settings/ProfileSettings";
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
           { path: "profile", element: <Profile /> },
           { path: "tables", element: <Table /> },
           { path: "billing", element: <Billing /> },
+          { path: "invoices", element: <Invoices /> },
           { path: "search", element: <Search /> },
         ],
       },
