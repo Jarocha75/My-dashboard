@@ -23,23 +23,13 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import ProjectRow from "../projects/ProjectRow";
 import {
   cardStyles,
   typographyStyles,
   mergeSx,
 } from "@/styles/commonStyles";
-
-const CARD_CONTENT = {
-  title: "Projects",
-  subtitle: "30 done this month",
-  tableHeaders: {
-    companies: "Companies",
-    members: "Members",
-    budget: "Budget",
-    completion: "Completion",
-  },
-};
 
 const projects = [
   {
@@ -88,6 +78,7 @@ const projects = [
 
 const ProjectsCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -110,14 +101,14 @@ const ProjectsCard = () => {
       {/* Header */}
       <Stack mb={3}>
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          {CARD_CONTENT.title}
+          {t("projectsCard.title")}
         </Typography>
         <Typography
           sx={mergeSx(typographyStyles.bodySecondary(theme), {
             color: "#38E68F",
           })}
         >
-          ● {CARD_CONTENT.subtitle}
+          ● {t("projectsCard.subtitle")}
         </Typography>
       </Stack>
 
@@ -137,10 +128,10 @@ const ProjectsCard = () => {
         >
           <TableHead>
             <TableRow>
-              <TableCell>{CARD_CONTENT.tableHeaders.companies}</TableCell>
-              <TableCell>{CARD_CONTENT.tableHeaders.members}</TableCell>
-              <TableCell>{CARD_CONTENT.tableHeaders.budget}</TableCell>
-              <TableCell>{CARD_CONTENT.tableHeaders.completion}</TableCell>
+              <TableCell>{t("projectsCard.companies")}</TableCell>
+              <TableCell>{t("projectsCard.members")}</TableCell>
+              <TableCell>{t("projectsCard.budget")}</TableCell>
+              <TableCell>{t("projectsCard.completion")}</TableCell>
             </TableRow>
           </TableHead>
 

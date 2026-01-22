@@ -1,0 +1,109 @@
+{
+  "navbar": {
+    "search": "Search...",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "pages": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "tables": "Tables",
+    "billing": "Billing",
+    "rtl": "RTL"
+  },
+  "breadcrumbs": {
+    "dashboardProfile": "Dashboard / Profile",
+    "dashboardTables": "Dashboard / Tables",
+    "dashboardBilling": "Dashboard / Billing",
+    "dashboardRtl": "Dashboard / RTL"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "tables": "Tables",
+    "billing": "Billing",
+    "settings": "Settings",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "settings": {
+    "preferences": "Preferences",
+    "customizeExperience": "Customize your application experience",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "systemDefault": "System Default",
+    "compactMode": "Compact Mode",
+    "compactModeDesc": "Reduce spacing for a more compact layout",
+    "languageRegion": "Language & Region",
+    "language": "Language",
+    "timezone": "Timezone",
+    "dateFormat": "Date Format",
+    "accessibility": "Accessibility",
+    "reducedMotion": "Reduced Motion",
+    "reducedMotionDesc": "Minimize animations and transitions",
+    "highContrast": "High Contrast",
+    "highContrastDesc": "Increase contrast for better visibility",
+    "fontSize": "Font Size",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "extraLarge": "Extra Large",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel"
+  },
+  "languages": {
+    "en": "English",
+    "sk": "Slovenčina"
+  },
+  "welcomeCard": {
+    "welcomeBack": "Welcome back",
+    "tapToRecord": "Tap to record",
+    "gladToSeeYou": "Glad to see you again!",
+    "askMeAnything": "Ask me anything."
+  },
+  "satisfactionRateCard": {
+    "satisfactionRate": "Satisfaction Rate",
+    "fromAllProjects": "From all projects",
+    "basedOnLikes": "Based on likes"
+  },
+  "analyticsCard": {
+    "todaysMoney": "Today's Money",
+    "todaysUsers": "Today's Users",
+    "newClients": "New Clients",
+    "totalSales": "Total Sales"
+  },
+  "salesOverviewCard": {
+    "title": "Sales overview",
+    "subtitle": "(+5) more in 2021"
+  },
+  "activeUsersCard": {
+    "title": "Active Users",
+    "subtitle": "+23% than last week",
+    "users": "Users",
+    "clicks": "Clicks",
+    "sales": "Sales",
+    "items": "Items"
+  },
+  "projectsCard": {
+    "title": "Projects",
+    "subtitle": "30 done this month",
+    "companies": "Companies",
+    "members": "Members",
+    "budget": "Budget",
+    "completion": "Completion"
+  },
+  "referralTrackingCard": {
+    "title": "Referral Tracking",
+    "invited": "Invited",
+    "people": "people",
+    "bonus": "Bonus",
+    "safety": "Safety",
+    "totalScore": "Total Score"
+  },
+  "ordersOverviewCard": {
+    "title": "Orders Overview",
+    "subtitle": "+ 30% this month"
+  }
+}

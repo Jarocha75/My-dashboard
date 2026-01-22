@@ -16,7 +16,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import LanguageSwitcher from "./LanguageSwitcher";
 import Sidebar from "./Sidebar";
 import { useAuth } from "@/context/useAuth";
 
@@ -24,18 +26,19 @@ const Navbar = () => {
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
 
   const getPageTitle = () => {
     const path = location.pathname;
-    if (path === "/" || path === "/dashboard") return "Dashboard";
-    if (path === "/profile") return "Dashboard / Profile";
-    if (path === "/tables") return "Dashboard / Tables";
-    if (path === "/billing") return "Dashboard / Billing";
-    if (path === "/rtl") return "Dashboard / RTL";
-    return "Dashboard";
+    if (path === "/" || path === "/dashboard") return t("pages.dashboard");
+    if (path === "/profile") return t("breadcrumbs.dashboardProfile");
+    if (path === "/tables") return t("breadcrumbs.dashboardTables");
+    if (path === "/billing") return t("breadcrumbs.dashboardBilling");
+    if (path === "/rtl") return t("breadcrumbs.dashboardRtl");
+    return t("pages.dashboard");
   };
 
   const handleSignInClick = () => {
@@ -105,7 +108,7 @@ const Navbar = () => {
             >
               <SearchIcon sx={{ color: "white", fontSize: 18, mr: 1 }} />
               <InputBase
-                placeholder="Search..."
+                placeholder={t("navbar.search")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleSearch}
@@ -148,7 +151,7 @@ const Navbar = () => {
                     display: { xs: "none", md: "block" },
                   }}
                 >
-                  Odhlásiť sa
+                  {t("navbar.signOut")}
                 </Button>
               </Box>
             ) : (
@@ -172,10 +175,14 @@ const Navbar = () => {
                     opacity: 0.9,
                   }}
                 >
-                  Sign In
+                  {t("navbar.signIn")}
                 </Typography>
               </Box>
             )}
+
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <LanguageSwitcher />
+            </Box>
 
             <IconButton
               sx={{

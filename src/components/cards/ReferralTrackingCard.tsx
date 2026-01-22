@@ -1,4 +1,5 @@
 import { Card, Typography, useTheme, IconButton, Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ArcProgress from "../common/ArcProgress";
 import { formatNumberShort } from "@/utils/formatNumber";
@@ -8,27 +9,15 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
-const CARD_CONTENT = {
-  title: "Referral Tracking",
-  invited: {
-    label: "Invited",
-    value: 145,
-    suffix: "people",
-  },
-  bonus: {
-    label: "Bonus",
-    value: 1465,
-    prefix: "$",
-  },
-  score: {
-    label: "Safety",
-    value: 9.3,
-    sublabel: "Total Score",
-  },
+const CARD_DATA = {
+  invited: { value: 145 },
+  bonus: { value: 1465, prefix: "$" },
+  score: { value: 9.3 },
 };
 
 const ReferralTrackingCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const labelStyle = {
     fontSize: 22,
@@ -74,7 +63,7 @@ const ReferralTrackingCard = () => {
         pr={{ md: 2 }}
       >
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          {CARD_CONTENT.title}
+          {t("referralTrackingCard.title")}
         </Typography>
 
         <Stack
@@ -86,10 +75,10 @@ const ReferralTrackingCard = () => {
           }}
         >
           <Typography sx={typographyStyles.bodySecondary(theme)}>
-            {CARD_CONTENT.invited.label}
+            {t("referralTrackingCard.invited")}
           </Typography>
           <Typography sx={labelStyle}>
-            {formatNumberShort(CARD_CONTENT.invited.value)} {CARD_CONTENT.invited.suffix}
+            {formatNumberShort(CARD_DATA.invited.value)} {t("referralTrackingCard.people")}
           </Typography>
         </Stack>
 
@@ -102,10 +91,10 @@ const ReferralTrackingCard = () => {
           }}
         >
           <Typography sx={typographyStyles.bodySecondary(theme)}>
-            {CARD_CONTENT.bonus.label}
+            {t("referralTrackingCard.bonus")}
           </Typography>
           <Typography sx={labelStyle}>
-            {CARD_CONTENT.bonus.prefix}{formatNumberShort(CARD_CONTENT.bonus.value)}
+            {CARD_DATA.bonus.prefix}{formatNumberShort(CARD_DATA.bonus.value)}
           </Typography>
         </Stack>
       </Stack>
@@ -119,7 +108,7 @@ const ReferralTrackingCard = () => {
         sx={{ position: "relative" }}
       >
         <ArcProgress
-          value={CARD_CONTENT.score.value * 10}
+          value={CARD_DATA.score.value * 10}
           size={{ xs: 160, md: 220 }}
           thickness={12}
           startAngle={200}
@@ -138,13 +127,13 @@ const ReferralTrackingCard = () => {
           }}
         >
           <Typography sx={typographyStyles.bodySecondary(theme)}>
-            {CARD_CONTENT.score.label}
+            {t("referralTrackingCard.safety")}
           </Typography>
 
-          <Typography sx={valueStyle}>{CARD_CONTENT.score.value}</Typography>
+          <Typography sx={valueStyle}>{CARD_DATA.score.value}</Typography>
 
           <Typography sx={typographyStyles.bodySecondary(theme)}>
-            {CARD_CONTENT.score.sublabel}
+            {t("referralTrackingCard.totalScore")}
           </Typography>
         </Stack>
       </Stack>

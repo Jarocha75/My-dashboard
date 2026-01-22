@@ -1,4 +1,5 @@
 import { Box, Card, Stack, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import ActiveUsersChart from "../common/ActiveUsersChart";
 import { Rocket, ShoppingCart, WalletMinimal, Wrench } from "lucide-react";
 import StatProgress from "../common/StatProgress";
@@ -9,19 +10,16 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
-const CARD_CONTENT = {
-  title: "Active Users",
-  subtitle: "+23% than last week",
-  stats: {
-    users: { value: 1245, max: 2000, label: "Users" },
-    clicks: { value: 2_420_430, max: 5_000_000, label: "Clicks" },
-    sales: { value: 2400, max: 5000, label: "Sales" },
-    items: { value: 320, max: 1000, label: "Items" },
-  },
+const STATS_DATA = {
+  users: { value: 1245, max: 2000 },
+  clicks: { value: 2_420_430, max: 5_000_000 },
+  sales: { value: 2400, max: 5000 },
+  items: { value: 320, max: 1000 },
 };
 
 const ActiveUsersCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const labelStyle = {
     fontSize: 14,
@@ -58,7 +56,7 @@ const ActiveUsersCard = () => {
       <Stack direction="column" spacing={3} mt={1}>
         <Stack spacing={0.5}>
           <Typography sx={typographyStyles.cardTitle(theme)}>
-            {CARD_CONTENT.title}
+            {t("activeUsersCard.title")}
           </Typography>
           <Typography
             sx={mergeSx(typographyStyles.bodySecondary(theme), {
@@ -67,7 +65,7 @@ const ActiveUsersCard = () => {
               fontWeight: 500,
             })}
           >
-            {CARD_CONTENT.subtitle}
+            {t("activeUsersCard.subtitle")}
           </Typography>
         </Stack>
 
@@ -85,14 +83,14 @@ const ActiveUsersCard = () => {
           >
             <Stack direction={"row"} spacing={1} alignItems="center">
               <WalletMinimal size={25} color={theme.palette.text.primary} />
-              <Typography sx={labelStyle}>{CARD_CONTENT.stats.users.label}</Typography>
+              <Typography sx={labelStyle}>{t("activeUsersCard.users")}</Typography>
             </Stack>
 
             <Stack spacing={1} alignItems="flex-start">
               <Typography sx={valueStyle}>
-                {formatNumberShort(CARD_CONTENT.stats.users.value)}
+                {formatNumberShort(STATS_DATA.users.value)}
               </Typography>
-              <StatProgress value={CARD_CONTENT.stats.users.value} max={CARD_CONTENT.stats.users.max} />
+              <StatProgress value={STATS_DATA.users.value} max={STATS_DATA.users.max} />
             </Stack>
           </Stack>
 
@@ -104,14 +102,14 @@ const ActiveUsersCard = () => {
           >
             <Stack direction={"row"} spacing={1}>
               <Rocket size={25} color={theme.palette.text.primary} />
-              <Typography sx={labelStyle}>{CARD_CONTENT.stats.clicks.label}</Typography>
+              <Typography sx={labelStyle}>{t("activeUsersCard.clicks")}</Typography>
             </Stack>
 
             <Stack spacing={1} alignItems="flex-start">
               <Typography sx={{ ...valueStyle, fontSize: 18 }}>
-                {formatNumberShort(CARD_CONTENT.stats.clicks.value)}
+                {formatNumberShort(STATS_DATA.clicks.value)}
               </Typography>
-              <StatProgress value={CARD_CONTENT.stats.clicks.value} max={CARD_CONTENT.stats.clicks.max} />
+              <StatProgress value={STATS_DATA.clicks.value} max={STATS_DATA.clicks.max} />
             </Stack>
           </Stack>
 
@@ -123,14 +121,14 @@ const ActiveUsersCard = () => {
           >
             <Stack direction={"row"} spacing={1}>
               <ShoppingCart size={25} color={theme.palette.text.primary} />
-              <Typography sx={labelStyle}>{CARD_CONTENT.stats.sales.label}</Typography>
+              <Typography sx={labelStyle}>{t("activeUsersCard.sales")}</Typography>
             </Stack>
 
             <Stack spacing={1} alignItems="flex-start">
               <Typography sx={{ ...valueStyle, fontSize: 18 }}>
-                {formatNumberShort(CARD_CONTENT.stats.sales.value)}
+                {formatNumberShort(STATS_DATA.sales.value)}
               </Typography>
-              <StatProgress value={CARD_CONTENT.stats.sales.value} max={CARD_CONTENT.stats.sales.max} />
+              <StatProgress value={STATS_DATA.sales.value} max={STATS_DATA.sales.max} />
             </Stack>
           </Stack>
 
@@ -142,14 +140,14 @@ const ActiveUsersCard = () => {
           >
             <Stack direction={"row"} spacing={1}>
               <Wrench size={25} color={theme.palette.text.primary} />
-              <Typography sx={labelStyle}>{CARD_CONTENT.stats.items.label}</Typography>
+              <Typography sx={labelStyle}>{t("activeUsersCard.items")}</Typography>
             </Stack>
 
             <Stack spacing={1} alignItems="flex-start">
               <Typography sx={{ ...valueStyle, fontSize: 18 }}>
-                {CARD_CONTENT.stats.items.value.toLocaleString()}
+                {STATS_DATA.items.value.toLocaleString()}
               </Typography>
-              <StatProgress value={CARD_CONTENT.stats.items.value} max={CARD_CONTENT.stats.items.max} />
+              <StatProgress value={STATS_DATA.items.value} max={STATS_DATA.items.max} />
             </Stack>
           </Stack>
         </Stack>

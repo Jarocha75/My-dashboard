@@ -1,4 +1,5 @@
 import { Card, Typography, useTheme, Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import SalesOverviewChart from "../common/SalesOverviewChart";
 import {
   cardStyles,
@@ -6,13 +7,9 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
-const CARD_CONTENT = {
-  title: "Sales overview",
-  subtitle: "(+5) more in 2021",
-};
-
 const SalesOverviewCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -24,7 +21,7 @@ const SalesOverviewCard = () => {
       })}
     >
       <Typography sx={typographyStyles.cardTitle(theme)}>
-        {CARD_CONTENT.title}
+        {t("salesOverviewCard.title")}
       </Typography>
 
       <Typography
@@ -34,7 +31,7 @@ const SalesOverviewCard = () => {
           fontWeight: 500,
         })}
       >
-        {CARD_CONTENT.subtitle}
+        {t("salesOverviewCard.subtitle")}
       </Typography>
 
       <Box mt={3} minHeight={320}>

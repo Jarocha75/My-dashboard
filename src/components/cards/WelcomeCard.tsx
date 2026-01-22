@@ -10,16 +10,14 @@ import {
   typographyStyles,
 } from "@/styles/commonStyles";
 import { useUserProfile } from "@/hooks/profile/useUserProfile";
+import { useTranslation } from "react-i18next";
 
-const CARD_CONTENT = {
-  title: "Welcome back",
-  text: "Tap to record",
-};
 
 const WelcomeCard = () => {
   const theme = useTheme();
   const { data: profile } = useUserProfile();
   const name = profile?.name || profile?.displayName || "User";
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -64,7 +62,7 @@ const WelcomeCard = () => {
         <Typography
           sx={mergeSx(typographyStyles.bodySecondary(theme), { mb: 1 })}
         >
-          {CARD_CONTENT.title}
+          {t("welcomeCard.welcomeBack")}
         </Typography>
 
         <Typography sx={typographyStyles.valueDisplay(theme)}>
@@ -74,8 +72,8 @@ const WelcomeCard = () => {
         <Typography
           sx={mergeSx(typographyStyles.bodyPrimary(theme), { mt: 3 })}
         >
-          Glad to see you again!
-          <br /> Ask me anything.
+          {t("welcomeCard.gladToSeeYou")}
+          <br /> {t("welcomeCard.askMeAnything")}
         </Typography>
 
         <Box
@@ -91,7 +89,7 @@ const WelcomeCard = () => {
           )}
         >
           <Typography sx={typographyStyles.cardLabel(theme)}>
-            {CARD_CONTENT.text}
+            {t("welcomeCard.tapToRecord")}
           </Typography>
 
           <Box

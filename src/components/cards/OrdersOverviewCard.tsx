@@ -1,4 +1,5 @@
 import { Card, List, Stack, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import OrderRow from "../projects/OrderRow";
 import { ordersData } from "@/data/ordersData";
 import {
@@ -7,13 +8,9 @@ import {
   mergeSx,
 } from "@/styles/commonStyles";
 
-const CARD_CONTENT = {
-  title: "Orders Overview",
-  subtitle: "+ 30% this month",
-};
-
 const OrdersOverviewCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -24,7 +21,7 @@ const OrdersOverviewCard = () => {
     >
       <Stack mb={3}>
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          {CARD_CONTENT.title}
+          {t("ordersOverviewCard.title")}
         </Typography>
         <Typography
           sx={mergeSx(typographyStyles.bodySecondary(theme), {
@@ -33,7 +30,7 @@ const OrdersOverviewCard = () => {
             fontWeight: 500,
           })}
         >
-          {CARD_CONTENT.subtitle}
+          {t("ordersOverviewCard.subtitle")}
         </Typography>
       </Stack>
 

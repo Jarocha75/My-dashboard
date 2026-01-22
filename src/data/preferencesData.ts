@@ -32,9 +32,6 @@ export const themeOptions: ThemeOption[] = [
 export const languageOptions: LanguageOption[] = [
   { value: "en", label: "English" },
   { value: "sk", label: "Slovenčina" },
-  { value: "cs", label: "Čeština" },
-  { value: "de", label: "Deutsch" },
-  { value: "fr", label: "Français" },
 ];
 
 export const timezoneOptions: TimezoneOption[] = [

@@ -1,0 +1,109 @@
+{
+  "navbar": {
+    "search": "Hľadať...",
+    "signIn": "Prihlásiť sa",
+    "signOut": "Odhlásiť sa"
+  },
+  "pages": {
+    "dashboard": "Prehľad",
+    "profile": "Profil",
+    "tables": "Tabuľky",
+    "billing": "Fakturácia",
+    "rtl": "RTL"
+  },
+  "breadcrumbs": {
+    "dashboardProfile": "Prehľad / Profil",
+    "dashboardTables": "Prehľad / Tabuľky",
+    "dashboardBilling": "Prehľad / Fakturácia",
+    "dashboardRtl": "Prehľad / RTL"
+  },
+  "sidebar": {
+    "dashboard": "Prehľad",
+    "tables": "Tabuľky",
+    "billing": "Fakturácia",
+    "settings": "Nastavenia",
+    "profile": "Profil",
+    "signIn": "Prihlásiť sa",
+    "signUp": "Registrácia"
+  },
+  "settings": {
+    "preferences": "Preferencie",
+    "customizeExperience": "Prispôsobte si aplikáciu podľa seba",
+    "appearance": "Vzhľad",
+    "theme": "Téma",
+    "light": "Svetlá",
+    "dark": "Tmavá",
+    "systemDefault": "Predvolená systémová",
+    "compactMode": "Kompaktný režim",
+    "compactModeDesc": "Zmenšiť medzery pre kompaktnejší vzhľad",
+    "languageRegion": "Jazyk a región",
+    "language": "Jazyk",
+    "timezone": "Časové pásmo",
+    "dateFormat": "Formát dátumu",
+    "accessibility": "Prístupnosť",
+    "reducedMotion": "Znížený pohyb",
+    "reducedMotionDesc": "Minimalizovať animácie a prechody",
+    "highContrast": "Vysoký kontrast",
+    "highContrastDesc": "Zvýšiť kontrast pre lepšiu viditeľnosť",
+    "fontSize": "Veľkosť písma",
+    "small": "Malé",
+    "medium": "Stredné",
+    "large": "Veľké",
+    "extraLarge": "Extra veľké",
+    "saveChanges": "Uložiť zmeny",
+    "cancel": "Zrušiť"
+  },
+  "languages": {
+    "en": "English",
+    "sk": "Slovenčina"
+  },
+  "welcomeCard": {
+    "welcomeBack": "Vitaj späť",
+    "tapToRecord": "Ťukni pre nahrávanie",
+    "gladToSeeYou": "Rád ťa opäť vidím!",
+    "askMeAnything": "Opýtaj sa ma čokoľvek."
+  },
+  "satisfactionRateCard": {
+    "satisfactionRate": "Miera spokojnosti",
+    "fromAllProjects": "Zo všetkých projektov",
+    "basedOnLikes": "Na základe laikov"
+  },
+  "analyticsCard": {
+    "todaysMoney": "Dnešné tržby",
+    "todaysUsers": "Dnešní používatelia",
+    "newClients": "Noví klienti",
+    "totalSales": "Celkové predaje"
+  },
+  "salesOverviewCard": {
+    "title": "Prehľad predajov",
+    "subtitle": "(+5) viac v 2021"
+  },
+  "activeUsersCard": {
+    "title": "Aktívni používatelia",
+    "subtitle": "+23% oproti minulému týždňu",
+    "users": "Používatelia",
+    "clicks": "Kliknutia",
+    "sales": "Predaje",
+    "items": "Položky"
+  },
+  "projectsCard": {
+    "title": "Projekty",
+    "subtitle": "30 dokončených tento mesiac",
+    "companies": "Spoločnosti",
+    "members": "Členovia",
+    "budget": "Rozpočet",
+    "completion": "Dokončenie"
+  },
+  "referralTrackingCard": {
+    "title": "Sledovanie odporúčaní",
+    "invited": "Pozvaní",
+    "people": "ľudí",
+    "bonus": "Bonus",
+    "safety": "Bezpečnosť",
+    "totalScore": "Celkové skóre"
+  },
+  "ordersOverviewCard": {
+    "title": "Prehľad objednávok",
+    "subtitle": "+ 30% tento mesiac"
+  }
+}

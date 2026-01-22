@@ -7,11 +7,9 @@ import {
   borderRadius,
   mergeSx,
 } from "@/styles/commonStyles";
+import { useTranslation } from "react-i18next";
 
 const CARD_CONTENT = {
-  title: "Satisfaction Rate",
-  subtitle: "From all projects",
-  description: "Based on likes",
   value: 95,
   minValue: 0,
   maxValue: 100,
@@ -19,6 +17,7 @@ const CARD_CONTENT = {
 
 const SatisfactionRateCard = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Card
@@ -31,10 +30,10 @@ const SatisfactionRateCard = () => {
     >
       <Stack>
         <Typography sx={typographyStyles.cardTitle(theme)}>
-          {CARD_CONTENT.title}
+          {t("satisfactionRateCard.satisfactionRate")}
         </Typography>
         <Typography sx={{ fontSize: 12, color: "#A0AEC0", mt: 0.5 }}>
-          {CARD_CONTENT.subtitle}
+          {t("satisfactionRateCard.fromAllProjects")}
         </Typography>
       </Stack>
 
@@ -86,7 +85,7 @@ const SatisfactionRateCard = () => {
               {CARD_CONTENT.value}%
             </Typography>
             <Typography sx={{ fontSize: 12, color: "#A0AEC0" }}>
-              {CARD_CONTENT.description}
+              {t("satisfactionRateCard.basedOnLikes")}
             </Typography>
           </Stack>
 
