@@ -11,7 +11,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Billing } from "@/data/billingData";
-import useUpdateBilling from "@/hooks/useUpdateBilling";
+import useUpdateBilling from "@/hooks/billings/useUpdateBilling";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { billingSchema, type BillingFormData } from "@/validation/editBilling";
@@ -70,7 +70,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
         onError: (error) => {
           toast.error(error.message || "Chyba pri aktualizácii");
         },
-      }
+      },
     );
   };
 

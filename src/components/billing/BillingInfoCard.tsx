@@ -4,18 +4,12 @@ import {
   spacing,
   typographyStyles,
 } from "@/styles/commonStyles";
-import {
-  Alert,
-  Card,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Alert, Card, Stack, Typography, useTheme } from "@mui/material";
 import BillingMiniCard from "./BillingMiniCard";
 import BillingInfoSkeleton from "./BillingInfoSkeleton";
 import EditBillingDialog from "./EditBillingDialog";
 import { type Billing } from "@/data/billingData";
-import useBillings from "@/hooks/useBillings";
+import useBillings from "@/hooks/billings/useBillings";
 import { useState } from "react";
 
 const BILLING_CONTENT = {

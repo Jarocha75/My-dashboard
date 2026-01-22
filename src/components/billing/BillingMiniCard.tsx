@@ -15,7 +15,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { Billing } from "@/data/billingData";
-import useDeleteBilling from "@/hooks/useDeleteBilling";
+import useDeleteBilling from "@/hooks/billings/useDeleteBilling";
 import ConfirmDeleteDialog from "../common/ConfirmDeleteDialog";
 import { useState } from "react";
 
