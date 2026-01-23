@@ -13,12 +13,14 @@ import {
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const SignInForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const mutation = useMutation<
     LoginResponse,
@@ -28,12 +30,12 @@ const SignInForm = () => {
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       loginRequest(email, password),
     onSuccess: (response) => {
-      toast.success("Úspešne si sa prihlásil!");
+      toast.success(t("toast.auth.signInSuccess"));
       login(response.accessToken, response.user, response.refreshToken);
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
-      toast.error(error.message || "Prihlásenie zlyhalo. Skús to znova.");
+      toast.error(error.message || t("toast.auth.signInError"));
     },
   });
 

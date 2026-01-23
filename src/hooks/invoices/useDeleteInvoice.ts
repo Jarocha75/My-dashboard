@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import APIClient from "@/services/apiClient";
 import toast from "react-hot-toast";
@@ -25,13 +26,13 @@ const useDeleteInvoice = () => {
       return { previousInvoices };
     },
     onSuccess: () => {
-      toast.success("Invoice was successfully deleted.");
+      toast.success(i18n.t("toast.invoice.deleteSuccess"));
     },
     onError: (_error, _id, context) => {
       if (context?.previousInvoices) {
         queryClient.setQueryData(["invoices"], context.previousInvoices);
       }
-      toast.error("Delete failed.");
+      toast.error(i18n.t("toast.invoice.deleteError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });

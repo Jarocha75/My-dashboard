@@ -6,6 +6,7 @@ import {
   themeOptions,
   timezoneOptions,
 } from "@/data/preferencesData";
+import { useTranslation } from "react-i18next";
 import {
   cardStyles,
   mergeSx,
@@ -35,6 +36,7 @@ interface Props {
 
 const PreferencesSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const selectStyles = {
     backgroundColor: "rgba(255,255,255,0.06)",
@@ -105,10 +107,10 @@ const PreferencesSettings = ({ className }: Props) => {
           {/* Header */}
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              Preferences
+              {t("settings.preferences")}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              Customize your application experience
+              {t("settings.customizeExperience")}
             </Typography>
           </Stack>
 
@@ -122,14 +124,14 @@ const PreferencesSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Appearance
+              {t("settings.appearance")}
             </Typography>
 
             <Box>
               <Typography
                 sx={mergeSx(typographyStyles.bodyPrimary(theme), { mb: 1.5 })}
               >
-                Theme
+                {t("settings.theme")}
               </Typography>
               <FormControl component="fieldset">
                 <RadioGroup
@@ -158,14 +160,14 @@ const PreferencesSettings = ({ className }: Props) => {
               label={
                 <Box>
                   <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                    Compact Mode
+                    {t("settings.compactMode")}
                   </Typography>
                   <Typography
                     sx={mergeSx(typographyStyles.bodySecondary(theme), {
                       fontSize: 13,
                     })}
                   >
-                    Reduce spacing for a more compact layout
+                    {t("settings.compactModeDesc")}
                   </Typography>
                 </Box>
               }
@@ -183,7 +185,7 @@ const PreferencesSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Language & Region
+              {t("settings.languageRegion")}
             </Typography>
 
             <Box>
@@ -193,7 +195,7 @@ const PreferencesSettings = ({ className }: Props) => {
                   fontSize: 14,
                 })}
               >
-                Language
+                {t("settings.language")}
               </Typography>
               <Select
                 defaultValue={preferencesDefaults.language}
@@ -216,7 +218,7 @@ const PreferencesSettings = ({ className }: Props) => {
                   fontSize: 14,
                 })}
               >
-                Timezone
+                {t("settings.timezone")}
               </Typography>
               <Select
                 defaultValue={preferencesDefaults.timezone}
@@ -239,7 +241,7 @@ const PreferencesSettings = ({ className }: Props) => {
                   fontSize: 14,
                 })}
               >
-                Date Format
+                {t("settings.dateFormat")}
               </Typography>
               <Select
                 defaultValue={preferencesDefaults.dateFormat}
@@ -266,7 +268,7 @@ const PreferencesSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Accessibility
+              {t("settings.accessibility")}
             </Typography>
 
             <FormControlLabel
@@ -279,14 +281,14 @@ const PreferencesSettings = ({ className }: Props) => {
               label={
                 <Box>
                   <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                    Reduced Motion
+                    {t("settings.reducedMotion")}
                   </Typography>
                   <Typography
                     sx={mergeSx(typographyStyles.bodySecondary(theme), {
                       fontSize: 13,
                     })}
                   >
-                    Minimize animations and transitions
+                    {t("settings.reducedMotionDesc")}
                   </Typography>
                 </Box>
               }
@@ -303,14 +305,14 @@ const PreferencesSettings = ({ className }: Props) => {
               label={
                 <Box>
                   <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                    High Contrast
+                    {t("settings.highContrast")}
                   </Typography>
                   <Typography
                     sx={mergeSx(typographyStyles.bodySecondary(theme), {
                       fontSize: 13,
                     })}
                   >
-                    Increase contrast for better visibility
+                    {t("settings.highContrastDesc")}
                   </Typography>
                 </Box>
               }
@@ -324,7 +326,7 @@ const PreferencesSettings = ({ className }: Props) => {
                   fontSize: 14,
                 })}
               >
-                Font Size
+                {t("settings.fontSize")}
               </Typography>
               <Select
                 defaultValue={preferencesDefaults.fontSize}
@@ -362,7 +364,7 @@ const PreferencesSettings = ({ className }: Props) => {
                 },
               }}
             >
-              Save Changes
+              {t("settings.saveChanges")}
             </Button>
             <Button
               variant="outlined"
@@ -379,7 +381,7 @@ const PreferencesSettings = ({ className }: Props) => {
                 },
               }}
             >
-              Cancel
+              {t("settings.cancel")}
             </Button>
           </Stack>
         </Stack>

@@ -4,6 +4,7 @@ import {
   spacing,
   typographyStyles,
 } from "@/styles/commonStyles";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   Button,
@@ -24,6 +25,7 @@ interface Props {
 
 const PrivacySettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Box className={className}>
@@ -38,10 +40,10 @@ const PrivacySettings = ({ className }: Props) => {
           {/* Header */}
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              Privacy Settings
+              {t("privacySettings.title")}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              Control your privacy and data sharing preferences
+              {t("privacySettings.subtitle")}
             </Typography>
           </Stack>
 
@@ -55,7 +57,7 @@ const PrivacySettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Profile Visibility
+              {t("privacySettings.profileVisibility")}
             </Typography>
 
             <Stack spacing={2}>
@@ -77,14 +79,14 @@ const PrivacySettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Public Profile
+                      {t("privacySettings.publicProfile")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Make your profile visible to other users
+                      {t("privacySettings.publicProfileDesc")}
                     </Typography>
                   </Box>
                 }
@@ -109,14 +111,14 @@ const PrivacySettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Show Email
+                      {t("privacySettings.showEmail")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Display your email address on your profile
+                      {t("privacySettings.showEmailDesc")}
                     </Typography>
                   </Box>
                 }
@@ -140,14 +142,14 @@ const PrivacySettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Show Activity Status
+                      {t("privacySettings.showActivityStatus")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Let others see when you're online
+                      {t("privacySettings.showActivityStatusDesc")}
                     </Typography>
                   </Box>
                 }
@@ -166,7 +168,7 @@ const PrivacySettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Data & Analytics
+              {t("privacySettings.dataAnalytics")}
             </Typography>
 
             <Stack spacing={2}>
@@ -188,14 +190,14 @@ const PrivacySettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Analytics & Performance
+                      {t("privacySettings.analyticsPerformance")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Help us improve by sharing usage data
+                      {t("privacySettings.analyticsPerformanceDesc")}
                     </Typography>
                   </Box>
                 }
@@ -219,15 +221,14 @@ const PrivacySettings = ({ className }: Props) => {
                 label={
                   <Box>
                     <Typography sx={typographyStyles.bodyPrimary(theme)}>
-                      Personalized Experience
+                      {t("privacySettings.personalizedExperience")}
                     </Typography>
                     <Typography
                       sx={mergeSx(typographyStyles.bodySecondary(theme), {
                         fontSize: 13,
                       })}
                     >
-                      Allow us to personalize your experience based on your
-                      activity
+                      {t("privacySettings.personalizedExperienceDesc")}
                     </Typography>
                   </Box>
                 }
@@ -246,7 +247,7 @@ const PrivacySettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Data Management
+              {t("privacySettings.dataManagement")}
             </Typography>
 
             <Alert
@@ -261,7 +262,7 @@ const PrivacySettings = ({ className }: Props) => {
                 },
               }}
             >
-              These actions are permanent and cannot be undone
+              {t("privacySettings.dataManagementWarning")}
             </Alert>
 
             <Stack spacing={2}>
@@ -289,7 +290,7 @@ const PrivacySettings = ({ className }: Props) => {
                       color: theme.palette.text.primary,
                     }}
                   >
-                    Download Your Data
+                    {t("privacySettings.downloadData")}
                   </Typography>
                   <Typography
                     sx={mergeSx(typographyStyles.bodySecondary(theme), {
@@ -297,7 +298,7 @@ const PrivacySettings = ({ className }: Props) => {
                       textAlign: "left",
                     })}
                   >
-                    Get a copy of all your data
+                    {t("privacySettings.downloadDataDesc")}
                   </Typography>
                 </Box>
               </Button>
@@ -326,7 +327,7 @@ const PrivacySettings = ({ className }: Props) => {
                       color: theme.palette.error.main,
                     }}
                   >
-                    Delete Account
+                    {t("privacySettings.deleteAccount")}
                   </Typography>
                   <Typography
                     sx={mergeSx(typographyStyles.bodySecondary(theme), {
@@ -334,7 +335,7 @@ const PrivacySettings = ({ className }: Props) => {
                       textAlign: "left",
                     })}
                   >
-                    Permanently delete your account and all data
+                    {t("privacySettings.deleteAccountDesc")}
                   </Typography>
                 </Box>
               </Button>
@@ -362,7 +363,7 @@ const PrivacySettings = ({ className }: Props) => {
                 },
               }}
             >
-              Save Changes
+              {t("privacySettings.saveChanges")}
             </Button>
             <Button
               variant="outlined"
@@ -379,7 +380,7 @@ const PrivacySettings = ({ className }: Props) => {
                 },
               }}
             >
-              Cancel
+              {t("privacySettings.cancel")}
             </Button>
           </Stack>
         </Stack>

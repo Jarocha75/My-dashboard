@@ -7,6 +7,7 @@ import { useFacebookLogin } from "@/hooks/auth/useFacebookLogin";
 import { useGoogleLogin } from "@/hooks/auth/useGoogleLogin";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -14,19 +15,20 @@ const SignUp = () => {
   const theme = useTheme();
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { login: fbLogin, isLoading: isFbLoading } = useFacebookLogin();
   const { login: googleLogin, isLoading: isGoogleLoading } = useGoogleLogin();
 
   const facebookMutation = useMutation({
     mutationFn: facebookLoginRequest,
     onSuccess: ({ accessToken, refreshToken, user }) => {
-      toast.success("Úspešne si sa prihlásil cez Facebook!");
+      toast.success(t("toast.auth.facebookSuccess"));
       login(accessToken, user, refreshToken);
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
       toast.error(
-        error.message || "Prihlásenie cez Facebook zlyhalo. Skús to znova.",
+        error.message || t("toast.auth.facebookError"),
       );
     },
   });
@@ -34,13 +36,13 @@ const SignUp = () => {
   const googleMutation = useMutation({
     mutationFn: googleLoginRequest,
     onSuccess: ({ accessToken, refreshToken, user }) => {
-      toast.success("Úspešne si sa prihlásil cez Google!");
+      toast.success(t("toast.auth.googleSuccess"));
       login(accessToken, user, refreshToken);
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {
       toast.error(
-        error.message || "Prihlásenie cez Google zlyhalo. Skús to znova.",
+        error.message || t("toast.auth.googleError"),
       );
     },
   });

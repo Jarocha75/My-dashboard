@@ -18,6 +18,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   cardStyles,
   typographyStyles,
@@ -32,6 +33,7 @@ import type { Invoice } from "@/types/invoices";
 const Invoices = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const { data: invoices, isLoading, isError } = useInvoices();
   const deleteInvoice = useDeleteInvoice();
 

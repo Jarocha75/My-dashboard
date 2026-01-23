@@ -240,5 +240,149 @@
     "deleteAccountDesc": "Natrvalo zmazať účet a všetky dáta",
     "saveChanges": "Uložiť zmeny",
     "cancel": "Zrušiť"
+  },
+  "toast": {
+    "profile": {
+      "updateSuccess": "Zmeny boli úspešne uložené",
+      "updateError": "Nastala chyba pri ukladaní",
+      "profileUpdateSuccess": "Profil bol úspešne aktualizovaný",
+      "profileUpdateError": "Nastala chyba pri ukladaní profilu",
+      "avatarUploadSuccess": "Avatar bol úspešne nahraný",
+      "avatarUploadError": "Nastala chyba pri nahrávaní avataru"
+    },
+    "auth": {
+      "signInSuccess": "Úspešne si sa prihlásil!",
+      "signInError": "Prihlásenie zlyhalo. Skús to znova.",
+      "facebookSuccess": "Úspešne si sa prihlásil cez Facebook!",
+      "facebookError": "Prihlásenie cez Facebook zlyhalo. Skús to znova.",
+      "googleSuccess": "Úspešne si sa prihlásil cez Google!",
+      "googleError": "Prihlásenie cez Google zlyhalo. Skús to znova."
+    },
+    "billing": {
+      "updateSuccess": "Billing bol úspešne aktualizovaný",
+      "updateError": "Chyba pri aktualizácii",
+      "deleteSuccess": "Billing bol úspešne zmazaný",
+      "deleteError": "Mazanie zlyhalo"
+    },
+    "transaction": {
+      "createSuccess": "Transakcia bola úspešne vytvorená",
+      "createError": "Vytvorenie zlyhalo",
+      "updateSuccess": "Transakcia bola úspešne aktualizovaná",
+      "updateError": "Aktualizácia zlyhala",
+      "deleteSuccess": "Transakcia bola úspešne zmazaná",
+      "deleteError": "Mazanie zlyhalo"
+    },
+    "invoice": {
+      "createSuccess": "Faktúra bola úspešne vytvorená",
+      "createError": "Vytvorenie zlyhalo",
+      "updateSuccess": "Faktúra bola úspešne aktualizovaná",
+      "updateError": "Aktualizácia zlyhala",
+      "deleteSuccess": "Faktúra bola úspešne zmazaná",
+      "deleteError": "Mazanie zlyhalo"
+    }
+  },
+  "dialogs": {
+    "editTransaction": {
+      "title": "Upraviť Transakciu",
+      "name": "Názov",
+      "amount": "Suma",
+      "transactionType": "Typ transakcie",
+      "deposit": "Vklad",
+      "withdrawal": "Výber",
+      "pending": "Čakajúca",
+      "category": "Kategória",
+      "description": "Popis",
+      "cancel": "Zrušiť",
+      "saving": "Ukladám...",
+      "saveChanges": "Uložiť zmeny"
+    },
+    "editBilling": {
+      "title": "Upraviť Billing Informácie",
+      "fullName": "Celé meno",
+      "company": "Spoločnosť",
+      "email": "Email",
+      "vatNumber": "DIČ",
+      "vatPlaceholder": "napr. FRB123456",
+      "cancel": "Zrušiť",
+      "saving": "Ukladám...",
+      "saveChanges": "Uložiť zmeny"
+    },
+    "confirmDelete": {
+      "title": "Potvrdiť zmazanie",
+      "confirm": "Potvrdiť",
+      "cancel": "Zrušiť"
+    }
+  },
+  "invoicesPage": {
+    "title": "Všetky faktúry",
+    "errorLoading": "Nepodarilo sa načítať faktúry",
+    "noInvoices": "Žiadne faktúry",
+    "invoiceNumber": "Číslo faktúry",
+    "client": "Klient",
+    "date": "Dátum",
+    "status": "Stav",
+    "amount": "Suma",
+    "actions": "Akcie"
+  },
+  "pdf": {
+    "invoice": "FAKTÚRA",
+    "invoiceNumber": "Číslo faktúry: ",
+    "issueDate": "Dátum vystavenia: ",
+    "dueDate": "Dátum splatnosti: ",
+    "customer": "Odberateľ",
+    "description": "Popis",
+    "amountToPay": "Suma na úhradu:",
+    "status": "Stav: ",
+    "thankYou": "Ďakujeme za Vašu dôveru.",
+    "statusPaid": "Zaplatená",
+    "statusSent": "Odoslaná",
+    "statusDraft": "Koncept",
+    "statusCancelled": "Zrušená"
+  },
+  "errorBoundary": {
+    "title": "Niečo sa pokazilo",
+    "description": "Vyskytla sa neočakávaná chyba. Skúste obnoviť stránku alebo sa vráťte späť.",
+    "tryAgain": "Skúsiť znova",
+    "refreshPage": "Obnoviť stránku"
+  },
+  "profile": {
+    "defaultUser": "Používateľ"
+  },
+  "validation": {
+    "transaction": {
+      "nameRequired": "Názov je povinný",
+      "nameTooLong": "Názov je príliš dlhý",
+      "amountMustBeNumber": "Suma musí byť číslo",
+      "amountMustBePositive": "Suma musí byť kladná",
+      "selectTransactionType": "Vyberte typ transakcie",
+      "descriptionTooLong": "Popis je príliš dlhý",
+      "categoryTooLong": "Kategória je príliš dlhá"
+    },
+    "billing": {
+      "nameMinLength": "Meno musí mať minimálne 2 znaky",
+      "nameMaxLength": "Meno môže mať maximálne 50 znakov",
+      "companyMinLength": "Názov spoločnosti musí mať minimálne 2 znaky",
+      "companyMaxLength": "Názov spoločnosti môže mať maximálne 100 znakov",
+      "emailInvalid": "Neplatný formát emailu",
+      "emailRequired": "Email je povinný",
+      "vatMinLength": "DIČ musí mať minimálne 3 znaky",
+      "vatMaxLength": "DIČ môže mať maximálne 20 znakov",
+      "vatFormat": "DIČ musí začínať 2-3 veľkými písmenami a pokračovať číslami alebo písmenami"
+    },
+    "profile": {
+      "nameRequired": "Meno je povinné!",
+      "nameMinLength": "Meno musí mať min. 3 znaky",
+      "nameMaxLength": "Meno môže mať max. 30 znakov",
+      "bioMaxLength": "Bio môže mať max. 500 znakov",
+      "locationMaxLength": "Lokácia môže mať max. 100 znakov"
+    },
+    "account": {
+      "nameMinLength": "Meno musí mať minimálne 3 znaky",
+      "nameMaxLength": "Meno môže mať maximálne 50 znakov",
+      "usernameMinLength": "Užívateľské meno musí mať min. 3 znaky.",
+      "usernameMaxLength": "Užívateľské meno môže mať max. 20 znakov",
+      "usernameFormat": "Použite písmená, čísla a podčiarkovník",
+      "phoneInvalid": "Neplatné slovenské telefónne číslo (formát: +421 123 456 789)"
+    }
   }
 }

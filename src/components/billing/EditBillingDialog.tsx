@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { Billing } from "@/data/billingData";
 import useUpdateBilling from "@/hooks/billings/useUpdateBilling";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { billingSchema, type BillingFormData } from "@/validation/editBilling";
 
@@ -24,6 +25,7 @@ interface Props {
 
 const EditBillingDialog = ({ open, billing, onClose }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const updateMutation = useUpdateBilling();
 
   const {
@@ -63,12 +65,12 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
       },
       {
         onSuccess: () => {
-          toast.success("Billing úspešne aktualizovaný");
+          toast.success(t("toast.billing.updateSuccess"));
           onClose();
           reset();
         },
         onError: (error) => {
-          toast.error(error.message || "Chyba pri aktualizácii");
+          toast.error(error.message || t("toast.billing.updateError"));
         },
       },
     );
@@ -100,7 +102,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
           fontWeight: 600,
         }}
       >
-        Upraviť Billing Informácie
+        {t("dialogs.editBilling.title")}
       </DialogTitle>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -112,7 +114,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Celé meno"
+                  label={t("dialogs.editBilling.fullName")}
                   fullWidth
                   error={!!errors.fullName}
                   helperText={errors.fullName?.message}
@@ -128,7 +130,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Spoločnosť"
+                  label={t("dialogs.editBilling.company")}
                   fullWidth
                   error={!!errors.company}
                   helperText={errors.company?.message}
@@ -143,7 +145,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Email"
+                  label={t("dialogs.editBilling.email")}
                   type="email"
                   fullWidth
                   error={!!errors.email}
@@ -159,12 +161,12 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="DIČ"
+                  label={t("dialogs.editBilling.vatNumber")}
                   fullWidth
                   error={!!errors.vatNumber}
                   helperText={errors.vatNumber?.message}
                   disabled={updateMutation.isPending}
-                  placeholder="napr. FRB123456"
+                  placeholder={t("dialogs.editBilling.vatPlaceholder")}
                 />
               )}
             />
@@ -177,7 +179,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
             disabled={updateMutation.isPending}
             sx={{ color: theme.palette.text.secondary }}
           >
-            Zrušiť
+            {t("dialogs.editBilling.cancel")}
           </Button>
           <Button
             type="submit"
@@ -190,7 +192,7 @@ const EditBillingDialog = ({ open, billing, onClose }: Props) => {
               },
             }}
           >
-            {updateMutation.isPending ? "Ukladám..." : "Uložiť zmeny"}
+            {updateMutation.isPending ? t("dialogs.editBilling.saving") : t("dialogs.editBilling.saveChanges")}
           </Button>
         </DialogActions>
       </form>

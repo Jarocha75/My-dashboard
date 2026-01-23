@@ -240,5 +240,149 @@
     "deleteAccountDesc": "Permanently delete your account and all data",
     "saveChanges": "Save Changes",
     "cancel": "Cancel"
+  },
+  "toast": {
+    "profile": {
+      "updateSuccess": "Changes were saved successfully",
+      "updateError": "An error occurred while saving",
+      "profileUpdateSuccess": "Profile was updated successfully",
+      "profileUpdateError": "An error occurred while saving profile",
+      "avatarUploadSuccess": "Avatar was uploaded successfully",
+      "avatarUploadError": "An error occurred while uploading avatar"
+    },
+    "auth": {
+      "signInSuccess": "You have signed in successfully!",
+      "signInError": "Sign in failed. Please try again.",
+      "facebookSuccess": "You have signed in via Facebook successfully!",
+      "facebookError": "Facebook sign in failed. Please try again.",
+      "googleSuccess": "You have signed in via Google successfully!",
+      "googleError": "Google sign in failed. Please try again."
+    },
+    "billing": {
+      "updateSuccess": "Billing was successfully updated",
+      "updateError": "Error while updating",
+      "deleteSuccess": "Billing was successfully deleted",
+      "deleteError": "Delete failed"
+    },
+    "transaction": {
+      "createSuccess": "Transaction was successfully created",
+      "createError": "Creation failed",
+      "updateSuccess": "Transaction was successfully updated",
+      "updateError": "Update failed",
+      "deleteSuccess": "Transaction was successfully deleted",
+      "deleteError": "Delete failed"
+    },
+    "invoice": {
+      "createSuccess": "Invoice was successfully created",
+      "createError": "Creation failed",
+      "updateSuccess": "Invoice was successfully updated",
+      "updateError": "Update failed",
+      "deleteSuccess": "Invoice was successfully deleted",
+      "deleteError": "Delete failed"
+    }
+  },
+  "dialogs": {
+    "editTransaction": {
+      "title": "Edit Transaction",
+      "name": "Name",
+      "amount": "Amount",
+      "transactionType": "Transaction Type",
+      "deposit": "Deposit",
+      "withdrawal": "Withdrawal",
+      "pending": "Pending",
+      "category": "Category",
+      "description": "Description",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes"
+    },
+    "editBilling": {
+      "title": "Edit Billing Information",
+      "fullName": "Full Name",
+      "company": "Company",
+      "email": "Email",
+      "vatNumber": "VAT Number",
+      "vatPlaceholder": "e.g. FRB123456",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes"
+    },
+    "confirmDelete": {
+      "title": "Confirm Deletion",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "invoicesPage": {
+    "title": "All Invoices",
+    "errorLoading": "Failed to load invoices",
+    "noInvoices": "No invoices",
+    "invoiceNumber": "Invoice Number",
+    "client": "Client",
+    "date": "Date",
+    "status": "Status",
+    "amount": "Amount",
+    "actions": "Actions"
+  },
+  "pdf": {
+    "invoice": "INVOICE",
+    "invoiceNumber": "Invoice Number: ",
+    "issueDate": "Issue Date: ",
+    "dueDate": "Due Date: ",
+    "customer": "Customer",
+    "description": "Description",
+    "amountToPay": "Amount to Pay:",
+    "status": "Status: ",
+    "thankYou": "Thank you for your trust.",
+    "statusPaid": "Paid",
+    "statusSent": "Sent",
+    "statusDraft": "Draft",
+    "statusCancelled": "Cancelled"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Try refreshing the page or go back.",
+    "tryAgain": "Try Again",
+    "refreshPage": "Refresh Page"
+  },
+  "profile": {
+    "defaultUser": "User"
+  },
+  "validation": {
+    "transaction": {
+      "nameRequired": "Name is required",
+      "nameTooLong": "Name is too long",
+      "amountMustBeNumber": "Amount must be a number",
+      "amountMustBePositive": "Amount must be positive",
+      "selectTransactionType": "Select transaction type",
+      "descriptionTooLong": "Description is too long",
+      "categoryTooLong": "Category is too long"
+    },
+    "billing": {
+      "nameMinLength": "Name must have at least 2 characters",
+      "nameMaxLength": "Name can have at most 50 characters",
+      "companyMinLength": "Company name must have at least 2 characters",
+      "companyMaxLength": "Company name can have at most 100 characters",
+      "emailInvalid": "Invalid email format",
+      "emailRequired": "Email is required",
+      "vatMinLength": "VAT number must have at least 3 characters",
+      "vatMaxLength": "VAT number can have at most 20 characters",
+      "vatFormat": "VAT number must start with 2-3 capital letters and continue with digits or letters"
+    },
+    "profile": {
+      "nameRequired": "Name is required!",
+      "nameMinLength": "Name must have min. 3 characters",
+      "nameMaxLength": "Name can have max. 30 characters",
+      "bioMaxLength": "Bio can have max. 500 characters",
+      "locationMaxLength": "Location can have max. 100 characters"
+    },
+    "account": {
+      "nameMinLength": "Name must have at least 3 characters",
+      "nameMaxLength": "Name can have at most 50 characters",
+      "usernameMinLength": "Username must have min. 3 characters.",
+      "usernameMaxLength": "Username can have max. 20 characters",
+      "usernameFormat": "Use letters, numbers and underscore",
+      "phoneInvalid": "Invalid Slovak phone number (format: +421 123 456 789)"
+    }
   }
 }

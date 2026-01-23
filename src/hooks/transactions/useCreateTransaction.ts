@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import APIClient from "@/services/apiClient";
 import type { Transaction } from "@/types/transactions";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -30,7 +31,7 @@ const useCreateTransaction = () => {
       return { previousTransactions };
     },
     onSuccess: () => {
-      toast.success("Transaction was successfully created.");
+      toast.success(i18n.t("toast.transaction.createSuccess"));
     },
     onError: (_error, _variables, context) => {
       if (context?.previousTransactions) {
@@ -39,7 +40,7 @@ const useCreateTransaction = () => {
           context.previousTransactions,
         );
       }
-      toast.error("Creation failed.");
+      toast.error(i18n.t("toast.transaction.createError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });

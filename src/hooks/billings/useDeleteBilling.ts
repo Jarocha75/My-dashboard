@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import APIClient from "@/services/apiClient";
 import type { Billing } from "@/data/billingData";
@@ -25,13 +26,13 @@ const useDeleteBilling = () => {
       return { previousBillings };
     },
     onSuccess: () => {
-      toast.success("Billing was successfully deleted.");
+      toast.success(i18n.t("toast.billing.deleteSuccess"));
     },
     onError: (_error, _id, context) => {
       if (context?.previousBillings) {
         queryClient.setQueryData(["billings"], context.previousBillings);
       }
-      toast.error("Delete failed.");
+      toast.error(i18n.t("toast.billing.deleteError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["billings"] });

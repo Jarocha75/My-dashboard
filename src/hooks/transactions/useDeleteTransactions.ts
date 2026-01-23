@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import APIClient from "@/services/apiClient";
 import toast from "react-hot-toast";
@@ -25,7 +26,7 @@ const useDeleteTransaction = () => {
       return { previousTransactions };
     },
     onSuccess: () => {
-      toast.success("Transaction was successfully deleted.");
+      toast.success(i18n.t("toast.transaction.deleteSuccess"));
     },
     onError: (_error, _id, context) => {
       if (context?.previousTransactions) {
@@ -34,7 +35,7 @@ const useDeleteTransaction = () => {
           context.previousTransactions,
         );
       }
-      toast.error("Delete failed.");
+      toast.error(i18n.t("toast.transaction.deleteError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });

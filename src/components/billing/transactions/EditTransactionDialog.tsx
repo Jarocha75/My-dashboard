@@ -17,6 +17,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Transaction } from "@/types/transactions";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   transactionSchema,
   type TransactionFormData,
@@ -32,6 +33,7 @@ interface Props {
 
 const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const updateMutation = useUpdateTransaction();
 
   const {
@@ -73,7 +75,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
           reset();
         },
         onError: (error) => {
-          toast.error(error.message || "Chyba pri aktualizácii");
+          toast.error(error.message || t("toast.transaction.updateError"));
         },
       },
     );
@@ -105,7 +107,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
           fontWeight: 600,
         }}
       >
-        Upraviť Transakciu
+        {t("dialogs.editTransaction.title")}
       </DialogTitle>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -117,7 +119,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Názov"
+                  label={t("dialogs.editTransaction.name")}
                   fullWidth
                   error={!!errors.name}
                   helperText={errors.name?.message}
@@ -133,7 +135,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Suma"
+                  label={t("dialogs.editTransaction.amount")}
                   type="number"
                   fullWidth
                   error={!!errors.amount}
@@ -149,10 +151,10 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
               control={control}
               render={({ field }) => (
                 <FormControl fullWidth error={!!errors.type}>
-                  <InputLabel>Typ transakcie</InputLabel>
+                  <InputLabel>{t("dialogs.editTransaction.transactionType")}</InputLabel>
                   <Select
                     {...field}
-                    label="Typ transakcie"
+                    label={t("dialogs.editTransaction.transactionType")}
                     disabled={updateMutation.isPending}
                     MenuProps={{
                       PaperProps: {
@@ -163,9 +165,9 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
                       },
                     }}
                   >
-                    <MenuItem value="deposit">Vklad</MenuItem>
-                    <MenuItem value="charge">Výber</MenuItem>
-                    <MenuItem value="pending">Čakajúca</MenuItem>
+                    <MenuItem value="deposit">{t("dialogs.editTransaction.deposit")}</MenuItem>
+                    <MenuItem value="charge">{t("dialogs.editTransaction.withdrawal")}</MenuItem>
+                    <MenuItem value="pending">{t("dialogs.editTransaction.pending")}</MenuItem>
                   </Select>
                   {errors.type && (
                     <FormHelperText>{errors.type.message}</FormHelperText>
@@ -180,7 +182,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Kategória"
+                  label={t("dialogs.editTransaction.category")}
                   fullWidth
                   error={!!errors.category}
                   helperText={errors.category?.message}
@@ -195,7 +197,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="Popis"
+                  label={t("dialogs.editTransaction.description")}
                   fullWidth
                   multiline
                   rows={3}
@@ -214,7 +216,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
             disabled={updateMutation.isPending}
             sx={{ color: theme.palette.text.secondary }}
           >
-            Zrušiť
+            {t("dialogs.editTransaction.cancel")}
           </Button>
           <Button
             type="submit"
@@ -227,7 +229,7 @@ const EditTransactionDialog = ({ open, transaction, onClose }: Props) => {
               },
             }}
           >
-            {updateMutation.isPending ? "Ukladám..." : "Uložiť zmeny"}
+            {updateMutation.isPending ? t("dialogs.editTransaction.saving") : t("dialogs.editTransaction.saveChanges")}
           </Button>
         </DialogActions>
       </form>

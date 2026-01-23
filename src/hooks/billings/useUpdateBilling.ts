@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import type { Billing } from "@/data/billingData";
 import APIClient from "@/services/apiClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -38,13 +39,13 @@ const useUpdateBilling = () => {
       return { previousBillings };
     },
     onSuccess: () => {
-      toast.success("Billing was successfully updated.");
+      toast.success(i18n.t("toast.billing.updateSuccess"));
     },
     onError: (_error, _variables, context) => {
       if (context?.previousBillings) {
         queryClient.setQueryData(["billings"], context.previousBillings);
       }
-      toast.error("Update failed.");
+      toast.error(i18n.t("toast.billing.updateError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["billings"] });

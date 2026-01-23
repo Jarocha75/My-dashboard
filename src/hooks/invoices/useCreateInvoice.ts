@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import APIClient from "@/services/apiClient";
 import type { Invoice } from "@/types/invoices";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -30,13 +31,13 @@ const useCreateInvoice = () => {
       return { previousInvoices };
     },
     onSuccess: () => {
-      toast.success("Invoice was successfully created.");
+      toast.success(i18n.t("toast.invoice.createSuccess"));
     },
     onError: (_error, _variables, context) => {
       if (context?.previousInvoices) {
         queryClient.setQueryData(["invoices"], context.previousInvoices);
       }
-      toast.error("Creation failed.");
+      toast.error(i18n.t("toast.invoice.createError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });

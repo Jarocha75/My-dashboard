@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import { updateUserProfile } from "@/services/useProfile";
 import type { AccountSettingsFormData } from "@/validation/accountSettings";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -11,11 +12,11 @@ export const useUpdateUserProfile = () => {
       updateUserProfile(profileData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["userProfile"] });
-      toast.success("Zmeny boli úspešne uložené");
+      toast.success(i18n.t("toast.profile.updateSuccess"));
     },
     onError: (error: any) => {
       toast.error(
-        error.response?.data?.message || "Nastala chyba pri ukladaní"
+        error.response?.data?.message || i18n.t("toast.profile.updateError")
       );
     },
   });

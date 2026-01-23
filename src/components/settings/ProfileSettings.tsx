@@ -7,6 +7,7 @@ import {
   spacing,
   typographyStyles,
 } from "@/styles/commonStyles";
+import { useTranslation } from "react-i18next";
 import {
   profileSettingsSchema,
   type ProfileSettingsFormData,
@@ -27,13 +28,6 @@ import { Camera } from "lucide-react";
 import { useCallback, useEffect, useRef, type ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
-const PROFILE_CONTENT = {
-  title: "Profile Settings",
-  subTitle: "Manage you public profile information",
-  picture: "Profile Picture",
-  personal: "Personal Information",
-};
-
 const getInitials = (name?: string, displayName?: string): string => {
   const nameToUse = displayName || name || "";
   const words = nameToUse.trim().split(/\s+/);
@@ -51,6 +45,7 @@ interface Props {
 
 const ProfileSettings = ({ className }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { data: userProfile, isLoading, isError } = useUserProfile();
   const updateProfile = useUpdateProfileSettings();
@@ -125,7 +120,7 @@ const ProfileSettings = ({ className }: Props) => {
         <Card
           sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
         >
-          <Typography>Načítavam...</Typography>
+          <Typography>{t("profileSettings.loading")}</Typography>
         </Card>
       </Box>
     );
@@ -137,7 +132,7 @@ const ProfileSettings = ({ className }: Props) => {
         <Card
           sx={mergeSx(cardStyles.glassCard(theme), { p: spacing.cardPadding })}
         >
-          <Typography color="error">Chyba pri načítaní profilu</Typography>
+          <Typography color="error">{t("profileSettings.errorLoading")}</Typography>
         </Card>
       </Box>
     );
@@ -156,10 +151,10 @@ const ProfileSettings = ({ className }: Props) => {
           {/* Header */}
           <Stack spacing={1}>
             <Typography sx={typographyStyles.cardTitle(theme)}>
-              {PROFILE_CONTENT.title}
+              {t("profileSettings.title")}
             </Typography>
             <Typography sx={typographyStyles.bodySecondary(theme)}>
-              {PROFILE_CONTENT.subTitle}
+              {t("profileSettings.subtitle")}
             </Typography>
           </Stack>
 
@@ -173,7 +168,7 @@ const ProfileSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              {PROFILE_CONTENT.picture}
+              {t("profileSettings.profilePicture")}
             </Typography>
 
             <Stack direction="row" alignItems="center" spacing={3}>
@@ -215,7 +210,7 @@ const ProfileSettings = ({ className }: Props) => {
                   },
                 }}
               >
-                {uploadAvatar.isPending ? "Nahrávam..." : "Change Photo"}
+                {uploadAvatar.isPending ? t("profileSettings.uploading") : t("profileSettings.changePhoto")}
               </Button>
             </Stack>
           </Stack>
@@ -230,12 +225,12 @@ const ProfileSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              {PROFILE_CONTENT.personal}
+              {t("profileSettings.personalInformation")}
             </Typography>
 
             <TextField
               {...register("displayName")}
-              label="Display Name"
+              label={t("profileSettings.displayName")}
               error={!!errors.displayName}
               helperText={errors.displayName?.message}
               fullWidth
@@ -245,7 +240,7 @@ const ProfileSettings = ({ className }: Props) => {
 
             <TextField
               {...register("bio")}
-              label="Bio"
+              label={t("profileSettings.bio")}
               error={!!errors.bio}
               helperText={errors.bio?.message}
               fullWidth
@@ -258,7 +253,7 @@ const ProfileSettings = ({ className }: Props) => {
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
               <TextField
                 {...register("location")}
-                label="Location"
+                label={t("profileSettings.location")}
                 error={!!errors.location}
                 helperText={errors.location?.message}
                 fullWidth
@@ -267,7 +262,7 @@ const ProfileSettings = ({ className }: Props) => {
               />
               <TextField
                 {...register("website")}
-                label="Website"
+                label={t("profileSettings.website")}
                 error={!!errors.website}
                 helperText={errors.website?.message}
                 fullWidth
@@ -287,12 +282,12 @@ const ProfileSettings = ({ className }: Props) => {
                 fontSize: 16,
               })}
             >
-              Social Links
+              {t("profileSettings.socialLinks")}
             </Typography>
 
             <TextField
               {...register("linkedin")}
-              label="LinkedIn"
+              label={t("profileSettings.linkedin")}
               error={!!errors.linkedin}
               helperText={errors.linkedin?.message}
               fullWidth
@@ -302,7 +297,7 @@ const ProfileSettings = ({ className }: Props) => {
 
             <TextField
               {...register("github")}
-              label="GitHub"
+              label={t("profileSettings.github")}
               error={!!errors.github}
               helperText={errors.github?.message}
               fullWidth
@@ -312,7 +307,7 @@ const ProfileSettings = ({ className }: Props) => {
 
             <TextField
               {...register("whatsup")}
-              label="WhatsApp"
+              label={t("profileSettings.whatsapp")}
               error={!!errors.whatsup}
               helperText={errors.whatsup?.message}
               fullWidth
@@ -344,7 +339,7 @@ const ProfileSettings = ({ className }: Props) => {
                 },
               }}
             >
-              {updateProfile.isPending ? "Ukladám..." : "Save Changes"}
+              {updateProfile.isPending ? t("profileSettings.saving") : t("profileSettings.saveChanges")}
             </Button>
             <Button
               onClick={handleCancel}
@@ -362,7 +357,7 @@ const ProfileSettings = ({ className }: Props) => {
                 },
               }}
             >
-              Cancel
+              {t("profileSettings.cancel")}
             </Button>
           </Stack>
         </Stack>

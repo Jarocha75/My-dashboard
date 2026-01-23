@@ -1,3 +1,4 @@
+import i18n from "@/i18n";
 import APIClient from "@/services/apiClient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -38,13 +39,13 @@ const useUpdateInvoice = () => {
       return { previousInvoices };
     },
     onSuccess: () => {
-      toast.success("Invoice was successfully updated.");
+      toast.success(i18n.t("toast.invoice.updateSuccess"));
     },
     onError: (_error, _variables, context) => {
       if (context?.previousInvoices) {
         queryClient.setQueryData(["invoices"], context.previousInvoices);
       }
-      toast.error("Update failed.");
+      toast.error(i18n.t("toast.invoice.updateError"));
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
