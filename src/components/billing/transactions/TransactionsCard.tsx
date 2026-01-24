@@ -72,7 +72,7 @@ const TransactionsCard = ({
     if (!transactions || transactions.length === 0) return [];
 
     const sorted = [...transactions].sort(
-      (a, b) => new Date(b.ISO).getTime() - new Date(a.ISO).getTime()
+      (a, b) => new Date(b.ISO).getTime() - new Date(a.ISO).getTime(),
     );
 
     const today = new Date();
@@ -98,10 +98,12 @@ const TransactionsCard = ({
     });
 
     const groups = [];
-    if (newest.length > 0) groups.push({ label: t("billing.newest"), items: newest });
+    if (newest.length > 0)
+      groups.push({ label: t("billing.newest"), items: newest });
     if (yesterdayItems.length > 0)
       groups.push({ label: t("billing.yesterday"), items: yesterdayItems });
-    if (older.length > 0) groups.push({ label: t("billing.older"), items: older });
+    if (older.length > 0)
+      groups.push({ label: t("billing.older"), items: older });
 
     return groups;
   }, [transactions, t]);
@@ -112,7 +114,8 @@ const TransactionsCard = ({
         className={className}
         sx={mergeSx(cardStyles.basicCard(theme), {
           p: spacing.cardPadding,
-          height: "100%",
+          height: 538,
+          flexShrink: 0,
         })}
       >
         <Stack
