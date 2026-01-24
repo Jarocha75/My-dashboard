@@ -149,6 +149,7 @@
     "noTransactions": "No transactions",
     "errorLoadingTransactions": "Failed to load transactions",
     "confirmDelete": "Are you sure you want to delete billing for {{name}}?",
+    "confirmDeleteCard": "Are you sure you want to delete card {{cardNumber}}?",
     "cancel": "Cancel"
   },
   "settingsPage": {
@@ -279,6 +280,14 @@
       "updateError": "Update failed",
       "deleteSuccess": "Invoice was successfully deleted",
       "deleteError": "Delete failed"
+    },
+    "paymentMethod": {
+      "addSuccess": "Card was successfully added",
+      "addError": "Failed to add card",
+      "updateSuccess": "Card was successfully updated",
+      "updateError": "Failed to update card",
+      "deleteSuccess": "Card was successfully deleted",
+      "deleteError": "Failed to delete card"
     }
   },
   "dialogs": {
@@ -311,6 +320,27 @@
       "title": "Confirm Deletion",
       "confirm": "Confirm",
       "cancel": "Cancel"
+    },
+    "addCard": {
+      "title": "Add New Card",
+      "cardholderName": "Cardholder Name",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV",
+      "cardType": "Card Type",
+      "cancel": "Cancel",
+      "adding": "Adding...",
+      "addCard": "Add Card"
+    },
+    "editCard": {
+      "title": "Edit Card",
+      "cardholderName": "Cardholder Name",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cardType": "Card Type",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes"
     }
   },
   "invoicesPage": {

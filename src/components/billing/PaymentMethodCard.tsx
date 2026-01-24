@@ -2,45 +2,65 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   IconButton,
   Stack,
   Typography,
   useTheme,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useTranslation } from "react-i18next";
 import { cardStyles, typographyStyles, mergeSx } from "@/styles/commonStyles";
-
-interface PaymentMethod {
-  id: string;
-  type: "mastercard" | "visa";
-  cardNumber: string;
-}
+import {
+  usePaymentMethods,
+  useCreatePaymentMethod,
+  useUpdatePaymentMethod,
+  useDeletePaymentMethod,
+} from "@/hooks/payment-methods";
+import type { CreatePaymentMethodPayload, PaymentMethod } from "@/types/paymentMethod";
+import { useState } from "react";
+import AddCardDialog from "./AddCardDialog";
+import EditCardDialog from "./EditCardDialog";
+import ConfirmDeleteDialog from "@/components/common/ConfirmDeleteDialog";
 
 interface Props {
-  paymentMethods?: PaymentMethod[];
   className: string;
 }
 
-const defaultPaymentMethods: PaymentMethod[] = [
-  {
-    id: "1",
-    type: "mastercard",
-    cardNumber: "7812 2139 0823 XXXX",
-  },
-  {
-    id: "2",
-    type: "visa",
-    cardNumber: "7812 2139 0823 XXXX",
-  },
-];
-
-const PaymentMethodCard = ({
-  paymentMethods = defaultPaymentMethods,
-  className,
-}: Props) => {
+const PaymentMethodCard = ({ className }: Props) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const { data: paymentMethods, isLoading, isError } = usePaymentMethods();
+  const createPaymentMethod = useCreatePaymentMethod();
+  const updatePaymentMethod = useUpdatePaymentMethod();
+  const deletePaymentMethod = useDeletePaymentMethod();
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editingCard, setEditingCard] = useState<PaymentMethod | null>(null);
+  const [deletingCard, setDeletingCard] = useState<PaymentMethod | null>(null);
+
+  const handleAddCard = (data: CreatePaymentMethodPayload) => {
+    console.log("Adding card with data:", data);
+    createPaymentMethod.mutate(data, {
+      onSuccess: () => setIsAddModalOpen(false),
+    });
+  };
+
+  const handleEditCard = (data: Partial<PaymentMethod>) => {
+    if (!editingCard) return;
+    updatePaymentMethod.mutate(
+      { id: editingCard.id, data },
+      { onSuccess: () => setEditingCard(null) }
+    );
+  };
+
+  const handleDeleteCard = () => {
+    if (!deletingCard) return;
+    deletePaymentMethod.mutate(deletingCard.id, {
+      onSuccess: () => setDeletingCard(null),
+    });
+  };
 
   const getCardIcon = (type: "mastercard" | "visa") => {
     if (type === "mastercard") {
@@ -128,6 +148,7 @@ const PaymentMethodCard = ({
           <Button
             variant="contained"
             size="small"
+            onClick={() => setIsAddModalOpen(true)}
             sx={{
               background: "linear-gradient(135deg, #5E8EFF 0%, #3d5afe 100%)",
               borderRadius: "8px",
@@ -155,7 +176,25 @@ const PaymentMethodCard = ({
             gap: { xs: 1.5, md: 2 },
           }}
         >
-          {paymentMethods.map((method) => (
+          {isLoading && (
+            <Box sx={{ display: "flex", justifyContent: "center", py: 2 }}>
+              <CircularProgress size={24} />
+            </Box>
+          )}
+
+          {isError && (
+            <Typography sx={{ color: theme.palette.error.main }}>
+              {t("billing.errorLoadingData")}
+            </Typography>
+          )}
+
+          {!isLoading && !isError && paymentMethods?.length === 0 && (
+            <Typography sx={{ color: theme.palette.text.secondary }}>
+              {t("billing.noData")}
+            </Typography>
+          )}
+
+          {paymentMethods?.map((method) => (
             <Box
               key={method.id}
               sx={{
@@ -187,22 +226,66 @@ const PaymentMethodCard = ({
                 </Typography>
               </Stack>
 
-              <IconButton
-                size="small"
-                sx={{
-                  color: theme.palette.text.secondary,
-                  "&:hover": {
-                    color: theme.palette.text.primary,
-                    background: "rgba(255, 255, 255, 0.1)",
-                  },
-                }}
-              >
-                <EditIcon sx={{ fontSize: { xs: 16, md: 18 } }} />
-              </IconButton>
+              <Stack direction="row" spacing={0.5}>
+                <IconButton
+                  size="small"
+                  onClick={() => setEditingCard(method)}
+                  sx={{
+                    color: theme.palette.text.secondary,
+                    "&:hover": {
+                      color: theme.palette.text.primary,
+                      background: "rgba(255, 255, 255, 0.1)",
+                    },
+                  }}
+                >
+                  <EditIcon sx={{ fontSize: { xs: 16, md: 18 } }} />
+                </IconButton>
+                <IconButton
+                  size="small"
+                  onClick={() => setDeletingCard(method)}
+                  sx={{
+                    color: theme.palette.text.secondary,
+                    "&:hover": {
+                      color: theme.palette.error.main,
+                      background: "rgba(255, 255, 255, 0.1)",
+                    },
+                  }}
+                >
+                  <DeleteIcon sx={{ fontSize: { xs: 16, md: 18 } }} />
+                </IconButton>
+              </Stack>
             </Box>
           ))}
         </Box>
       </Stack>
+
+      <AddCardDialog
+        open={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSubmit={handleAddCard}
+        isLoading={createPaymentMethod.isPending}
+      />
+
+      <EditCardDialog
+        open={!!editingCard}
+        card={editingCard}
+        onClose={() => setEditingCard(null)}
+        onSubmit={handleEditCard}
+        isLoading={updatePaymentMethod.isPending}
+      />
+
+      <ConfirmDeleteDialog
+        open={!!deletingCard}
+        title={t("dialogs.confirmDelete.title")}
+        message={t("billing.confirmDeleteCard", {
+          cardNumber: deletingCard?.cardNumber,
+        })}
+        confirmText={t("dialogs.confirmDelete.confirm")}
+        cancelText={t("dialogs.confirmDelete.cancel")}
+        onConfirm={handleDeleteCard}
+        onCancel={() => setDeletingCard(null)}
+        isLoading={deletePaymentMethod.isPending}
+      />
     </Card>
   );
 };

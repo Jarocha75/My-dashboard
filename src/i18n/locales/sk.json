@@ -149,6 +149,7 @@
     "noTransactions": "Žiadne transakcie",
     "errorLoadingTransactions": "Nepodarilo sa načítať transakcie",
     "confirmDelete": "Naozaj chcete zmazať billing pre {{name}}?",
+    "confirmDeleteCard": "Naozaj chcete zmazať kartu {{cardNumber}}?",
     "cancel": "Zrušiť"
   },
   "settingsPage": {
@@ -279,6 +280,14 @@
       "updateError": "Aktualizácia zlyhala",
       "deleteSuccess": "Faktúra bola úspešne zmazaná",
       "deleteError": "Mazanie zlyhalo"
+    },
+    "paymentMethod": {
+      "addSuccess": "Karta bola úspešne pridaná",
+      "addError": "Nepodarilo sa pridať kartu",
+      "updateSuccess": "Karta bola úspešne aktualizovaná",
+      "updateError": "Nepodarilo sa aktualizovať kartu",
+      "deleteSuccess": "Karta bola úspešne zmazaná",
+      "deleteError": "Nepodarilo sa zmazať kartu"
     }
   },
   "dialogs": {
@@ -311,6 +320,27 @@
       "title": "Potvrdiť zmazanie",
       "confirm": "Potvrdiť",
       "cancel": "Zrušiť"
+    },
+    "addCard": {
+      "title": "Pridať novú kartu",
+      "cardholderName": "Meno držiteľa karty",
+      "cardNumber": "Číslo karty",
+      "expiryDate": "Dátum expirácie",
+      "cvv": "CVV",
+      "cardType": "Typ karty",
+      "cancel": "Zrušiť",
+      "adding": "Pridávam...",
+      "addCard": "Pridať kartu"
+    },
+    "editCard": {
+      "title": "Upraviť kartu",
+      "cardholderName": "Meno držiteľa karty",
+      "cardNumber": "Číslo karty",
+      "expiryDate": "Dátum expirácie",
+      "cardType": "Typ karty",
+      "cancel": "Zrušiť",
+      "saving": "Ukladám...",
+      "saveChanges": "Uložiť zmeny"
     }
   },
   "invoicesPage": {
