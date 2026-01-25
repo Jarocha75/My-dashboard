@@ -41,7 +41,6 @@ const PaymentMethodCard = ({ className }: Props) => {
   const [deletingCard, setDeletingCard] = useState<PaymentMethod | null>(null);
 
   const handleAddCard = (data: CreatePaymentMethodPayload) => {
-    console.log("Adding card with data:", data);
     createPaymentMethod.mutate(data, {
       onSuccess: () => setIsAddModalOpen(false),
     });

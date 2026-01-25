@@ -55,7 +55,7 @@ createRoot(document.getElementById("root")!).render(
                 },
               }}
             />
-            <ReactQueryDevtools />
+            {import.meta.env.DEV && <ReactQueryDevtools />}
           </ThemeProvider>
         </AuthProvider>
       </QueryClientProvider>

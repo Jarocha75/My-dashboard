@@ -66,10 +66,10 @@ const SignInForm = () => {
           mt={{ xs: 0, sm: 2 }}
         >
           <Typography variant="h2" fontWeight={700} mb={2}>
-            Nice to see you!
+            {t("signInForm.title")}
           </Typography>
           <Typography fontSize={14} color="text.secondary" mb={4}>
-            Enter your email and password to sign in
+            {t("signInForm.subtitle")}
           </Typography>
         </Box>
 
@@ -77,9 +77,9 @@ const SignInForm = () => {
           <TextField
             {...register("email")}
             fullWidth
-            label="Email"
+            label={t("signInForm.email")}
             type="email"
-            placeholder="Your email address"
+            placeholder={t("signInForm.emailPlaceholder")}
             error={!!errors.email}
             helperText={errors.email?.message}
           />
@@ -87,15 +87,15 @@ const SignInForm = () => {
           <TextField
             {...register("password")}
             fullWidth
-            label="Password"
+            label={t("signInForm.password")}
             type="password"
-            placeholder="Your password"
+            placeholder={t("signInForm.passwordPlaceholder")}
             error={!!errors.password}
             helperText={errors.password?.message}
           />
           <FormControlLabel
             control={<Switch {...register("rememberMe")} />}
-            label="Remember me"
+            label={t("signInForm.rememberMe")}
           />
           <Button
             variant="contained"
@@ -104,10 +104,10 @@ const SignInForm = () => {
             type="submit"
             disabled={mutation.isPending}
           >
-            {mutation.isPending ? "Signing In..." : "Sign In"}
+            {mutation.isPending ? t("signInForm.signingIn") : t("signInForm.signIn")}
           </Button>
           <Typography fontSize={14} color="text.secondary" textAlign="center">
-            Don&apos;t have an account?{" "}
+            {t("signInForm.noAccount")}{" "}
             <Box
               component={RouterLink}
               to="/auth/signup"
@@ -117,7 +117,7 @@ const SignInForm = () => {
                 fontWeight: 600,
               }}
             >
-              Sign Up
+              {t("signInForm.signUp")}
             </Box>
           </Typography>
         </Stack>

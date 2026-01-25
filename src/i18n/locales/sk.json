@@ -378,6 +378,19 @@
   "profile": {
     "defaultUser": "Používateľ"
   },
+  "signInForm": {
+    "title": "Rád ťa vidím!",
+    "subtitle": "Zadaj email a heslo pre prihlásenie",
+    "email": "Email",
+    "emailPlaceholder": "Tvoja emailová adresa",
+    "password": "Heslo",
+    "passwordPlaceholder": "Tvoje heslo",
+    "rememberMe": "Zapamätať si ma",
+    "signingIn": "Prihlasujem...",
+    "signIn": "Prihlásiť sa",
+    "noAccount": "Nemáš účet?",
+    "signUp": "Registrovať sa"
+  },
   "validation": {
     "transaction": {
       "nameRequired": "Názov je povinný",
