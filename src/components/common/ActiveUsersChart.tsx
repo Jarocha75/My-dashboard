@@ -38,6 +38,7 @@ const ActiveUsersChart = () => {
           type="number"
           dataKey="uv"
           domain={[0, 500]}
+          width={40}
           tick={{ fill: "#ffffff", fontSize: 12, fontWeight: 500 }}
           axisLine={false}
           tickLine={false}
@@ -49,6 +50,7 @@ const ActiveUsersChart = () => {
           wrapperStyle={{ outline: "none" }}
           labelStyle={{ color: "#A0AEC0" }}
           itemStyle={{ color: "white" }}
+          cursor={false}
         />
 
         <Bar dataKey="uv" fill="#ffffff" barSize={15} activeBar={false} />
