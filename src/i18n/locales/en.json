@@ -391,6 +391,14 @@
     "noAccount": "Don't have an account?",
     "signUp": "Sign Up"
   },
+  "authNavbar": {
+    "brandName": "Vision UI Free",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "freeDownload": "Free Download"
+  },
   "validation": {
     "transaction": {
       "nameRequired": "Name is required",

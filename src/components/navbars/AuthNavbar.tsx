@@ -12,10 +12,12 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { CircleUser, Codesandbox, KeyRound, UserPen } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import NavItem from "./NavItem";
 
 const Navbar = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [menuMobileOpen, setMenuMobileOpen] = useState(false);
 
   return (
@@ -49,7 +51,7 @@ const Navbar = () => {
             letterSpacing={2}
             textTransform={"uppercase"}
           >
-            Vision UI Free
+            {t("authNavbar.brandName")}
           </Typography>
 
           {/* CENTER */}
@@ -59,10 +61,10 @@ const Navbar = () => {
             spacing={4}
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            <NavItem icon={Codesandbox} label="Dashboard" to="/" />
-            <NavItem icon={UserPen} label="Profile" to="/profile" />
-            <NavItem icon={CircleUser} label="Sign Up" to="/auth/signup" />
-            <NavItem icon={KeyRound} label="Sign In" to="/auth/signin" />
+            <NavItem icon={Codesandbox} label={t("authNavbar.dashboard")} to="/" />
+            <NavItem icon={UserPen} label={t("authNavbar.profile")} to="/profile" />
+            <NavItem icon={CircleUser} label={t("authNavbar.signUp")} to="/auth/signup" />
+            <NavItem icon={KeyRound} label={t("authNavbar.signIn")} to="/auth/signin" />
           </Stack>
 
           {/* RIGHT */}
@@ -77,7 +79,7 @@ const Navbar = () => {
               size="small"
               sx={{ display: { xs: "none", md: "inline-flex" } }}
             >
-              Free Download
+              {t("authNavbar.freeDownload")}
             </Button>
 
             <IconButton
@@ -106,13 +108,13 @@ const Navbar = () => {
         }}
       >
         <Stack spacing={2} mt={4}>
-          <NavItem icon={Codesandbox} label="Dashboard" />
-          <NavItem icon={UserPen} label="Profile" />
-          <NavItem icon={CircleUser} label="Sign Up" />
-          <NavItem icon={KeyRound} label="Sign In" />
+          <NavItem icon={Codesandbox} label={t("authNavbar.dashboard")} to="/" />
+          <NavItem icon={UserPen} label={t("authNavbar.profile")} to="/profile" />
+          <NavItem icon={CircleUser} label={t("authNavbar.signUp")} to="/auth/signup" />
+          <NavItem icon={KeyRound} label={t("authNavbar.signIn")} to="/auth/signin" />
 
           <Button variant="contained" fullWidth sx={{ mt: 2 }}>
-            Free Download
+            {t("authNavbar.freeDownload")}
           </Button>
         </Stack>
       </Drawer>

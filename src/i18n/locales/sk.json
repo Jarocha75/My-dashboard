@@ -391,6 +391,14 @@
     "noAccount": "Nemáš účet?",
     "signUp": "Registrovať sa"
   },
+  "authNavbar": {
+    "brandName": "Vision UI Free",
+    "dashboard": "Prehľad",
+    "profile": "Profil",
+    "signUp": "Registrácia",
+    "signIn": "Prihlásiť sa",
+    "freeDownload": "Stiahnuť zadarmo"
+  },
   "validation": {
     "transaction": {
       "nameRequired": "Názov je povinný",
