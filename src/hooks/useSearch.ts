@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { searchablePages, type SearchResult } from "@/data/searchData";
 import { authorsData } from "@/data/authorsData";
-import { projectsData } from "@/data/projectsData";
+import { useProjectsData } from "@/data/projectsData";
 import { billingsData } from "@/data/billingData";
 import useTransactions from "@/hooks/transactions/useTransactions";
 import useInvoices from "@/hooks/invoices/useInvoices";
@@ -14,6 +14,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 export const useSearch = (query: string) => {
   const { data: transactions } = useTransactions();
   const { data: invoices } = useInvoices();
+  const projectsData = useProjectsData();
 
   const results = useMemo<SearchResult[]>(() => {
     if (!query.trim()) return [];
@@ -139,7 +140,7 @@ export const useSearch = (query: string) => {
     });
 
     return searchResults;
-  }, [query, transactions, invoices]);
+  }, [query, transactions, invoices, projectsData]);
 
   return {
     results,

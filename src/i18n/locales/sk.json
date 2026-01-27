@@ -159,7 +159,12 @@
     "notifications": "Notifikácie",
     "privacy": "Súkromie",
     "preferences": "Preferencie",
-    "backToDashboard": "Späť na prehľad"
+    "backToDashboard": "Späť na prehľad",
+    "settingsAccount": "Nastavenia / Účet",
+    "settingsProfile": "Nastavenia / Profil",
+    "settingsNotifications": "Nastavenia / Notifikácie",
+    "settingsPrivacy": "Nastavenia / Súkromie",
+    "settingsPreferences": "Nastavenia / Preferencie"
   },
   "accountSettings": {
     "title": "Nastavenia účtu",

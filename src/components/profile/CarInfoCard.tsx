@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import ArcProgress from "../common/ArcProgress";
 import iconBattery from "@/assets/icons/iconBattery.svg";
 import MiniCard from "./MiniCard";
+import { useUserProfile } from "@/hooks/profile/useUserProfile";
 
 const score = 6.8;
 const scorePercent = Math.round(score * 10);
@@ -29,8 +30,9 @@ const CarInfoCard = ({
 }: Props) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const { data: profile } = useUserProfile();
   const displayTitle = title || t("profilePage.carInformation");
-  const displayUserName = userName || t("profilePage.defaultUserName");
+  const displayUserName = userName || profile?.name || profile?.displayName || t("profilePage.defaultUser");
   const displayActionText = actionText || t("profilePage.yourCarIsReady");
 
   const titleStyle = {

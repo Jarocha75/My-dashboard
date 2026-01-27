@@ -1,6 +1,7 @@
 import SettingsSidebar from "@/pages/settings/SettingsSidebar";
 import { Box, Drawer, IconButton, AppBar, Toolbar, Typography, useTheme } from "@mui/material";
 import { Outlet, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import backgroundImage from "@/assets/background/backgroundImage.png";
 import { Menu, Home } from "lucide-react";
 import { useState } from "react";
@@ -8,18 +9,19 @@ import { useNavigate } from "react-router-dom";
 
 const SettingsLayout = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const getPageTitle = () => {
     const path = location.pathname;
-    if (path.includes("/account")) return "Settings / Account";
-    if (path.includes("/profile")) return "Settings / Profile";
-    if (path.includes("/notifications")) return "Settings / Notifications";
-    if (path.includes("/privacy")) return "Settings / Privacy";
-    if (path.includes("/preferences")) return "Settings / Preferences";
-    return "Settings";
+    if (path.includes("/account")) return t("settingsPage.settingsAccount");
+    if (path.includes("/profile")) return t("settingsPage.settingsProfile");
+    if (path.includes("/notifications")) return t("settingsPage.settingsNotifications");
+    if (path.includes("/privacy")) return t("settingsPage.settingsPrivacy");
+    if (path.includes("/preferences")) return t("settingsPage.settingsPreferences");
+    return t("settingsPage.title");
   };
 
   return (

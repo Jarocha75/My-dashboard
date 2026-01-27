@@ -159,7 +159,12 @@
     "notifications": "Notifications",
     "privacy": "Privacy",
     "preferences": "Preferences",
-    "backToDashboard": "Back to Dashboard"
+    "backToDashboard": "Back to Dashboard",
+    "settingsAccount": "Settings / Account",
+    "settingsProfile": "Settings / Profile",
+    "settingsNotifications": "Settings / Notifications",
+    "settingsPrivacy": "Settings / Privacy",
+    "settingsPreferences": "Settings / Preferences"
   },
   "accountSettings": {
     "title": "Account Settings",
