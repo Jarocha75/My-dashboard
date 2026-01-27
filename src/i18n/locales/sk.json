@@ -399,6 +399,12 @@
     "signIn": "Prihlásiť sa",
     "freeDownload": "Stiahnuť zadarmo"
   },
+  "footer": {
+    "copyright": "My dashboard. Vytvoril s ❤️ Jaroslav Pecha pre lepší web.",
+    "marketplace": "Obchod",
+    "blog": "Blog",
+    "license": "Licencia"
+  },
   "validation": {
     "transaction": {
       "nameRequired": "Názov je povinný",

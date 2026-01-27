@@ -1,11 +1,17 @@
 import { Stack, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
-
-const items = ["Marketplace", "Blog", "License"];
 
 const Footer = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+
+  const items = [
+    { key: "marketplace", label: t("footer.marketplace") },
+    { key: "blog", label: t("footer.blog") },
+    { key: "license", label: t("footer.license") },
+  ];
 
   return (
     <Stack
@@ -19,8 +25,7 @@ const Footer = () => {
       }}
     >
       <Typography variant="body1">
-        &copy; {currentYear} My dashboard. Made with ❤️ by Jaroslav Pecha for a
-        better web.
+        &copy; {currentYear} {t("footer.copyright")}
       </Typography>
 
       <Stack
@@ -31,7 +36,7 @@ const Footer = () => {
       >
         {items.map((item) => (
           <Typography
-            key={item}
+            key={item.key}
             component={RouterLink}
             to="/"
             fontSize={14}
@@ -44,7 +49,7 @@ const Footer = () => {
               },
             }}
           >
-            {item}
+            {item.label}
           </Typography>
         ))}
       </Stack>
