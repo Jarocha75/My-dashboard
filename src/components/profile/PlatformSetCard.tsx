@@ -8,12 +8,15 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { INITIAL_SETTINGS } from "../../data/platformSettingsData";
+import { useTranslation } from "react-i18next";
+import { useInitialSettings } from "../../data/platformSettingsData";
 import type { Settings, SettingItem } from "../../data/platformSettingsData";
 
 const PlatformSetCard = () => {
   const theme = useTheme();
-  const [settings, setSettings] = useState<Settings>(INITIAL_SETTINGS);
+  const { t } = useTranslation();
+  const initialSettings = useInitialSettings();
+  const [settings, setSettings] = useState<Settings>(() => initialSettings);
 
   const handleToggle = (category: keyof Settings, id: string) => {
     setSettings((prev) => ({
@@ -98,11 +101,11 @@ const PlatformSetCard = () => {
             color: theme.palette.text.primary,
           }}
         >
-          Platform Settings
+          {t("profilePage.platformSettings")}
         </Typography>
 
-        {renderSettingGroup("Account", settings.account, "account")}
-        {renderSettingGroup("Application", settings.application, "application")}
+        {renderSettingGroup(t("profilePage.account"), settings.account, "account")}
+        {renderSettingGroup(t("profilePage.application"), settings.application, "application")}
       </Stack>
     </Card>
   );

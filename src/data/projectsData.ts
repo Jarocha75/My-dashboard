@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Avatar01 from "@/assets/avatars/Avatar01.jpg";
 import Avatar02 from "@/assets/avatars/Avatar02.jpg";
 import Avatar03 from "@/assets/avatars/Avatar03.jpg";
@@ -7,11 +8,6 @@ import Picture02 from "@/assets/image/Picture02.png";
 import Picture03 from "@/assets/image/Picture03.png";
 import Picture04 from "@/assets/image/Picture04.png";
 
-export const CARD_CONTENT = {
-  title: "Projects",
-  description: "Architecture and design portfolio",
-};
-
 export interface Project {
   id: number;
   title: string;
@@ -20,29 +16,39 @@ export interface Project {
   avatars: string[];
 }
 
-export const projectsData: Project[] = [
-  {
-    id: 1,
-    title: "Modern",
-    description:
-      "As Uber works through a huge amount of internal management turmoil.",
-    image: Picture02,
-    avatars: [Avatar01, Avatar02, Avatar03, Avatar04],
-  },
-  {
-    id: 2,
-    title: "Scandinavian",
-    description:
-      "Music is something that every person has his or her own specific opinion about.",
-    image: Picture03,
-    avatars: [Avatar02, Avatar03, Avatar04, Avatar05],
-  },
-  {
-    id: 3,
-    title: "Minimalist",
-    description:
-      "Different people have different taste, and various types of music.",
-    image: Picture04,
-    avatars: [Avatar05, Avatar04, Avatar03, Avatar02],
-  },
-];
+export const useCardContent = () => {
+  const { t } = useTranslation();
+
+  return {
+    title: t("profilePage.projectsTitle"),
+    description: t("profilePage.projectsDescription"),
+  };
+};
+
+export const useProjectsData = (): Project[] => {
+  const { t } = useTranslation();
+
+  return [
+    {
+      id: 1,
+      title: t("profilePage.projectModern"),
+      description: t("profilePage.projectModernDesc"),
+      image: Picture02,
+      avatars: [Avatar01, Avatar02, Avatar03, Avatar04],
+    },
+    {
+      id: 2,
+      title: t("profilePage.projectScandinavian"),
+      description: t("profilePage.projectScandinavianDesc"),
+      image: Picture03,
+      avatars: [Avatar02, Avatar03, Avatar04, Avatar05],
+    },
+    {
+      id: 3,
+      title: t("profilePage.projectMinimalist"),
+      description: t("profilePage.projectMinimalistDesc"),
+      image: Picture04,
+      avatars: [Avatar05, Avatar04, Avatar03, Avatar02],
+    },
+  ];
+};

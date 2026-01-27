@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export interface SettingItem {
   id: string;
   label: string;
@@ -9,24 +11,28 @@ export interface Settings {
   application: SettingItem[];
 }
 
-export const INITIAL_SETTINGS: Settings = {
-  account: [
-    { id: "follow", label: "Email me when someone follows me", checked: true },
-    {
-      id: "answer",
-      label: "Email me when someone answers on my post",
-      checked: false,
-    },
-    {
-      id: "mention",
-      label: "Email me when someone mentions me",
-      checked: true,
-    },
-  ],
-  application: [
-    { id: "launches", label: "New launches and projects", checked: false },
-    { id: "products", label: "Monthly product updates", checked: false },
-    { id: "subscribe", label: "Subscribe to newsletter", checked: true },
-    { id: "receive", label: "Receive mails weekly", checked: true },
-  ],
+export const useInitialSettings = (): Settings => {
+  const { t } = useTranslation();
+
+  return {
+    account: [
+      { id: "follow", label: t("profilePage.emailWhenFollows"), checked: true },
+      {
+        id: "answer",
+        label: t("profilePage.emailWhenAnswers"),
+        checked: false,
+      },
+      {
+        id: "mention",
+        label: t("profilePage.emailWhenMentions"),
+        checked: true,
+      },
+    ],
+    application: [
+      { id: "launches", label: t("profilePage.newLaunches"), checked: false },
+      { id: "products", label: t("profilePage.monthlyUpdates"), checked: false },
+      { id: "subscribe", label: t("profilePage.subscribeNewsletter"), checked: true },
+      { id: "receive", label: t("profilePage.receiveMailsWeekly"), checked: true },
+    ],
+  };
 };

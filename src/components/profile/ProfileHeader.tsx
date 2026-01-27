@@ -12,6 +12,7 @@ import {
 import headerLogo from "@/assets/logos/headerLogo.svg";
 import { Codepen, Pencil, Users, Wrench } from "lucide-react";
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/useAuth";
 import { useUserProfile } from "@/hooks/profile/useUserProfile";
 import { useUploadAvatar } from "@/hooks/profile/useUploadAvatar";
@@ -32,6 +33,7 @@ const ProfileHeader = ({
   onEditAvatar,
 }: ProfileHeaderProps) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [tab, setTab] = useState(0);
   const { user } = useAuth();
   const { data: profile } = useUserProfile();
@@ -105,7 +107,7 @@ const ProfileHeader = ({
           <IconButton
             size="small"
             onClick={onEditAvatar || handleEdtiClick}
-            aria-label="Edit profile picture"
+            aria-label={t("profilePage.editProfilePicture")}
             sx={{
               position: "absolute",
               bottom: -4,
@@ -140,7 +142,7 @@ const ProfileHeader = ({
               color: theme.palette.text.primary,
             }}
           >
-            {name || user?.name || "Používateľ"}
+            {name || user?.name || t("profilePage.defaultUser")}
           </Typography>
           <Typography
             sx={{
@@ -167,9 +169,9 @@ const ProfileHeader = ({
           }}
         >
           {[
-            { icon: <Codepen size={14} />, label: "OVERVIEW" },
-            { icon: <Users size={14} />, label: "TEAMS" },
-            { icon: <Wrench size={14} />, label: "PROJECTS" },
+            { icon: <Codepen size={14} />, label: t("profilePage.overview") },
+            { icon: <Users size={14} />, label: t("profilePage.teams") },
+            { icon: <Wrench size={14} />, label: t("profilePage.projects") },
           ].map((tabData, index) => (
             <Tab
               key={index}

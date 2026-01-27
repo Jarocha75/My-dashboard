@@ -1,10 +1,11 @@
 import { Card, Stack, Typography, useTheme, Box } from "@mui/material";
 import ProjectsItem from "./ProjectsItem";
-import { projectsData } from "@/data/projectsData";
-import { CARD_CONTENT } from "@/data/projectsData";
+import { useProjectsData, useCardContent } from "@/data/projectsData";
 
 const ProjectsProfileCard = () => {
   const theme = useTheme();
+  const projectsData = useProjectsData();
+  const cardContent = useCardContent();
 
   return (
     <Card
@@ -25,7 +26,7 @@ const ProjectsProfileCard = () => {
             color: theme.palette.text.primary,
           }}
         >
-          {CARD_CONTENT.title}
+          {cardContent.title}
         </Typography>
         <Typography
           sx={{
@@ -34,7 +35,7 @@ const ProjectsProfileCard = () => {
             color: theme.palette.text.secondary,
           }}
         >
-          {CARD_CONTENT.description}
+          {cardContent.description}
         </Typography>
         <Box
           sx={{

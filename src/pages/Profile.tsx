@@ -5,11 +5,13 @@ import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileInfoCard from "@/components/profile/ProfileInfoCard";
 import ProjectsProfileCard from "@/components/profile/ProjectsProfileCard";
 import WelcomeBackCard from "@/components/profile/WelcomeBackCard";
-import { miniCardsData } from "@/data/miniCardsData";
+import { useMiniCardsData } from "@/data/miniCardsData";
 import { socialMediaData } from "@/data/socialMediaData";
 import { Grid } from "@mui/material";
 
 const Profile = () => {
+  const miniCardsData = useMiniCardsData();
+
   return (
     <Grid
       container

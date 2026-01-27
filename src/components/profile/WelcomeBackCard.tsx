@@ -1,4 +1,5 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import ImageWelcome from "@/assets/image/ImageWelcome02.png";
 import { useUserProfile } from "@/hooks/profile/useUserProfile";
 
@@ -11,13 +12,16 @@ interface Props {
 }
 
 const WelcomeBackCard = ({
-  title = "Welcome back!",
-  actionText = "Turn on your car",
+  title,
+  actionText,
   backgroundImage = ImageWelcome,
   onActionClick,
 }: Props) => {
+  const { t } = useTranslation();
   const { data: profile } = useUserProfile();
-  const name = profile?.name || profile?.displayName || "User";
+  const name = profile?.name || profile?.displayName || t("profilePage.defaultUser");
+  const displayTitle = title || t("profilePage.welcomeBack");
+  const displayActionText = actionText || t("profilePage.turnOnYourCar");
 
   return (
     <Card
@@ -47,7 +51,7 @@ const WelcomeBackCard = ({
               color: "white",
             }}
           >
-            {title}
+            {displayTitle}
           </Typography>
           <Typography
             sx={{
@@ -56,7 +60,7 @@ const WelcomeBackCard = ({
               color: "white",
             }}
           >
-            Nice to see you,{name}!
+            {t("profilePage.niceToSeeYou", { name })}
           </Typography>
         </Box>
 
@@ -72,7 +76,7 @@ const WelcomeBackCard = ({
           }}
         >
           <Typography sx={{ fontSize: 12, fontWeight: 400, color: "white" }}>
-            {actionText}
+            {displayActionText}
           </Typography>
 
           <Box

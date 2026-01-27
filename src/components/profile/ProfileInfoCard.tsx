@@ -1,4 +1,5 @@
 import { Card, Stack, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import SocialMediaLink, { type SocialMediaItem } from "./SocialMediaLink";
 import { useUserProfile } from "@/hooks/profile/useUserProfile";
 
@@ -13,22 +14,24 @@ interface Props {
 }
 
 const ProfileInfoCard = ({
-  title = "Profile Informations",
+  title,
   socialMedia,
 }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const { data: profile } = useUserProfile();
-  const fullName = profile?.name || profile?.displayName || "User";
+  const fullName = profile?.name || profile?.displayName || t("profilePage.defaultUser");
   const mobile = profile?.phoneNumber || "";
   const email = profile?.email || "";
   const location = profile?.location || "";
-  const bio = profile?.bio || "Default bio text...";
+  const bio = profile?.bio || t("profilePage.defaultBio");
+  const displayTitle = title || t("profilePage.profileInformations");
 
   const profileData = [
-    { label: "Full Name", value: fullName },
-    { label: "Mobile", value: mobile },
-    { label: "Email", value: email },
-    { label: "Location", value: location },
+    { label: t("profilePage.fullName"), value: fullName },
+    { label: t("profilePage.mobile"), value: mobile },
+    { label: t("profilePage.email"), value: email },
+    { label: t("profilePage.location"), value: location },
   ];
 
   return (
@@ -52,7 +55,7 @@ const ProfileInfoCard = ({
             color: theme.palette.text.primary,
           }}
         >
-          {title}
+          {displayTitle}
         </Typography>
 
         <Typography

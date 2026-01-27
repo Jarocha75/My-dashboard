@@ -1,4 +1,5 @@
 import { Box, Card, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import ArcProgress from "../common/ArcProgress";
 import iconBattery from "@/assets/icons/iconBattery.svg";
 import MiniCard from "./MiniCard";
@@ -21,12 +22,16 @@ interface Props {
 }
 
 const CarInfoCard = ({
-  title = "Car Information",
-  userName = "Mark Johnson",
-  actionText = "Your Car is ready",
+  title,
+  userName,
+  actionText,
   miniCards = [],
 }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
+  const displayTitle = title || t("profilePage.carInformation");
+  const displayUserName = userName || t("profilePage.defaultUserName");
+  const displayActionText = actionText || t("profilePage.yourCarIsReady");
 
   const titleStyle = {
     fontSize: 18,
@@ -83,7 +88,7 @@ const CarInfoCard = ({
             fontWeight={700}
             color={theme.palette.text.primary}
           >
-            {title}
+            {displayTitle}
           </Typography>
           <Typography
             fontSize="14px"
@@ -91,7 +96,7 @@ const CarInfoCard = ({
             color={theme.palette.text.primary}
             sx={{ textAlign: { xs: "center", lg: "left" } }}
           >
-            Hello, {userName}! {actionText}.
+            {t("profilePage.hello", { name: displayUserName, action: displayActionText })}
           </Typography>
         </Stack>
 
@@ -157,7 +162,7 @@ const CarInfoCard = ({
 
               <Typography sx={valueStyle}>{scorePercent}%</Typography>
 
-              <Typography sx={subtitleStyle}>Current load</Typography>
+              <Typography sx={subtitleStyle}>{t("profilePage.currentLoad")}</Typography>
             </Box>
 
             <svg width="0" height="0">
@@ -186,7 +191,7 @@ const CarInfoCard = ({
             }}
           >
             <Typography sx={titleStyle}>{restTime}</Typography>
-            <Typography sx={subtitleStyle}>Time to full charge</Typography>
+            <Typography sx={subtitleStyle}>{t("profilePage.timeToFullCharge")}</Typography>
           </Box>
         </Stack>
       </Stack>
